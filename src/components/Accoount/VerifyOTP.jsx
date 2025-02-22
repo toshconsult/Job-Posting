@@ -1,22 +1,19 @@
 import { useContext, useState } from "react"
 import Loader from "../Loader"
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { AuthContext } from "../context/AuthContext"
 import { toast, ToastContainer } from "react-toastify"
 
 
-const Login = () => {
-    const {url} = useContext(AuthContext)
+const VerifyOTP = () => {
+    const {url, token} = useContext(AuthContext)
+    console.log(token);
+    
     const [loading, setLoading] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
     const [formdata, setFormdata] = useState({
-        email: '',
-        password: ''
+        otp: '',
     })
 
-    const togglePassword = () => {
-        setShowPassword(!showPassword)
-    }
+    
 
     const handleChange = (e) => { 
         const {name, value} = e.target
@@ -31,19 +28,18 @@ const Login = () => {
 
         try {
             setLoading(true)
-            const response = await fetch(`${url}api/v1/login`, {
-                method: 'POST',
+            const response = await fetch(`${url}api/v1/verify-otp`, {
+                method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer`
                 },
                 body: JSON.stringify(formdata)
             })
             if(response.ok){
                 const data = await response.json()
                 console.log(data);
-                const token = data.token
-                localStorage.setItem('token', token)
-                toast.success('Login Successful')
+                toast.success(data.message)
                 setLoading(false)
             } else {
                 const data = await response.json()
@@ -63,28 +59,19 @@ const Login = () => {
     <>
     {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
     <div className="w-full gap-y-2 flex flex-col justify-center">
-      <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Log <span className="text-[#EA1588] ">in</span></h1>
+      <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Verify <span className="text-[#EA1588] ">OTP</span></h1>
      <ToastContainer />
       <form 
       onSubmit={handleSubmit}
       className="flex flex-col gap-y-4 justify-center items-center">
-        <input type="email" placeholder="Enter Your Email" required
+        <input type="number" placeholder="Enter the OTP sent to your email" required
         onChange={handleChange}
-        name="email"
+        name="otp"
         className="w-[328px] h-[50px] rounded-md p-2 px-5 outline-0
          placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
-         <div className="flex justify-between items-center pr-4 h-[50px] bg-[#FFF5F6] w-[328px] rounded-md">
-        <input type={showPassword ? "text": "password"} placeholder="Password" required
-        onChange={handleChange}
-        name="password"
-        className="h-[50px] rounded-md p-2 px-5 outline-0
-         placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
-         <span onClick={togglePassword} className="text-[#EA1588] cursor-pointer">
-           {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-         </span>
-         </div>
+         
        
-        <p className="px-10 md:w-[30vw]">By clicking continue mean you have agree to our <span className="text-[#EA1588]">terms</span> & <span className="text-[#EA1588]">conditions</span></p>
+        {/* <p className="px-10 md:w-[30vw]">Make sure you enter a valid <span className="text-[#EA1588]">email</span></p> */}
       <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
       </form>
 
@@ -96,4 +83,4 @@ const Login = () => {
   
 }
 
-export default Login
+export default VerifyOTP

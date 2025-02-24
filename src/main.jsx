@@ -13,6 +13,9 @@ import ForgotPassword from './components/Accoount/ForgotPassword.jsx'
 import VerifyOTP from './components/Accoount/VerifyOTP.jsx'
 import ResetPassword from './components/Accoount/ResetPassword.jsx'
 import ChangePassword from './components/Accoount/ChangePassword.jsx'
+import Interest from './components/Tasks/Interest.jsx'
+import CreateTask from './components/Tasks/CreateTask.jsx'
+import AllTask from './components/Tasks/AllTask.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,9 @@ const router = createBrowserRouter([
         {path: '/verify-otp', element: <VerifyOTP />},
         {path: '/reset-password', element: <ResetPassword />},
         {path: '/change-password', element: <ChangePassword />},
+        {path: '/interest', element: <Interest />},
+        {path: '/create-task', element: <CreateTask />},
+        {path: '/all-task', element: <AllTask />},
     ] 
   }
 ])

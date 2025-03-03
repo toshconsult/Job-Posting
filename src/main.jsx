@@ -16,6 +16,9 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
+import GetTasks from './components/Tasks/GetTasks.jsx'
+import Onboarding from './components/Onboording/Onboarding.jsx'
+import Verification from './components/Onboording/Verification.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +36,10 @@ const router = createBrowserRouter([
         {path: '/interest', element: <Interest />},
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
+        {path: '/get-tasks', element: <GetTasks/>},
+        {path: '/verifly', element: <Onboarding/>},
+        {path: '/v-type', element: <Verification/>},
+        
     ] 
   }
 ])
@@ -46,3 +53,10 @@ createRoot(document.getElementById('root')).render(
     </RoleContextProvider>
   </AuthContextProvider>,
 )
+
+
+
+
+
+
+

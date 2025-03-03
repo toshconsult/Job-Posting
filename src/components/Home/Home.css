@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.home-gap{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.home-container{
+    background-image: url(../../assets/Images/pexel.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.home-h1{
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+}
+
+.home-p{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 12px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+}
+
+.home-span{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+}
+
+.home-span::before {
+    content: "Complete Your KYC Verification.";
+    color: #FFFFFF;
+    font-size: 10px;
+    animation: words 25s infinite;
+}
+
+.home-span::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 88px);
+    height: 0%;
+    left: 0px;
+    animation: typing 20s steps(14) infinite;
+}
+
+@keyframes words {
+    0%, 20% { content: "Complete Your KYC Verification"; }
+    21%, 40% { content: "Finalize Your KYC Verification"; }
+    41%, 60% { content: "Verify Your KYC Details"; }
+    61%, 80% { content: "Confirm Your KYC Information"; }
+    81%, 100% { content: "Finish Your KYC Process"; }
+}
+
+@keyframes typing {
+    10%,
+    15%,
+    30%,
+    35%,
+    50%,
+    55%,
+    70%,
+    75%,
+    90%,
+    95%{
+        width: 0;
+    }
+    5%,
+    20%,
+    25%,
+    40%,
+    45%,
+    60%,
+    65%,
+    80%,
+    85%{
+        width: calc(100% + 8px);
+    }
+
+}
+
+.home-btn{
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 9px;
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+.home-text{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+ 
+.background{
+    background-color: #EA1588;
+    width: 27vw;
+    height: 24vh;
+    border-radius: 20px;
+    padding: 20px 30px;
+   
+}
+
+.home-bn{
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 13.5px;
+    letter-spacing: 0%;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: Auto;
+    color: #FFFFFF;
+}
+
+.home-pull{
+    padding-left: 100px;
+    padding-top: 300px;
+}
+
+@media screen and (max-width: 768px) {
+    .home-h1{
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 21px;
+        letter-spacing: 0%;
+        color: #FFFFFF;
+    }
+    .home-p{
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 12px;
+        letter-spacing: 0%;
+        color: #FFFFFF;
+    }
+    
+    .home-span{
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0%;
+        color: #FFFFFF;
+    }
+    .home-bn{
+        font-family: Poppins;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration-style: solid; 
+        text-decoration-thickness: Auto;
+        color: #FFFFFF;
+    }
+    .home-text{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    .background{
+        background-color: #EA1588;
+        width: 97vw;
+        height: 20vh;
+        border-radius: 20px;
+        padding: 20px 30px;
+       
+    }
+    .home-pull{
+        padding-left: 5px;
+        padding-top: 350px;
+    }
+}

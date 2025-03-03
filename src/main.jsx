@@ -19,6 +19,10 @@ import AllTask from './components/Tasks/AllTask.jsx'
 import GetTasks from './components/Tasks/GetTasks.jsx'
 import Onboarding from './components/Onboording/Onboarding.jsx'
 import Verification from './components/Onboording/Verification.jsx'
+import "../node_modules/font-awesome/css/font-awesome.min.css";
+import Home from './components/Home/Home.jsx'
+import Select from './components/Select/Select.jsx'
+import Request from './components/Request/Request.jsx'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +44,9 @@ const router = createBrowserRouter([
         {path: '/verifly', element: <Onboarding/>},
         {path: '/v-type', element: <Verification/>},
         
+        {path: '/home', element: <Home />},
+        {path: 'select', element: <Select />},
+        {path: '/request', element: <Request />}
     ] 
   }
 ])

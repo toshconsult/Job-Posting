@@ -16,6 +16,10 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
+import SingleTask from './components/Tasks/SingleTask.jsx'
+import GetMessages from './components/Chats/GetMessages.jsx'
+import StartChat from './components/Chats/StartChat.jsx'
+import Review from './components/Tasks/Review.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,10 @@ const router = createBrowserRouter([
         {path: '/interest', element: <Interest />},
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
+        {path: '/single-task/:id', element: <SingleTask />},
+        {path: '/messages', element: <GetMessages />},
+        {path: '/chat', element: <StartChat />},
+        {path: '/review', element: <Review />},
     ] 
   }
 ])

@@ -1,17 +1,17 @@
 import {  useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import Loader from "../Loader";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-const AllTask = () => {
-
-    
+const SingleTask = () => {
+ 
     const {url} = useContext(AuthContext)
     const {token} = useContext(AuthContext)
     const [loading, setLoading] = useState(false)
     const [tasks, setTasks] = useState([])
-   const navigate = useNavigate()
+    const navigate = useNavigate()
+    const {id} = useParams()
+    console.log(id);
     
 
    
@@ -22,7 +22,7 @@ const AllTask = () => {
     //   console.log(token);
   
       try {
-        // setLoading(true)
+        setLoading(true)
         if (!token) {
           console.error("Token is missing!");
          navigate('/login')
@@ -30,18 +30,18 @@ const AllTask = () => {
         }
 
           
-        const response = await fetch(`${url}api/v1/task/get-tasks`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
+        const response = await fetch(`${url}api/v1/client/get-task/${id}`)
+        //   method: 'GET',
+        //   headers: {
+        //     'Authorization': `Bearer ${token}`,
+        //     'Content-Type': 'application/json'
+        //   },
           
-        }) 
+        // }) 
   
         if(response.ok){
           const data = await response.json();
-          console.log(data);
+        //   console.log(data);
             setTasks(data)
           
           setLoading(false)
@@ -75,7 +75,6 @@ const AllTask = () => {
     
       {
             tasks.map(task => {
-              //  console.log(task);
                
                 
                 return(
@@ -83,10 +82,8 @@ const AllTask = () => {
                     border-[#F3F5FF] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2">
                         <h1 className=" font-semibold text-[20px]">{task.task.title}</h1>
                         <p className="text-[#333] font-normal text-[14px]">{task.task.description}</p>
-                        <Link to={`/single-task/${task.task._id}`}>
                         <button className="w-[263px] h-[40px] bg-[#EA1588] hover:bg-white
-                         hover:text-black hover:border-2 cursor-pointer hover:border-[#F3F5FF] text-white rounded-md">View Details</button>
-                    </Link>
+                         hover:text-black hover:border-2 hover:border-[#F3F5FF] text-white rounded-md">View Details</button>
                     </div>
                 )
             })
@@ -96,6 +93,7 @@ const AllTask = () => {
     </> }
         </div>
   )
+   
 }
 
-export default AllTask
+export default SingleTask

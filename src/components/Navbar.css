@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 10px;
+    background-color: white;
+    box-shadow: 1px 1px 10px rgb(244, 240, 240);
+}
+
+.text{
+    display: flex;
+    align-items: center;
+}
+
+.air{
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22.5px;
+    letter-spacing: 0%;
+    color: darkblue;
+}
+
+.span{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22.5px;
+    letter-spacing: 0%;
+    color: #EA1588;
+}
+
+.menuList{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    color: #000000;
+}
+
+.ul{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.li:hover{
+    color: #EA1588;
+}
+
+.button{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn{
+    font-size: 15px;
+}
+
+.btn:hover{
+    color: #EA1588;
+    transition: 0.7s;
+    padding: 4px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.sign{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #FFF5F6;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0%;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #FFF5F6;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0%;
+}
+
+.sign:hover{
+    background-color: darkblue;
+    color: #EA1588;
+    transition: 0.5s;
+}
+
+.logo:hover{
+    background-color: darkblue;
+    color: #EA1588;
+    transition: 0.5s;
+}
+
+.ul .li:hover,  .home-activ{
+    border: 1PX solid darkblue;
+    border-radius: 0.5rem;
+    color: black;
+    transition:  0.7s;
+    padding: 0.4rem ;
+}
+
+
+.ham{
+    display: none;
+}
+
+.close{
+    display: none;
+}
+
+.bg{
+    background-color: #EA1588;
+    height: 50vh;
+    width: 50vw;
+    right: 0;
+    display: none;
+    position: absolute;
+}
+
+.input{
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #EA1588;
+    font-size: 13px;
+    color: black;
+    padding: 5px;
+}
+
+.input:hover{
+    color: black;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .ul{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        display: none;
+
+        &.active{
+            display: flex;
+        }
+    }
+    .button{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        display: none;
+
+        &.active{
+            display: flex;
+        }
+    }
+    .btn{
+        display: none;
+    }
+    .ham{
+        display: flex;
+    }
+    .close{
+        display: flex;
+        font-size: 25px;
+        font-weight: 100;
+    }
+    .bg{
+        background-color: white;
+        height: 99vh;
+        width: 70vw;
+        right: -100%;
+        position: fixed;
+        box-shadow: 1px 1px 10px rgb(244, 240, 240);
+        top: 0;
+        transition: 0.7s;
+        z-index: 1;
+
+        
+        &.active{
+            right: 0;
+            display: flex;
+            transition: 0.1m;
+        }
+    }
+    .mobile{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding-left: 80px;
+        padding-top: 100px;
+    }
+}

@@ -16,6 +16,10 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
+import "../node_modules/font-awesome/css/font-awesome.min.css";
+import Home from './components/Home/Home.jsx'
+import Select from './components/Select/Select.jsx'
+import Request from './components/Request/Request.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,9 @@ const router = createBrowserRouter([
         {path: '/interest', element: <Interest />},
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
+        {path: '/home', element: <Home />},
+        {path: 'select', element: <Select />},
+        {path: '/request', element: <Request />}
     ] 
   }
 ])

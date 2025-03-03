@@ -2,6 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import SignUp from './components/Accoount/SignUp.jsx'
@@ -20,13 +21,14 @@ import SingleTask from './components/Tasks/SingleTask.jsx'
 import GetMessages from './components/Chats/GetMessages.jsx'
 import StartChat from './components/Chats/StartChat.jsx'
 import Review from './components/Tasks/Review.jsx'
+import Home from './components/Home/Home.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
-        {index: true, element: <App />},
+        {index: true, element: <Home /> },
         {path: '/account-type', element: <AccountType />},
         {path: '/register', element: <SignUp />},
         {path: '/login', element: <Login />},
@@ -41,6 +43,7 @@ const router = createBrowserRouter([
         {path: '/messages', element: <GetMessages />},
         {path: '/chat', element: <StartChat />},
         {path: '/review', element: <Review />},
+        
     ] 
   }
 ])

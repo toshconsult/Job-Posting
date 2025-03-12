@@ -6,6 +6,7 @@ import {  useNavigate } from "react-router-dom";
 import image from '/src/assets/react.svg' 
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
+import Sidebar from "../SideBar";
 const GetMessages = () => {
     const {url} = useContext(AuthContext)
     const {token} = useContext(AuthContext)
@@ -59,6 +60,7 @@ useEffect(()=>{
 
   return (
     <div>
+        <Sidebar />
         <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Messages</h1>
         {loading ? <Loader /> : <>
         <div className="w-full gap-y-2 flex flex-col justify-center items-center">

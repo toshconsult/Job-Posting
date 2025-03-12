@@ -1,14 +1,13 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "../context/AuthContext"
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 
 const CreateTask = () => {
 
-      const {url} = useContext(AuthContext)
-      const {token} = useContext(AuthContext)
+      const {url, token} = useContext(UserContext)
       const [loading, setLoading] = useState(false)
      const navigate = useNavigate()
       const [formdata, setFormdata] = useState({

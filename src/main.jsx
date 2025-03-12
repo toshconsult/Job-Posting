@@ -1,12 +1,11 @@
 
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import SignUp from './components/Accoount/SignUp.jsx'
-import AuthContextProvider from './components/context/AuthContext.jsx'
 import { AccountType } from './components/Accoount/AccountType.jsx'
 import RoleContextProvider from './components/context/RoleContext.jsx'
 import Login from './components/Accoount/Login.jsx'
@@ -22,6 +21,12 @@ import GetMessages from './components/Chats/GetMessages.jsx'
 import StartChat from './components/Chats/StartChat.jsx'
 import Review from './components/Tasks/Review.jsx'
 import Home from './components/Home/Home.jsx'
+import Profile from './components/Users/Profile.jsx'
+import { UserContext, UserContextProvider } from './components/UserContext.jsx';
+import WalletPage from './components/Users/Wallet.jsx';
+import Settingpage from './components/Users/Settingpage.jsx';
+import ApplyTask from './components/Tasks/ApplyTask.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -40,20 +45,34 @@ const router = createBrowserRouter([
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
         {path: '/single-task/:id', element: <SingleTask />},
+        // {path: '/apply-task/:id/apply', element: <ApplyTask />},
         {path: '/messages', element: <GetMessages />},
         {path: '/chat', element: <StartChat />},
         {path: '/review', element: <Review />},
+        {path: '/profile', element:<Profile />},
+        {path: '/settings', element:<Settingpage />},
+        {path: '/wallet', element: <WalletPage />},
+        {path:'/context', element: <UserContext />}
+        
         
     ] 
   }
 ])
 
 createRoot(document.getElementById('root')).render(
-  <AuthContextProvider>
+  <UserContextProvider >
+  
     <RoleContextProvider>
 
     <RouterProvider router={router} />
 
     </RoleContextProvider>
-  </AuthContextProvider>,
+  </UserContextProvider>
 )
+
+
+
+
+
+
+

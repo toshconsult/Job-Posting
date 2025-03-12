@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* *{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+} */
+
+.product-image{
+    background-image: url(../../assets/Images/mikhail.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.product-h1{
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 18.78px;
+    letter-spacing: 0%;
+    color: white;
+}
+
+.pp{
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 18.78px;
+    letter-spacing: 0%;
+    color: #EA1588;
+}
+
+.product-now{
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 10.5px;
+    letter-spacing: 0%;
+    color: white;
+    
+}
+
+.is{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px 30px;
+}
+
+.product-images{
+    background-color: #2F3C7E;
+    width: 29vw;
+    height: 20vh;
+    border-radius: 10px;
+}
+
+.perfect{
+    padding: 300px 100px;
+}
+
+.client{
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16.44px;
+    letter-spacing: 0%;
+
+}
+
+.product-what{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.des{
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14.09px;
+    letter-spacing: 0%;
+
+}
+
+.do-1{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 3px #2F3C7E;
+    border-radius: 10px;
+}
+
+.do-1:hover{
+    background-color: #EA1588;
+    color: white;
+    transition: 0.5s;
+}
+
+.do{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.you-all{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.product-ll{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .do{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .you-all{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    
+.product-ll{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+    .do-1{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        background-color: white;
+        padding: 50px;
+        box-shadow: 0px 0px 3px #2F3C7E;
+        border-radius: 10px;
+        width: 50vw;
+    }
+    
+.des{
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14.09px;
+    letter-spacing: 0%;
+
+}
+    .product-what{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .product-h1{
+        font-family: Raleway;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 18.78px;
+        letter-spacing: 0%;
+    }
+    
+.pp{
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 18.78px;
+    letter-spacing: 0%;
+    color: #EA1588;
+}
+
+    .product-now{
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 10.5px;
+        letter-spacing: 0%;
+        color: white;
+    }
+    
+.is{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.is{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 50px 30px;
+}
+
+.product-images{
+    background-color: #2F3C7E;
+    width: 80vw;
+    height: 20vh;
+    border-radius: 10px;
+}
+.perfect{
+    padding: 300px 40px;
+}
+
+.client{
+        font-family: Raleway;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16.44px;
+    letter-spacing: 0%;
+
+}
+
+}

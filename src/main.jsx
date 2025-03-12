@@ -25,6 +25,7 @@ import Profile from './components/Users/Profile.jsx'
 import { UserContext, UserContextProvider } from './components/UserContext.jsx';
 import WalletPage from './components/Users/Wallet.jsx';
 import Settingpage from './components/Users/Settingpage.jsx';
+import ProductClick from './components/Clients/ProductClick.jsx';
 // import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
         {path: '/profile', element:<Profile />},
         {path: '/settings', element:<Settingpage />},
         {path: '/wallet', element: <WalletPage />},
+        {path: '/product', element: <ProductClick /> },
         {path:'/context', element: <UserContext />}
         
         

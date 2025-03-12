@@ -25,7 +25,7 @@ import Profile from './components/Users/Profile.jsx'
 import { UserContext, UserContextProvider } from './components/UserContext.jsx';
 import WalletPage from './components/Users/Wallet.jsx';
 import Settingpage from './components/Users/Settingpage.jsx';
-import ApplyTask from './components/Tasks/ApplyTask.jsx';
+// import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
 const router = createBrowserRouter([

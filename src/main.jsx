@@ -16,7 +16,10 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
-import "../node_modules/font-awesome/css/font-awesome.min.css";
+import GetTasks from './components/Tasks/GetTasks.jsx'
+import Onboarding from './components/Onboording/Onboarding.jsx'
+import Verification from './components/Onboording/Verification.jsx'
+// import "../node_modules/font-awesome/css/font-awesome.min.css";
 import Home from './components/Home/Home.jsx'
 import Select from './components/Select/Select.jsx'
 import Request from './components/Request/Request.jsx'
@@ -38,6 +41,10 @@ const router = createBrowserRouter([
         {path: '/interest', element: <Interest />},
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
+        {path: '/get-tasks', element: <GetTasks/>},
+        {path: '/verifly', element: <Onboarding/>},
+        {path: '/v-type', element: <Verification/>},
+        
         {path: '/home', element: <Home />},
         {path: 'select', element: <Select />},
         {path: '/request', element: <Request />},
@@ -55,3 +62,10 @@ createRoot(document.getElementById('root')).render(
     </RoleContextProvider>
   </AuthContextProvider>,
 )
+
+
+
+
+
+
+

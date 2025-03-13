@@ -24,6 +24,7 @@ import Home from './components/Home/Home.jsx'
 import Select from './components/Select/Select.jsx'
 import Request from './components/Request/Request.jsx'
 import ProductClick from './components/Clients/ProductClick.jsx'
+import DetailTask from './components/Details/DetailTask.jsx'
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
         {path: '/home', element: <Home />},
         {path: 'select', element: <Select />},
         {path: '/request', element: <Request />},
-        {path: '/productclick',  element: <ProductClick />}
+        {path: '/productclick',  element: <ProductClick />},
+        {path: '/detailTask', element: <DetailTask />}
     ] 
   }
 ])

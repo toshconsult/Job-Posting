@@ -179,23 +179,19 @@
 
 .message{
     background-color: #2F3C7E;
-    width: 5vw;
+    width: 60px;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10vh;
+    height: 60px;
     border-radius: 100%;
     position: fixed;
     right: 2%;
     top: 85%;
 }
 
-.message:hover{
-    background-color: #EA1588;
-    transition: 0.5s;
-}
 
 .moh{
     font-family: Poppins;
@@ -383,13 +379,13 @@
     }
     .message{
         background-color: #2F3C7E;
-        width: 20vw;
+        width: 60px;
         color: white;
-        font-size: 40px;
+        font-size: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 11vh;
+        height: 60px;
         border-radius: 100%;
         position: fixed;
         right: 2%;

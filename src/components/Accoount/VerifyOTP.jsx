@@ -1,11 +1,11 @@
 import { useContext, useState } from "react"
 import Loader from "../Loader"
-import { AuthContext } from "../context/AuthContext"
 import { toast, ToastContainer } from "react-toastify"
+import { UserContext } from "../UserContext"
 
 
 const VerifyOTP = () => {
-    const {url, token} = useContext(AuthContext)
+    const {url, token} = useContext(UserContext)
     console.log(token);
     
     const [loading, setLoading] = useState(false)

@@ -1,11 +1,11 @@
 
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+
+import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import SignUp from './components/Accoount/SignUp.jsx'
-import AuthContextProvider from './components/context/AuthContext.jsx'
 import { AccountType } from './components/Accoount/AccountType.jsx'
 import RoleContextProvider from './components/context/RoleContext.jsx'
 import Login from './components/Accoount/Login.jsx'
@@ -16,10 +16,10 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
-import GetTasks from './components/Tasks/GetTasks.jsx'
-import Onboarding from './components/Onboording/Onboarding.jsx'
-import Verification from './components/Onboording/Verification.jsx'
-// import "../node_modules/font-awesome/css/font-awesome.min.css";
+import SingleTask from './components/Tasks/SingleTask.jsx'
+import GetMessages from './components/Chats/GetMessages.jsx'
+import StartChat from './components/Chats/StartChat.jsx'
+import Review from './components/Tasks/Review.jsx'
 import Home from './components/Home/Home.jsx'
 import Select from './components/Select/Select.jsx'
 import Request from './components/Request/Request.jsx'
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-        {index: true, element: <App />},
+        {index: true, element: <Home /> },
         {path: '/account-type', element: <AccountType />},
         {path: '/register', element: <SignUp />},
         {path: '/login', element: <Login />},
@@ -52,21 +52,19 @@ const router = createBrowserRouter([
         {path: '/passport', element: <PassportUpload/>},
         {path: '/underview', element: <Underview />},
         
-        {path: '/home', element: <Home />},
-        {path: 'select', element: <Select />},
-        {path: '/request', element: <Request />}
     ] 
   }
 ])
 
 createRoot(document.getElementById('root')).render(
-  <AuthContextProvider>
+  <UserContextProvider >
+  
     <RoleContextProvider>
 
     <RouterProvider router={router} />
 
     </RoleContextProvider>
-  </AuthContextProvider>,
+  </UserContextProvider>
 )
 
 

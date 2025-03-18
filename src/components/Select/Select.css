@@ -39,7 +39,7 @@
 }
 
 .select-text::before {
-    content: "Choose your classifications.";
+    /* content: "Choose your classifications."; */
     color: black;
     animation: word 25s infinite;
 }

@@ -1,14 +1,14 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "../context/AuthContext"
 // import { Link } from "react-router-dom";
 import { RoleContext } from "../context/RoleContext";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { UserContext } from "../UserContext";
 
 
 const SignUp = () => {
-  const {url} = useContext(AuthContext)
+  const {url} = useContext(UserContext)
   const {role} = useContext(RoleContext)
   const [loading, setLoading] = useState(false)
  
@@ -114,9 +114,9 @@ const SignUp = () => {
                   </span>
                   </div>
          <ToastContainer />
-          <p className="px-10 md:w-[30vw]">By clicking continue mean you have agree to our <span className="text-[#EA1588]">terms</span> & <span className="text-[#EA1588]">conditions</span></p>
         <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
         </form>
+          <p className="text-center">Already have an account ? <span className="text-[#EA1588]">Login</span></p>
 
       </div>
       </>

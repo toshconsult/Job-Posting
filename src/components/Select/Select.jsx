@@ -35,30 +35,30 @@ const Select = () => {
   return (
     <div className='select-container'>
         <div>
-            <h1 className='select-h1'>Your <span className='select-span'>Discipline</span></h1>
+            <h1 className='select-h1 px-16'>Trending <span className='select-span'>Categories</span></h1>
             <span className='select-text'></span>
         </div>
         <div>
         <div className='card-1'>
             <Carousel responsive={responsive}>
-                <div className='card'>
+                {/* <div className='card'>
                     <div>
                         <img className='card-img' src={Gra} alt="" />
                     </div>
                     <h1 className='card-h1'>Graphics Design</h1>
-                </div>
-                <div className='card'>
+                </div> */}
+                {/* <div className='card'>
                     <div>
                         <img className='card-img' src={Pro} alt="" />
                     </div>
                     <h1 className='card-h1'>Programming</h1>
-                </div>
-                <div className='card'>
+                </div> */}
+                {/* <div className='card'>
                     <div>
                         <img className='card-img' src={Ui} alt="" />
                     </div>
                     <h1 className='card-h1'>UI/UX Design</h1>
-                </div>
+                </div> */}
                 <div className='card'>
                     <div>
                         <img className='card-img' src={Plum} alt="" />

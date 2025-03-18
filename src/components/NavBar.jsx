@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
   <div>
     <div>
-      <div className="container">
+      <div className="containerr">
         {/* {Logo section} */}
         <div className="text">
           <p className="air">THEBEST</p>

@@ -23,6 +23,10 @@ import Verification from './components/Onboording/Verification.jsx'
 import Home from './components/Home/Home.jsx'
 import Select from './components/Select/Select.jsx'
 import Request from './components/Request/Request.jsx'
+import GovernCard from './components/Onboording/GovernCard.jsx'
+import Uploading from './components/Onboording/Uploading.jsx'
+import PassportUpload from './components/Onboording/PassportUpload.jsx'
+import Underview from './components/Onboording/Underview.jsx'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +47,10 @@ const router = createBrowserRouter([
         {path: '/get-tasks', element: <GetTasks/>},
         {path: '/verifly', element: <Onboarding/>},
         {path: '/v-type', element: <Verification/>},
+        {path: '/govtcard', element: <GovernCard/>},
+        {path: '/uploading', element: <Uploading/>},
+        {path: '/passport', element: <PassportUpload/>},
+        {path: '/underview', element: <Underview />},
         
         {path: '/home', element: <Home />},
         {path: 'select', element: <Select />},

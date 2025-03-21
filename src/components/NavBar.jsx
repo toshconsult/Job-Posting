@@ -1,7 +1,12 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import "../components/Navbar.css"
+import { Link } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import Sidebar from "./SideBar";
 
 const NavBar = () => {
+ const {user} = useContext(UserContext);
+// console.log(user?.username);
 
   const [open, setOpen] = useState(false);
 
@@ -12,30 +17,47 @@ const NavBar = () => {
   return (
   <div>
     <div>
-      <div className="container">
+      <div className="containerr">
+<<<<<<< HEAD
+=======
+       
+>>>>>>> faaefe2e4fd0a88787467af8a3ed7ab3a98e8596
         {/* {Logo section} */}
         <div className="text">
           <p className="air">THEBEST</p>
           <span className="span">PRICE</span>
         </div>
         {/* Menu Section */}
+        { user ? (
         <div className="menuList">
           <ul className="ul">
             <li className="li home-activ">Account Info.</li>
             <li className="li">About Us</li>
-            <li className="li">Settings</li>
+            <li className="li"><Link to='/settings'>Settings</Link> </li>
             <li className="li">Support</li>
             <li className="li">Give Feedback</li>
             <li className="li">FAQ</li>
             <li className="li">Check Update</li>
           </ul>
         </div>
+        ) : ''}
         {/* Icons Section */}
         <div className="button">
-          <button className="btn"><input className="input" type="search" name="" id="" placeholder="Search" /><i class="fa fa-search"></i></button>
-          <button className="sign"><i class="fa fa-sign-in"></i>Sign in</button>
-          <button className="logo"><i class="fa fa-user"></i>Logo in</button>
+          <Link to='/' className="btn"><input className="input" type="search" name="" id="" placeholder="Search" /><i class="fa fa-search"></i></Link>
+          {
+            user? (
+            <Link to='/profile' className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+
+            ):
+            (
+            <>
+            <Link to='/register' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
+            <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
+            </>
+            )
+          }
         </div>  
+        
         {/* Mobile hamburger Menu section */}
         <button className="ham" onClick={handleClick}><i class="fa fa-bars"></i></button>
       </div>
@@ -44,11 +66,12 @@ const NavBar = () => {
     <div className={open ? "bg active" : "bg"}>
      <button className="close" onClick={handleClick}><i class="fa fa-times"></i></button>
       <div className="mobile">
+    { user ?  <Sidebar /> : <>
         <div className="menuList">
             <ul className={open ? "ul active" : "ul"}>
               <li className="li home-active">Account Info.</li>
               <li className="li">About Us</li>
-              <li className="li">Settings</li>
+              <li className="li"><Link to='/settings'>Settings</Link> </li>
               <li className="li">Support</li>
               <li className="li">Give Feedback</li>
               <li className="li">FAQ</li>
@@ -57,9 +80,20 @@ const NavBar = () => {
           </div>
           <div className={open ? "button active" : "button"}>
             <button className="btn"><i class="fa fa-search"></i></button>
-            <button className="sign"><i class="fa fa-sign-in"></i>Sign in</button>
-            <button className="logo"><i class="fa fa-user"></i>Logo in</button>
+            {
+            user? (
+            <Link to='/profile' className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+
+            ):
+            (
+            <>
+            <Link to='/register' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
+            <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
+            </>
+            )
+          }
           </div>
+    </>}
         </div>
     </div>
     {/* mobile sidebar section */}

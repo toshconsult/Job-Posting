@@ -5,7 +5,9 @@ import { Outlet, useLocation } from 'react-router-dom'
 const Layout = () => {
   const location = useLocation()
   const hideHeadFooter = ['/login', '/register', '/profile', '/reset-password', '/account-type',
-  '/forgot-password', '/reset-password', '/verify-otp', '/change-password', '/interest', '/create-task', '/all-task', '/verifly', '/get-tasks', '/v-type',
+  '/forgot-password', '/reset-password', '/verify-otp', '/change-password', '/interest',
+   '/create-task', '/all-task', '/messages', '/chat', '/review', '/wallet'
+  
   ]
 
   const hideAll = hideHeadFooter.includes(location.pathname) 

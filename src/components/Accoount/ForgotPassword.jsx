@@ -1,11 +1,12 @@
 import { useContext, useState } from "react"
 import Loader from "../Loader"
-import { AuthContext } from "../context/AuthContext"
 import { toast, ToastContainer } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+import { UserContext } from "../UserContext"
 
 
 const ForgotPassword = () => {
-    const {url} = useContext(AuthContext)
+    const {url} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [formdata, setFormdata] = useState({
         email: '',
@@ -21,6 +22,7 @@ const ForgotPassword = () => {
         }))
         
     }
+    const navigate = useNavigate()
     const handleSubmit = async (e) => { 
         e.preventDefault()
 
@@ -37,6 +39,7 @@ const ForgotPassword = () => {
                 const data = await response.json()
                 console.log(data);
                 toast.success(data.message)
+                 navigate('/verify-otp')
                 setLoading(false)
             } else {
                 const data = await response.json()

@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { format } from 'date-fns';
-import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 const GetTasks = () => {
 
-  const [userData, setUserData] = useState([]);
-  const {token} = useContext(AuthContext)
+  const [tasks, settasks] = useState([]);
+  const {userToken} = useContext(UserContext)
 
   useEffect(() => {
     const getData = async () => {
@@ -15,16 +16,18 @@ const GetTasks = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer: ${token}`
+            "Authorization": `Bearer ${userToken}`
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setUserData(data);  
+          settasks(data);  
           console.log(data); 
         } else {
-          console.error('Error fetching data:', response.status);
+          const error = await response.json()
+          console.log(error);
+          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -34,32 +37,33 @@ const GetTasks = () => {
     getData();
   }, []); 
   return (
-    <div className='flex flex-col lg:p-10 p-[50px]'>
-          <div>
-            <h2 className='lg:text-[30px] text-[20px] font-serif font-bold'>All Task</h2>
-          </div>
-          {
-            userData && userData.map((u, task_id)=>(
-              <div key={task_id} className='flex flex-col items-center lg:p-7 py-[20px]'>
-            <div className='flex flex-col lg:w-[75%] w-[90vw] p-[20px]  bg-neutral-100 shadow-2xl lg:p-[30px] rounded-2xl  justify-center gap-1'>
+      <div>
+    <h2 className='lg:text-[30px] text-[20px] font-serif font-bold px-8 pb-5'>Tasks</h2>
+    <div className='flex flex-col md:flex-row gap-5 px-8 md:px-20'>
+          { tasks.map((txk, index)=>(
+
+            <div key={index}  className='w-full md:w-[25vw] cursor-pointer p-6 h-[200px]
+            rounded-2xl border-1 border-[#F3F5FF] hover:bg-neutral-100 '>
+              <Link to={`/single-task/${txk.task._id}`}>
               <div className='flex flex-col pb-5'>
                 <div className='flex justify-between gap-2'>
-                  <p className='lg:text-[25px] text-[20px] font-bold'>{u.task.title}</p>
-                  <p className='text-green-400 font-medium'>{u.task.status}</p>
+                  <p className='lg:text-[20px] text-[15px] font-semibold'>{txk.task.title}</p>
+                  <p className='text-green-400 '>{txk.task.status}</p>
                 </div>
-                <p className='lg:text-[16px] text-[12px] text-gray-500'>{u.task.description}</p>
+                <p className='lg:text-[16px] text-[12px] text-gray-500'>{txk.task.description}</p>
               </div>
-              <div className='flex justify-between text-[12px]'>
+              <div className='flex justify-between gap-2 text-[12px]'>
                 <p>
                   <span className='text-pink-500 font-medium '>Date:</span>{' '}
-                  {u.task.date ? format(new Date(u.task.date), 'MM/dd/yyyy') : 'N/A'}
+                  {txk.task.date ? format(new Date(txk.task.date), 'MM/dd/yyyy') : 'N/A'}
                 </p>
-                <p><span className='text-pink-500 font-medium'>Price:</span> N{u.task.pricing}</p>
+                <p><span className='text-pink-500 font-medium'>Price:</span> N{txk.task.pricing}</p>
               </div>
-            </div>
+              </Link>
         </div>
             ))
           }
+    </div>
     </div>
   )
 }

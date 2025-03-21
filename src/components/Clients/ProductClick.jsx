@@ -23,7 +23,7 @@ import Photo from "../../assets/Images/Group 84.png";
 const ProductClick = () => {
   return (
     <div className='product-what'>
-      <div className='product-image'  >
+      {/* <div className='product-image'  >
         <div>
           <div className='perfect'>
             <div className='product-images'>
@@ -34,12 +34,12 @@ const ProductClick = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Need */}
       
       <div className='product-ll'>
-       <p className='client'>what do you need help with?</p>
+       <p className='client text-center' >what do you need help with?</p>
         <div className='you-all'>
           
           <div className='do'>

@@ -19,10 +19,10 @@ const SingleTask = () => {
       setLoading(true);
       if (!userToken) {
         console.error("Token is missing!");
-        navigate("/login");
+        // navigate("/login");
       }
 
-      const response = await fetch(`${url}api/v1/task/get-task/${id}`, {
+      const response = await fetch(`${url}user/task/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${userToken}`,
@@ -32,12 +32,14 @@ const SingleTask = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
+        
         setTask(data);
         setLoading(false);
       } else {
         const data = await response.json();
         console.log(data.error);
-        navigate("/login");
+        // navigate("/login");
         setLoading(false);
       }
     } catch (error) {

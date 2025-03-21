@@ -11,7 +11,7 @@ export const AccountType = () => {
 
     const handleRole = (selectedRole) => {
         setRole(selectedRole)
-        navigate('/register')
+        navigate('/interest')
        
         
     }

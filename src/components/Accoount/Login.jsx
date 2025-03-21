@@ -32,7 +32,7 @@ const Login = () => {
 
         try {
             setLoading(true)
-            const response = await fetch(`${url}api/v1/login`, {
+            const response = await fetch(`${url}user/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ const Login = () => {
       <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
       </form>
         <Link to='/forgot-password' className="text-center text-[#EA1588]">Forgot Password</Link>
-        <p className="text-center">Don't have account ? <Link to='/register' className="text-[#EA1588]">Sign Up</Link></p>
+        <p className="text-center">Don't have account ? <Link to='/account-type' className="text-[#EA1588]">Sign Up</Link></p>
     </div>
     </>
     }

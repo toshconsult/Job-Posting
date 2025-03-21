@@ -1,113 +1,148 @@
 // src/components/Sidebar.jsx
-import { useState } from 'react';
-import { FaBars} from 'react-icons/fa';
-import { MdCancel } from 'react-icons/md';
+import { useContext, useState } from "react";
+import { FaBars } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 import { Switch } from "@headlessui/react";
 import { ChevronRight, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import Loader from "./Loader";
 
 const settingsOptions = [
-  {text:"Wallet",
-    link: '/wallet'
-  },
-   {text:"Profile",
-    link: '/profile' },
-   {text:"Referrals",
-    link: '/referrals'
-   },
-   {text:"Community",
-    link: '/community'
-   },
-   {text:"Availability",
-    link: '/availaibility'
-   }];
+  { text: "Dashboard", link: "/dashboard" },
+  { text: "Profile", link: "/profile" },
+  { text: "Wallet", link: "/wallet" },
+  { text: "Tasks", link: "/all-task" },
+  { text: "Messages", link: "/messages" },
+  { text: "Referrals", link: "/referrals" },
+  { text: "Community", link: "/community" },
+  { text: "Availability", link: "/availaibility" },
+];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [enabled, setEnabled] = useState(true);
-  const navigate = useNavigate()
+  const [role, setRole] = useState("");
+  const { url, user, userToken, logout, getuser } = useContext(UserContext);
+  const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+  const userDetail = user?.userDetails?.user
+
+  // console.log({user : user?.role});
+
+  // console.log(user?.role);
+
+  const switchRole = async () => {
+    const response = await fetch(`${url}user/switch-role`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // console.log(data.user.role)
+      userDetail.userType = data.user.role;
+      setRole(data.user.role);
+      getuser();
+    } else {
+      const error = await response.json();
+      console.log(error);
+    }
   };
 
   return (
     <div className="flex ">
-      
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
+        className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
     border-[#F3F5FF] transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform duration-300 ease-in-out`}
+      isOpen ? "translate-x-0" : "-translate-x-full"
+    } md:translate-x-0 transition-transform duration-300 ease-in-out`}
       >
-        
         <div className="flex items-center justify-between p-4 border-gray-700">
-          <h2 className={`${isOpen ? 'block' : 'hidden'} md:block text-xl font-bold`}>Menu</h2>
-          <button onClick={toggleSidebar} className="md:hidden focus:outline-none">
-           
-            <MdCancel className="w-6 h-6" /> 
+          <h2
+            className={`${
+              isOpen ? "block" : "hidden"
+            } md:block text-xl font-bold`}
+          >
+            Menu
+          </h2>
+          <button
+            onClick={toggleSidebar}
+            className="md:hidden focus:outline-none"
+          >
+            <MdCancel className="w-6 h-6" />
           </button>
         </div>
 
-       
         <nav className="flex flex-col p-4 space-y-2">
           {/* Account Type Toggle */}
-      <div className="bg-white p-4 rounded-lg">
-        <span className="text-gray-800 font-medium">Account Type</span>
-        <div className="flex justify-between items-center mt-2">
-          <span className="text-sm text-gray-500">{enabled ? "As A Client" : "As A Worker"}</span>
-          <Switch
-            checked={enabled}
-            onChange={setEnabled}
-            className={`${
-              enabled ? "bg-pink-500" : "bg-gray-300"
-            } relative inline-flex h-6 w-11 items-center rounded-full transition`}
-          >
-            <span
-              className={`${
-                enabled ? "translate-x-6" : "translate-x-1"
-              } inline-block h-4 w-4 transform bg-white rounded-full transition`}
-            />
-          </Switch>
-        </div>
-      </div>
+          <div className="bg-white p-4 rounded-lg">
+            <span className="text-gray-800 font-medium">Account Type</span>
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-sm text-gray-500">{`As A ${
+                user ? user.role : "..."
+              }`}</span>
+              <Switch
+                checked={role}
+                onChange={switchRole}
+                className={`${
+                  user?.role == "tasker" ? "bg-pink-500" : "bg-gray-300"
+                } relative inline-flex h-6 w-11 items-center rounded-full transition`}
+              >
+                <span
+                  className={`${
+                    user?.role == "tasker" ? "translate-x-6" : "translate-x-1"
+                  } inline-block h-4 w-4 transform bg-white rounded-full transition`}
+                />
+              </Switch>
+            </div>
+          </div>
 
-      {/* General Settings List */}
-      <div className="mt-6">
-        <h3 className="text-lg font-medium mb-2">General Settings</h3>
-        <div className="bg-white rounded-lg">
-          {settingsOptions.map((option, index) => (
-            <button
-              key={index}
-              onClick={()=> navigate(option.link)}
-              className="w-full flex justify-between items-center p-4  cursor-pointer
+          {/* General Settings List */}
+          <div className="mt-6">
+            <h3 className="text-lg font-medium mb-2">General Settings</h3>
+            <div className="bg-white rounded-lg">
+              {settingsOptions.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => navigate(option.link)}
+                  className="w-full flex justify-between items-center p-4  cursor-pointer
             hover:bg-pink-500 hover:text-white transition"
-            >
-              <span className="text-gray-700" 
-             ><Link to={option.link}> {option.text} </Link></span>
-              <ChevronRight size={18} className="text-gray-500" />
-            </button>
-          ))}
-        </div>
-      </div>
+                >
+                  <span className="text-gray-700">
+                    <Link to={option.link}> {option.text} </Link>
+                  </span>
+                  <ChevronRight size={18} className="text-gray-500" />
+                </button>
+              ))}
+            </div>
+          </div>
 
-      {/* Log Out Button */}
-      <button className="w-full flex items-center justify-center gap-2 mt-10 bg-pink-500 text-white py-3 rounded-lg text-lg font-semibold transition hover:bg-pink-600">
-        <LogOut size={20} />
-        Log Out
-      </button>
+          {/* Log Out Button */}
+          <button
+            className="cursor-pointer w-full flex items-center justify-center gap-2 mt-10 bg-pink-500 text-white py-3 rounded-lg text-lg font-semibold transition hover:bg-pink-600"
+            onClick={logout}
+          >
+            <LogOut size={20} />
+            Log Out
+          </button>
         </nav>
       </div>
 
-      {/* Toggle Button (Visible on Mobile) */}
       <div className="md:hidden">
         <button
           onClick={toggleSidebar}
-          className={`fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded focus:outline-none ${isOpen ? 'hidden' : ''} `}
+          className={`fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded focus:outline-none ${
+            isOpen ? "hidden" : ""
+          } `}
         >
           <FaBars className="w-6 h-6" />
         </button>
       </div>
-
     </div>
   );
 };

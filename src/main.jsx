@@ -26,6 +26,11 @@ import { UserContext, UserContextProvider } from './components/UserContext.jsx';
 import WalletPage from './components/Users/Wallet.jsx';
 import Settingpage from './components/Users/Settingpage.jsx';
 import ProductClick from './components/Clients/ProductClick.jsx';
+import AssignTask from './components/Tasks/Assign-task.jsx';
+import Sidebar from './components/SideBar.jsx';
+import UpdateProfile from './components/Users/UpdateProfile.jsx';
+import StartSupport from './components/Support/StartSupport.jsx';
+import Dashboard from './components/Users/Dashboard.jsx';
 // import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
@@ -46,6 +51,7 @@ const router = createBrowserRouter([
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
         {path: '/single-task/:id', element: <SingleTask />},
+        {path: '/assign', element: <AssignTask />},
         // {path: '/apply-task/:id/apply', element: <ApplyTask />},
         {path: '/messages', element: <GetMessages />},
         {path: '/chat', element: <StartChat />},
@@ -53,8 +59,12 @@ const router = createBrowserRouter([
         {path: '/profile', element:<Profile />},
         {path: '/settings', element:<Settingpage />},
         {path: '/wallet', element: <WalletPage />},
-        {path: '/product', element: <ProductClick /> },
-        {path:'/context', element: <UserContext />}
+        {path: '/client', element: <ProductClick /> },
+        {path:'/context', element: <UserContext />},
+        {path: '/update-profile', element: <UpdateProfile />},
+        {path: '/side', element: <Sidebar />},
+        {path: '/support', element: <StartSupport />},
+        {path: '/dashboard', element: <Dashboard />}
         
         
     ] 

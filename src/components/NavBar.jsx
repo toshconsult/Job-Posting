@@ -48,7 +48,7 @@ const NavBar = () => {
             ):
             (
             <>
-            <Link to='/register' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
+            <Link to='/account-type' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
             <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
             </>
             )
@@ -84,7 +84,7 @@ const NavBar = () => {
             ):
             (
             <>
-            <Link to='/register' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
+            <Link to='/account-type' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
             <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
             </>
             )

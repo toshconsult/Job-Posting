@@ -1,10 +1,64 @@
-import { useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify"
+import { UserContext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
+import Loader from '../Loader'
+import skills from '/src/components/Skills.jsx'
+
 
 const Interest = () => {
+  const {url, userToken} = useContext(UserContext)
   const [click, setClick] = useState(null);
-  const handleClick = (index) => {
+  const [clickvalue, setClickValue] = useState(null);
+  const [selectedSkills, setSelectedSkills] = useState([])
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  console.log(selectedSkills);
+  
+
+
+  const addSkills = async ()=>{
+  const response = await fetch(`${url}user/update-profile`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({skillsets:selectedSkills})
+         })
+         if (response.ok){
+          const data = await response.json()
+          setLoading(false)
+          console.log(data);
+          toast.success('Skills updated Successfully')
+          navigate('/update-profile')
+          
+         } else {
+          const error = await response.json()
+          console.log(error);
+          setLoading(false)
+          toast.error(error.error)
+         }
+        }
+
+    // Reset selected checkboxes when `click` changes
+    useEffect(() => {
+      setSelectedSkills([]);
+    }, [click]);
+  
+    const handleCheckboxChange = (item) => {
+      setSelectedSkills((prev) =>
+        prev.includes(item) ? prev.filter((skill) => skill !== item) : [...prev, item]
+      );
+    };
+
+  const handleClick = (index, e) => {
     setClick(index);
+    setClickValue(e);
   };
+
+  
   const buttons = [
     "Photograph",
     "Furniture",
@@ -15,48 +69,49 @@ const Interest = () => {
     "Cleaning",
     "Tutoring",
   ];
-  const states = [
-    "Abia",
-    "Adamawa",
-    "Akwa Ibom",
-    "Anambra",
-    "Bauchi",
-    "Bayelsa",
-    "Benue",
-    "Borno",
-    "Cross River",
-    "Delta",
-    "Ebonyi",
-    "Edo",
-    "Ekiti",
-    "Enugu",
-    "Gombe",
-    "Imo",
-    "Jigawa",
-    "Kaduna",
-    "Kano",
-    "Katsina",
-    "Kebbi",
-    "Kogi",
-    "Kwara",
-    "Lagos",
-    "Nasarawa",
-    "Niger",
-    "Ogun",
-    "Ondo",
-    "Osun",
-    "Oyo",
-    "Plateau",
-    "Rivers",
-    "Sokoto",
-    "Taraba",
-    "Yobe",
-    "Zamfara",
-    "FCT (Abuja)",
-  ];
+  // const states = [
+  //   "Abia",
+  //   "Adamawa",
+  //   "Akwa Ibom",
+  //   "Anambra",
+  //   "Bauchi",
+  //   "Bayelsa",
+  //   "Benue",
+  //   "Borno",
+  //   "Cross River",
+  //   "Delta",
+  //   "Ebonyi",
+  //   "Edo",
+  //   "Ekiti",
+  //   "Enugu",
+  //   "Gombe",
+  //   "Imo",
+  //   "Jigawa",
+  //   "Kaduna",
+  //   "Kano",
+  //   "Katsina",
+  //   "Kebbi",
+  //   "Kogi",
+  //   "Kwara",
+  //   "Lagos",
+  //   "Nasarawa",
+  //   "Niger",
+  //   "Ogun",
+  //   "Ondo",
+  //   "Osun",
+  //   "Oyo",
+  //   "Plateau",
+  //   "Rivers",
+  //   "Sokoto",
+  //   "Taraba",
+  //   "Yobe",
+  //   "Zamfara",
+  //   "FCT (Abuja)",
+  // ];
 
   return (
     <div>
+      {loading ? <Loader /> : <>
       <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-14">
         Your <span className="text-[#EA1588]">Field</span>
       </h1>
@@ -69,32 +124,52 @@ const Interest = () => {
           {buttons.map((item, index) => (
             <button
               key={index}
+              value={item}
               className={`border border-[#F3F5FF] p-3 rounded-2xl text-center 
             ${click === index ? "bg-[#EA1588] text-white" : ""}`}
-              onClick={() => handleClick(index)}
+              onClick={(e) => handleClick(index, e.target.value)}
             >
               {item}
             </button>
           ))}{" "}
         </div>
 
-        <div>
-          <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-14">
-            Your <span className="text-[#EA1588]">Location </span>
-          </h1>
+        <div className="py-12 max-w-[800px]">
+          {clickvalue ? <>
 
-          <p className=" px-4">Choose your location</p>
+            <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-2">
+        Your <span className="text-[#EA1588]">Skillset</span>
+      </h1>
+      
+        <p className="pb-6 text-center">
+          You can select more than one (1) skill from the following
+        </p>
+            <form className=" w-full grid grid-cols-2 md:grid-cols-4 gap-5  ">
+             { skills[click].map((item, i)=> (
+              <div key={i} className=" flex items-center border
+               border-[#F3F5FF] p-3 rounded-2xl text-center gap-4 min-h-[40px]">
+              <label className="flex gap-[20px] cursor-pointer">
+                <input type="checkbox"  
+                 checked={selectedSkills.includes(item)}
+                 onChange={() => handleCheckboxChange(item)}
+                />
+                {item}
+              </label>
+              </div>
+             ))}
+            </form>
 
-          <select className="border border-[#F3F5FF] p-3 rounded-2xl w-[90vw] md:w-[60vw] my-4 outline-0 px-2">
-            <option value="">Select a state</option>
-            {states.map((state, index) => (
-              <option key={index} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
+
+            
+          </> : ''}
+        </div >
+          
+        <div className="mb-5">
+        <button type="submit" className="w-[328px] md:w-[652px] py-[20px] cursor-pointer bg-[#EA1588] text-white
+         hover:bg-white rounded-3xl hover:text-black hover:border-2 hover:border-[#F3F5FF]" onClick={addSkills}>Continue</button>
         </div>
       </div>
+      </> }
     </div>
   );
 };

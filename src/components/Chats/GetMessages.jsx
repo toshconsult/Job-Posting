@@ -1,29 +1,28 @@
 
 import {  useContext, useEffect, useState } from "react"
-import { AuthContext } from "../context/AuthContext"
 import Loader from "../Loader";
 import {  useNavigate } from "react-router-dom";
 import image from '/src/assets/react.svg' 
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
 import Sidebar from "../SideBar";
+import { UserContext } from "../UserContext";
 const GetMessages = () => {
-    const {url} = useContext(AuthContext)
-    const {token} = useContext(AuthContext)
+    const {url, userToken} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [messages, setMessages] = useState([])
    const navigate = useNavigate()
       
 const getMessages = async ()=>{
     
-    if (!token){
+    if (!userToken){
         navigate('/login')
     }
     setLoading(true)
     const response = await fetch(`${url}api/v1/chat/67ab605b68eebf099535176f/messages`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${userToken}`,
             'Content-Type': 'application/json'
         }
     })
@@ -68,7 +67,7 @@ useEffect(()=>{
         {
             messages.map(msg =>{
                 return(
-                    <div key={msg.sender._id} className="w-[328px] h-[67px] border-1 
+                    <div key={msg.sender._id} className="w-[328px] md:w-[642px] h-[67px] border-1 
                     border-[#F3F5FF] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2">
                         <div className="flex justify-between px-4 items-center w-full">
                             <div className="flex items-center gap-3 justify-between">

@@ -1,8 +1,62 @@
 // import { Sidebar } from "lucide-react";
 
+import { useContext, useState, useEffect } from "react";
 import Sidebar from "../SideBar";
+import { UserContext } from "../UserContext";
 
 export default function WalletPage() {
+
+  const  {url, userTOken} = useContext(UserContext)
+  const [allbanks, setBanks] = useState([])
+console.log(allbanks);
+
+  const withdraw = async () => {
+    const response = await fetch(`${url}api/v1/resolve-banks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userTOken}`
+      },
+      body: JSON.stringify({
+        
+          "accountNumber": "8132315005",
+          "bankCode": "999992"
+      
+      })
+    })
+    if(response.ok){
+      const data = await response.json()
+      console.log(data)
+    } else {
+      const error = await response.json()
+      console.log(error)
+    }
+  }
+
+const banks = async ()=>{
+  const response = await fetch(`${url}api/v1/supported-banks`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userTOken}`
+    }
+  })
+  if(response.ok){
+    const data = await response.json()
+    // console.log(data)
+    setBanks(data)
+  } else {
+    const error = await response.json()
+    console.log(error)
+  }
+}
+
+
+  useEffect(() => {
+    // withdraw()
+    banks()
+  }, [])
+
     return (
         <div>
        <Sidebar />
@@ -22,7 +76,7 @@ export default function WalletPage() {
         {/* Action Buttons */}
         <div className="flex gap-4 mb-6">
           <button className="flex-1 flex items-center justify-center border border-gray-300 rounded-lg py-2 text-gray-800">
-            <span className="mr-2">💳</span> Transfer
+            <span className="mr-2">💳</span> Fund Account
           </button>
           <button className="flex-1 flex items-center justify-center bg-pink-600 text-white rounded-lg py-2">
             <span className="mr-2">🏦</span> Withdraw

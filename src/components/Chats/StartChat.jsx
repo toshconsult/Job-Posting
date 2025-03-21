@@ -5,18 +5,18 @@ import {  useNavigate } from "react-router-dom";
 import image from '/src/assets/react.svg' 
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
+import { UserContext } from "../UserContext";
 
 const StartChat = () => {
-    const {url} = useContext(AuthContext)
-    const {token} = useContext(AuthContext)
+   const {url, token} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [messages, setMessages] = useState([])
    const navigate = useNavigate()
 
    const chat = async ()=>{
-    if(!token){
-        navigate('/login')
-    }
+    // if(!token){
+    //     navigate('/login')
+    // }
     const response = await fetch(`${url}api/v1/chat/create`, {
         method: 'POST',
         headers: {

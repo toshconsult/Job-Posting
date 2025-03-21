@@ -5,15 +5,20 @@ import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { UserContext } from "../UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
   const {url} = useContext(UserContext)
   const {role} = useContext(RoleContext)
   const [loading, setLoading] = useState(false)
- 
+const navigate = useNavigate()
+if(role === ''){
+  navigate('/account-type')
+}
+
   const [formdata, setFormdata] = useState({
-    role: role ,
+    userType: role ,
     username: '',
     email: '',
     password: ''
@@ -26,6 +31,7 @@ const SignUp = () => {
         setShowPassword(!showPassword)
     }
 
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormdata(prevData => ({
@@ -41,7 +47,7 @@ const SignUp = () => {
     if (formdata.role === '') {
       setFormdata(prevData => ({
         ...prevData,
-        role: role 
+        userType: role 
       }));
     }
   
@@ -50,7 +56,7 @@ const SignUp = () => {
 
     try {
       setLoading(true)
-      const response = await fetch(`${url}api/v1/register`, {
+      const response = await fetch(`${url}user/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -65,7 +71,7 @@ const SignUp = () => {
       } 
       else {
         const data = await response.json();
-      //  console.log(data.error);
+       console.log(data.error);
         setLoading(false)
         toast.error(data.error)
       }
@@ -116,8 +122,8 @@ const SignUp = () => {
          <ToastContainer />
         <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
         </form>
-          <p className="text-center">Already have an account ? <span className="text-[#EA1588]">Login</span></p>
-
+          <Link to='/login'> <p className="text-center">Already have an account ? <span className="text-[#EA1588]">Login</span></p></Link>
+        
       </div>
       </>
       }

@@ -16,6 +16,7 @@ import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
 import CreateTask from './components/Tasks/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
+
 import SingleTask from './components/Tasks/SingleTask.jsx'
 import GetMessages from './components/Chats/GetMessages.jsx'
 import StartChat from './components/Chats/StartChat.jsx'
@@ -27,6 +28,7 @@ import GovernCard from './components/Onboording/GovernCard.jsx'
 import Uploading from './components/Onboording/Uploading.jsx'
 import PassportUpload from './components/Onboording/PassportUpload.jsx'
 import Underview from './components/Onboording/Underview.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,7 @@ const router = createBrowserRouter([
         {path: '/interest', element: <Interest />},
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
-        {path: '/get-tasks', element: <GetTasks/>},
+        // {path: '/getTask', element: <GetTasks />},
         {path: '/verifly', element: <Onboarding/>},
         {path: '/v-type', element: <Verification/>},
         {path: '/govtcard', element: <GovernCard/>},
@@ -52,6 +54,8 @@ const router = createBrowserRouter([
         {path: '/passport', element: <PassportUpload/>},
         {path: '/underview', element: <Underview />},
         
+
+
     ] 
   }
 ])

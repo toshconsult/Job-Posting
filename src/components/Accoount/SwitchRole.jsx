@@ -7,10 +7,10 @@ const SwitchRole = () => {
 
 
     const switchRole = async ()=>{
-        const response = fetch(`${url}api/v1/switch-role`, {
-            method: 'PATCH',
+        const response = fetch(`${url}user/update-user-type`, {
+            method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${userToken}`
             }
         })
@@ -23,13 +23,16 @@ const SwitchRole = () => {
             console.log(error)
         }
     }
-useEffect(()=>{
-    switchRole()
-}, [])
+// useEffect(()=>{
+//     switchRole()
+// }, [])
 
 
   return (
-    <div>SwitchRole</div>
+    <div>SwitchRole
+
+        <button onClick={switchRole}>click ,me</button>
+    </div>
   )
 }
 

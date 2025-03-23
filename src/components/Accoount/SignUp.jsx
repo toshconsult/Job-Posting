@@ -68,6 +68,7 @@ if(role === ''){
         const data = await response.json();
         setLoading(false)
         toast.success(data.message)
+        navigate('/interest')
       } 
       else {
         const data = await response.json();

@@ -7,7 +7,7 @@ import { UserContext } from "../UserContext"
 
 
 const Login = () => {
-    const {url} = useContext(UserContext)
+    const {url, user} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [formdata, setFormdata] = useState({
@@ -45,7 +45,7 @@ const Login = () => {
                 const token = data.token
                 localStorage.setItem('token', token)
                 toast.success('Login Successful')
-                navigate('/profile')
+                user?.userType == "Client" ? navigate('/client-dashboard'):  navigate('/dashboard')
                 setLoading(false)
             } else {
                 const data = await response.json()

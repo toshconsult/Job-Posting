@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Bell, Gift, RefreshCcw, Settings } from "lucide-react";
 import Sidebar from '../SideBar'
+import Loader from "../Loader";
 import { UserContext } from "../UserContext";
 
 const Dashboard = () => {
-    const {user, } = useContext(UserContext)
+    const {user, loading, getuser } = useContext(UserContext)
     const userDetail = user?.userDetails?.user
-    console.log(userDetail);
+    // console.log(userDetail);
     
       const [requests, setRequests] = useState([
         { title: "Looking For An Experience Designer", price: "Undefined" },
@@ -14,9 +15,12 @@ const Dashboard = () => {
         { title: "Web Designer", price: "Undefined" },
         { title: "Professional Banner Designer", price: "Undefined" },
       ]);
-    
+    // useEffect(()=>{
+    //   getuser()
+    // }[userDetail])
       return (
         <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
+          {loading ? <Loader />: <>
           {/* Sidebar */}
           <Sidebar />
     
@@ -29,7 +33,7 @@ const Dashboard = () => {
                 <Gift className="text-gray-500" />
                 <Bell className="text-gray-500" />
                 <img
-                  src={userDetail?.profilePicture }
+                  src={'userDetail?.profilePicture '}
                   alt="Profile"
                   className="w-8 h-8 rounded-full border-2 border-yellow-400"
                 />
@@ -76,6 +80,7 @@ const Dashboard = () => {
               ))}
             </div>
           </div>
+          </>}
         </div>
       );
   

@@ -16,6 +16,7 @@ import Tur from "../../assets/Images/Group 81.png";
 import Cook from "../../assets/Images/Group 82.png";
 import Plum from "../../assets/Images/Group 83.png";
 import Photo from "../../assets/Images/Group 84.png";
+import Sidebar from '../SideBar';
 
 
 
@@ -23,6 +24,7 @@ import Photo from "../../assets/Images/Group 84.png";
 const ProductClick = () => {
   return (
     <div className='product-what'>
+     
       {/* <div className='product-image'  >
         <div>
           <div className='perfect'>
@@ -39,6 +41,7 @@ const ProductClick = () => {
       {/* Need */}
       
       <div className='product-ll'>
+      <Sidebar />
        <p className='client text-center' >what do you need help with?</p>
         <div className='you-all'>
           

@@ -1,67 +1,62 @@
-// src/components/Sidebar.jsx
-import { useContext, useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
-import { Switch } from "@headlessui/react";
-import { ChevronRight, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
+ // src/components/Sidebar.jsx
+ import { useContext, useState } from "react";
+ import { FaBars } from "react-icons/fa";
+ import { MdCancel } from "react-icons/md";
+ import { Switch } from "@headlessui/react";
+ import { ChevronRight, LogOut } from "lucide-react";
+ import { Link, useNavigate } from "react-router-dom";
+ import { UserContext } from "../UserContext";
 
+ 
+ const settingsOptions = [
+   { text: "Dashboard", link: "/client-dashboard" },
+   { text: "Wallet", link: "/client-wallet" },
+   { text: "Tasks", link: "/client-tasks" },
+   { text: "Community", link: "/community" },
+   
+ ];
+ 
+ 
+   
 
-const settingsOptions = [
-  { text: "Dashboard", link: "/dashboard" },
-  { text: "Profile", link: "/profile" },
-  { text: "Wallet", link: "/wallet" },
-  { text: "Tasks", link: "/all-task" },
-  { text: "Messages", link: "/messages" },
-  { text: "Referrals", link: "/referrals" },
-  { text: "Community", link: "/community" },
-  { text: "Availability", link: "/availaibility" },
-];
-
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [role, setRole] = useState(null);
-  const { user, logout, url, userToken, getuser } = useContext(UserContext);
-  // const {switchRole} = useContext(RoleContext)
-  // console.log(role);
-  
+const ClientSideBar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+  const [role, setRole] = useState("");
+  const { url, user, userToken, logout, getuser } = useContext(UserContext);
   const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
   const userDetail = user?.userDetails?.user
 
-  const switchRole = async ()=>{
-    const response = await fetch(`${url}user/update-user-type`, {
-        method: 'PUT',
-        headers: {
-            // 'Content-Type': 'application/json',
-            'Authorization': `Bearer ${userToken}`
-        }
-    })
+  // console.log({user : user?.role});
 
-    if(response.ok){
-        const data = await response.json()
-        setRole(data.user.userType)
-   
-        // console.log(data.user.userType)
+  // console.log(user?.role);
+
+  const switchRole = async () => {
+    const response = await fetch(`${url}user/switch-role`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // console.log(data.user.role)
+      userDetail.userType = data.user.role;
+      setRole(data.user.role);
+      getuser();
     } else {
-        const error = await response.json()
-        console.log(error)
+      const error = await response.json();
+      console.log(error);
     }
-}
-
-useEffect(()=>{
-  // getuser()
-
-  // setRole(userDetail?.userType)
-  // console.log(role);
-  
-},[])
-
-
+  };
   return (
+  
+
+  
     <div className="flex ">
       <div
         className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
@@ -91,19 +86,18 @@ useEffect(()=>{
             <span className="text-gray-800 font-medium">Account Type</span>
             <div className="flex justify-between items-center mt-2">
               <span className="text-sm text-gray-500">{`As A ${
-                role ? role : userDetail?.userType
+                user ? user.role : "..."
               }`}</span>
               <Switch
                 checked={role}
                 onChange={switchRole}
-                onClick={getuser}
                 className={`${
-                  role || userDetail?.userType == "tasker" ? "bg-pink-500" : "bg-gray-300"
+                  user?.role == "tasker" ? "bg-pink-500" : "bg-gray-300"
                 } relative inline-flex h-6 w-11 items-center rounded-full transition`}
               >
                 <span
                   className={`${
-                    role || userDetail?.userType  == "tasker" ? "translate-x-6" : "translate-x-1"
+                    user?.role == "tasker" ? "translate-x-6" : "translate-x-1"
                   } inline-block h-4 w-4 transform bg-white rounded-full transition`}
                 />
               </Switch>
@@ -152,7 +146,10 @@ useEffect(()=>{
         </button>
       </div>
     </div>
-  );
-};
+  
 
-export default Sidebar;
+
+  )
+}
+
+export default ClientSideBar

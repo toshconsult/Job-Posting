@@ -7,7 +7,7 @@ export const UserContextProvider = ({children}) =>{
 
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(false);
-    const [initChat, setInit] = useState(null)
+    // const [initChat, setInit] = useState(null)
     
     const [userToken, setUserToken] = useState(()=>{
 
@@ -51,38 +51,38 @@ export const UserContextProvider = ({children}) =>{
 
     
     ////------------------------------------- Initiate Support -------------------------------------/////////////////////
-const initiateSupport = async ()=>{
+// const initiateSupport = async ()=>{
     
-    try {
+//     try {
         
-        const response = await fetch(`${url}api/v1/support/start`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`
-            }
+//         const response = await fetch(`${url}api/v1/support/start`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${userToken}`
+//             }
             
-        })
+//         })
 
-        if(response.ok){
-            const data = await response.json()
-            // console.log(data);
-            setInit(data)
-        } else {
-            const error = await response.json()
-            console.log(error);
-        }
-    } catch (error) {
-       console.log(error);
+//         if(response.ok){
+//             const data = await response.json()
+//             // console.log(data);
+//             setInit(data)
+//         } else {
+//             const error = await response.json()
+//             console.log(error);
+//         }
+//     } catch (error) {
+//        console.log(error);
         
-    }
-}
+//     }
+// }
 
-useEffect(()=>{
-    if(userToken){
-        getuser()
-        initiateSupport()
-    }}, [])
+// useEffect(()=>{
+//     if(userToken){
+//         getuser()
+//         // initiateSupport()
+//     }}, [])
     useEffect(()=> {
         if(userToken){
             getuser()
@@ -93,7 +93,7 @@ useEffect(()=>{
         }
     }, [userToken])
 
-    const contextvalue = {url, user, userToken, loading, initChat, logout, getuser}
+    const contextvalue = {url, user, userToken, loading,  logout, getuser}
     
     return(
     <UserContext.Provider value={contextvalue}>

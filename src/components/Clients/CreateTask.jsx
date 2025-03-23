@@ -25,18 +25,30 @@ const CreateTask = () => {
      
      
      const navigate = useNavigate()
-      const [formdata, setFormdata] = useState({
-        title: '',
-        description: '',
-        duration: '',
-        projectType: '',
-        location: '',
-        price: '',
-        skills: selectedSkills,
-        taskImage: null
+
+     const [title, setTitle] = useState()
+     const [description, setDescription] = useState('')
+     const [price, setPrice] = useState('')
+     const [duration, setDuration] = useState('')
+     const [projectType, sertProjectType] = useState('')
+     const [location, setLocation] = useState('')
+     const [skillss, setSkills] = useState([])
+     const [taskImage, setTaskImage] = useState(null)
+console.log(taskImage);
+
+     
+      // const [formdata, setFormdata] = useState({
+      //   title: '',
+      //   description: '',
+      //   duration: '',
+      //   projectType: '',
+      //   location: '',
+      //   price: '',
+      //   skills: selectedSkills,
+      //   taskImage: null
        
-      })
-    console.log(formdata);
+      // })
+    // console.log(formData);
     
       const handleSelect = (skill) => {
         setSelectedSkills((prev) => {
@@ -49,7 +61,8 @@ const CreateTask = () => {
 
       useEffect(() => {
         // console.log(selectedSkills);
-        formdata.skills = selectedSkills
+        setSkills(selectedSkills)
+        // formData.skills = selectedSkills
       }, [selectedSkills]);
       
       // const handleFileChange = (e) => {
@@ -58,20 +71,32 @@ const CreateTask = () => {
       //     setFormdata((prev) => ({ ...prev, taskImage: file }));
       //   }
       // };
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormdata(prevData => ({
-        ...prevData,
-        [name]: value,  
+      // const handleChange = (e) => {
+      //   const { name, value } = e.target;
+      //   setFormdata(prevData => ({
+      //   ...prevData,
+      //   [name]: value,  
        
-        }));
-      }
+      //   }));
+      // }
      
       
     // !!!!!!!!!!-------------------------------------- FUCTION TO HANDLE SUBMIT --------------------------------------!!!!!!!!!!
       const handleSubmit = async (e) => {
         e.preventDefault()
         // console.log("Submitting data:", formdata); 
+
+        const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("duration", duration);
+      formData.append("projectType", projectType);
+      formData.append("location", location);
+      formData.append("skills", skillss);
+      if (taskImage) formData.append("taskImage", taskImage);
+      
+      
         
         try {
           setLoading(true)
@@ -85,14 +110,15 @@ const CreateTask = () => {
           const response = await fetch(`${url}client/create-task`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
               'Authorization': `Bearer ${userToken}`
             },
-            body: JSON.stringify(formdata)
+            body: formData
           }) 
     
           if(response.ok){
             const data = await response.json();
+            console.log(data);
+            
             setLoading(false)
             toast.success(data.message)
             navigate('/dashboard')
@@ -131,9 +157,9 @@ const CreateTask = () => {
                 <input
                   type="text"
                   id="title"
-                  name="title"
+                  value={title}
                   placeholder="Enter title"
-                  onChange={handleChange}
+                  onChange={(e)=>setTitle(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -144,9 +170,9 @@ const CreateTask = () => {
                 </label>
                 <textarea
                   id="description"
-                  name="description"
+                 value={description}
                   placeholder="Enter the task description"
-                  onChange={handleChange}
+                  onChange={(e)=>setDescription(e.target.value)}
                   className="w-full h-[114px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -157,9 +183,10 @@ const CreateTask = () => {
                 </label>
                 <input
                   type="text"
+                  value={location}
                   name="location"
                   placeholder="Enter location"
-                  onChange={handleChange}
+                  onChange={(e)=> setLocation(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -170,9 +197,10 @@ const CreateTask = () => {
                 </label>
                 <input
                   type="text"
+                  value={price}
                   name="price"
                   placeholder="Enter price"
-                  onChange={handleChange}
+                  onChange={(e)=> setPrice(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -183,7 +211,8 @@ const CreateTask = () => {
                 </label>
                 <select
                   name="duration"
-                  onChange={handleChange}
+                  value={duration}
+                  onChange={(e)=>setDuration(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >
                   <option value="">Select project type</option>
@@ -202,7 +231,8 @@ const CreateTask = () => {
                 </label>
                 <select
                   name="projectType"
-                  onChange={handleChange}
+                  value={projectType}
+                  onChange={(e)=>sertProjectType(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >
                   <option value="">Select project type</option>
@@ -218,8 +248,9 @@ const CreateTask = () => {
                 </label>
                 <input
                   type="file"
+                  // value={taskImage}
                   name="taskImage"
-                  onChange={handleChange}
+                  onChange={(e)=>setTaskImage(e.target.files[0])}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 />
               </div>
@@ -255,7 +286,7 @@ const CreateTask = () => {
                           onChange={() => handleSelect(skill)}
                           className="w-4 h-4 text-[#EA1588] border-gray-300 rounded focus:ring-[#EA1588]"
                         />
-                        <span className="text-sm text-gray-700">{skill}</span>
+                        <span className="text-sm text-gray-700"> {skill }</span>
                       </label>
                     ))}
                   </div>

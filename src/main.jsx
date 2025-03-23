@@ -14,7 +14,7 @@ import VerifyOTP from './components/Accoount/VerifyOTP.jsx'
 import ResetPassword from './components/Accoount/ResetPassword.jsx'
 import ChangePassword from './components/Accoount/ChangePassword.jsx'
 import Interest from './components/Tasks/Interest.jsx'
-import CreateTask from './components/Tasks/CreateTask.jsx'
+import CreateTask from './components/Clients/CreateTask.jsx'
 import AllTask from './components/Tasks/AllTask.jsx'
 
 import SingleTask from './components/Tasks/SingleTask.jsx'
@@ -32,6 +32,12 @@ import Sidebar from './components/SideBar.jsx';
 import UpdateProfile from './components/Users/UpdateProfile.jsx';
 import StartSupport from './components/Support/StartSupport.jsx';
 import Dashboard from './components/Users/Dashboard.jsx';
+import ClientDashboard from './components/Clients/ClientDashboard.jsx';
+import ClientWallet from './components/Clients/ClientWallet.jsx';
+import ClientTasks from './components/Clients/ClientTasks.jsx';
+import EditTask from './components/Clients/EditTask.jsx';
+import ApplyTask from './components/Tasks/ApplyTask.jsx';
+import SwitchRole from './components/Accoount/SwitchRole.jsx';
 // import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
@@ -52,21 +58,31 @@ const router = createBrowserRouter([
         {path: '/create-task', element: <CreateTask />},
         {path: '/all-task', element: <AllTask />},
         {path: '/single-task/:id', element: <SingleTask />},
+        {path: '/Apply-task/:id', element: <ApplyTask />},
         {path: '/assign', element: <AssignTask />},
-        // {path: '/apply-task/:id/apply', element: <ApplyTask />},
+        {path: 'switch', element: <SwitchRole />},
         {path: '/messages', element: <GetMessages />},
         {path: '/chat', element: <StartChat />},
         {path: '/review', element: <Review />},
         {path: '/profile', element:<Profile />},
         {path: '/settings', element:<Settingpage />},
         {path: '/wallet', element: <WalletPage />},
+
         {path: '/client', element: <ProductClick /> },
         {path:'/context', element: <UserContext />},
         {path: '/update-profile', element: <UpdateProfile />},
         {path: '/side', element: <Sidebar />},
         {path: '/support', element: <StartSupport />},
-        {path: '/dashboard', element: <Dashboard />}
+        {path: '/dashboard', element: <Dashboard />},
+       
         
+
+        //////// ----------------------------- CLIENT ROUTES ---------------------------------//////
+
+        {path: '/client-dashboard', element: <ClientDashboard />},
+        {path: '/client-wallet', element: <ClientWallet />},
+        {path: '/client-tasks', element: <ClientTasks />},
+        {path: '/edit-task', element: <EditTask />},
         
 
 

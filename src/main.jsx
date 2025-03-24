@@ -38,12 +38,10 @@ import ClientTasks from './components/Clients/ClientTasks.jsx';
 import EditTask from './components/Clients/EditTask.jsx';
 import ApplyTask from './components/Tasks/ApplyTask.jsx';
 import SwitchRole from './components/Accoount/SwitchRole.jsx';
-import ProtectedRoute from './components/ProtectedRoute.jsx';
-import AuthContextProvider from './components/context/AuthContext.jsx';
-import { Delete } from 'lucide-react';
+import AppliedTask from './components/Tasks/AppliedTask.jsx';
 import DeleteTask from './components/Clients/DeleteTask.jsx';
-
-// import ApplyTask from './components/Tasks/ApplyTask.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+// import ApplyTask from './components/Tasks/ApplyTask.js
 
 
 const router = createBrowserRouter([
@@ -78,9 +76,8 @@ const router = createBrowserRouter([
         {path: '/update-profile', element: <UpdateProfile />},
         {path: '/side', element: <Sidebar />},
         {path: '/support', element: <StartSupport />},
-
-        {path: '/dashboard', element: <ProtectedRoute allowedRoles={["tasker"]}><Dashboard /></ProtectedRoute>},
-        {path: '/route', element:<ProtectedRoute />},
+        {path: '/dashboard', element: <Dashboard />},
+        {path: '/apply', element: <AppliedTask/>},
         
 
         //////// ----------------------------- CLIENT ROUTES ---------------------------------//////
@@ -100,9 +97,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <UserContextProvider >
     <RoleContextProvider>
-    <AuthContextProvider>
+   
     <RouterProvider router={router} />
-    </AuthContextProvider>
+   
     </RoleContextProvider>
     
   </UserContextProvider>

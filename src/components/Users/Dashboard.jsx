@@ -3,20 +3,14 @@ import { Bell, Gift, RefreshCcw, Settings } from "lucide-react";
 import Sidebar from '../SideBar'
 import Loader from "../Loader";
 import { UserContext } from "../UserContext";
+import AppliedTask from "../Tasks/AppliedTask";
 
 const Dashboard = () => {
     const {user, loading,} = useContext(UserContext)
     const userDetail = user?.userDetails?.user
     // console.log(userDetail);
     
-      const [requests, setRequests] = useState([
-        { title: "Looking For An Experience Designer", price: "Undefined" },
-        { title: "Well-Organized Designer", price: "10k+ Per Hours" },
-        { title: "Web Designer", price: "Undefined" },
-        { title: "Professional Banner Designer", price: "Undefined" },
-      ]);
-
-    // useEffect(()=>{
+        // useEffect(()=>{
     //   window.location.reload()
     // },[userDetail.userType])
 
@@ -70,18 +64,7 @@ const Dashboard = () => {
             </div>
             <p className="text-sm text-gray-500">Send Your Offer To Your Clients</p>
     
-            <div className="mt-4 space-y-4">
-              {requests.map((req, index) => (
-                <div key={index} className="bg-white p-4 rounded-xl shadow-md">
-                  <div className="flex justify-between items-center">
-                    <p className="font-bold">{req.title}</p>
-                    <p className="text-gray-500">Price: {req.price}</p>
-                  </div>
-                  <p className="text-gray-500 text-sm">Hello Everyone! I'm Looking For An Experience Graphics...</p>
-                  <button className="text-pink-500 mt-2">Show Details</button>
-                </div>
-              ))}
-            </div>
+            <AppliedTask/>
           </div>
          
         </div>

@@ -38,6 +38,11 @@ import ClientTasks from './components/Clients/ClientTasks.jsx';
 import EditTask from './components/Clients/EditTask.jsx';
 import ApplyTask from './components/Tasks/ApplyTask.jsx';
 import SwitchRole from './components/Accoount/SwitchRole.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import AuthContextProvider from './components/context/AuthContext.jsx';
+import { Delete } from 'lucide-react';
+import DeleteTask from './components/Clients/DeleteTask.jsx';
+
 // import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
@@ -73,16 +78,18 @@ const router = createBrowserRouter([
         {path: '/update-profile', element: <UpdateProfile />},
         {path: '/side', element: <Sidebar />},
         {path: '/support', element: <StartSupport />},
-        {path: '/dashboard', element: <Dashboard />},
-       
+
+        {path: '/dashboard', element: <ProtectedRoute allowedRoles={["tasker"]}><Dashboard /></ProtectedRoute>},
+        {path: '/route', element:<ProtectedRoute />},
         
 
         //////// ----------------------------- CLIENT ROUTES ---------------------------------//////
 
-        {path: '/client-dashboard', element: <ClientDashboard />},
+        {path: '/client-dashboard', element: <ProtectedRoute allowedRoles={["client"]}><ClientDashboard /></ProtectedRoute>},
         {path: '/client-wallet', element: <ClientWallet />},
         {path: '/client-tasks', element: <ClientTasks />},
-        {path: '/edit-task', element: <EditTask />},
+        {path: '/edit-task/:id', element: <EditTask />},
+        {path: '/delete-task/:id', element: <DeleteTask />},
         
 
 
@@ -92,12 +99,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <UserContextProvider >
-  
     <RoleContextProvider>
-
+    <AuthContextProvider>
     <RouterProvider router={router} />
-
+    </AuthContextProvider>
     </RoleContextProvider>
+    
   </UserContextProvider>
 )
 

@@ -1,8 +1,8 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Loader from "../Loader"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
-import { Link, useNavigate } from "react-router-dom"
+import { Link,  useNavigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
 
 
@@ -14,6 +14,8 @@ const Login = () => {
         email: '',
         password: ''
     })
+    const details = user?.userDetails?.user;
+
     const navigate = useNavigate()
     const togglePassword = () => {
         setShowPassword(!showPassword)
@@ -45,8 +47,16 @@ const Login = () => {
                 const token = data.token
                 localStorage.setItem('token', token)
                 toast.success('Login Successful')
-                user?.userType == "Client" ? navigate('/client-dashboard'):  navigate('/dashboard')
                 setLoading(false)
+                if(details?.userType === "client"){
+                    navigate('/client-dashboard')
+                } else if(details?.userType === "tasker"){
+                    navigate('/dashboard')
+                } else {
+                    setLoading(true)
+                }
+console.log(details?.userType);
+
             } else {
                 const data = await response.json()
                 toast.error(data.error)
@@ -58,7 +68,7 @@ const Login = () => {
         }
     }
 
-   
+    
   return (
     <div>
     {loading ? <Loader /> :
@@ -89,7 +99,7 @@ const Login = () => {
       <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
       </form>
         <Link to='/forgot-password' className="text-center text-[#EA1588]">Forgot Password</Link>
-        <p className="text-center">Don't have account ? <Link to='/account-type' className="text-[#EA1588]">Sign Up</Link></p>
+        <p className="text-center">Don&apos;t have account ? <Link to='/account-type' className="text-[#EA1588]">Sign Up</Link></p>
     </div>
     </>
     }

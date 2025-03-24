@@ -6,6 +6,7 @@ import { Switch } from "@headlessui/react";
 import { ChevronRight, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import Loader from "./Loader";
 
 
 const settingsOptions = [
@@ -23,6 +24,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [role, setRole] = useState(null);
   const { user, logout, url, userToken, getuser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false)
   // const {switchRole} = useContext(RoleContext)
   // console.log(role);
   
@@ -33,6 +35,7 @@ const Sidebar = () => {
   const userDetail = user?.userDetails?.user
 
   const switchRole = async ()=>{
+    setLoading(true)
     const response = await fetch(`${url}user/update-user-type`, {
         method: 'PUT',
         headers: {
@@ -44,25 +47,27 @@ const Sidebar = () => {
     if(response.ok){
         const data = await response.json()
         setRole(data.user.userType)
-   
+      setLoading(false)
         // console.log(data.user.userType)
     } else {
         const error = await response.json()
         console.log(error)
+        setLoading(false)
     }
 }
 
-useEffect(()=>{
-  // getuser()
+// useEffect(()=>{
+//   window.location.reload()
 
-  // setRole(userDetail?.userType)
-  // console.log(role);
+//   // setRole(userDetail?.userType)
+//   // console.log(role);
   
-},[])
+// },[userDetail?.userType])
 
 
   return (
     <div className="flex ">
+      {loading ? <Loader /> : <>
       <div
         className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
     border-[#F3F5FF] transform ${
@@ -151,6 +156,7 @@ useEffect(()=>{
           <FaBars className="w-6 h-6" />
         </button>
       </div>
+      </>}
     </div>
   );
 };

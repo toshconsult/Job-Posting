@@ -1,16 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Bell, Gift,  } from "lucide-react";
 import { FaPlusCircle } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
 import { UserContext } from "../UserContext";
 import ClientTasks from "./ClientTasks";
+import { Link } from "react-router-dom";
 
 const ClientDashboard = () => {
     const {user, } = useContext(UserContext)
     const userDetail = user?.userDetails?.user
     console.log(userDetail);
     
-      
+
+      //  useEffect(()=>{
+      //       window.location.reload()
+      //     },[userDetail.userType])
     
       return (
         <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
@@ -55,7 +59,7 @@ const ClientDashboard = () => {
               <h2 className="text-lg font-semibold">Task <span className="text-[#2F3C7E]">History</span></h2>
               <div className="flex gap-3 items-center">
                
-                <FaPlusCircle className="text-blue-950 cursor-pointer" size={30}/>
+               <Link to='/create-task'> <FaPlusCircle className="text-blue-950 cursor-pointer" size={30}/></Link>
                 {/* <Settings className="text-gray-500 cursor-pointer" /> */}
               </div>
             </div>

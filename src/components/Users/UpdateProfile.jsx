@@ -11,39 +11,50 @@ const UpdateProfile = () => {
     const {url, user, userToken} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const details = user?.userDetails?.user;
+    
     const [formdata, setFormdata] = useState({
         profilePicture: details?.profilePicture,
         jobTitle: details?.jobTitle,
         profileDescription: details?.profileDescription,
         location: details?.location
         })
+        const [profilePic, setProfilePicture] = useState(null)
 console.log(formdata);
 
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormdata(prevData => ({
-        ...prevData,
-        [name]: value  
-        }));  
-    }
+const handleChange = (e) => {
+  const { name, value, type, files } = e.target;
+
+  setFormdata(prevData => ({
+      ...prevData,
+      [name]: type === "file" ? files[0] : value
+  }));
+};
         
+    // const handleFile = (e)=>{
+    //   const file = e.target.files[0];
+    // if (file) {
+    //     setProfilePicture(file);
+    // }
+    // }
     
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
         
-        if (Object.values(formdata).some(value => value.trim() === '')) {
-          toast.error('Please fill in all fields before submitting.');
-          return;
-      }
+      const formData = new FormData()
+      formData.append("profilePicture", formdata.profilePicture);
+      formData.append("jobTitle", formdata.jobTitle);
+      formData.append("profileDescription", formdata.profileDescription);
+      formData.append("location", formdata.location);
+
         setLoading(true)
        const response = await fetch(`${url}user/update-profile`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${userToken}`,
-          'content-type': 'application/json'
+          // 'content-type': 'application/json'
         },
-        body: JSON.stringify(formdata)
+        body: formData
        })
        if (response.ok){
         const data = await response.json()
@@ -79,7 +90,7 @@ console.log(formdata);
               <input type="file" placeholder="Upload your profile" 
               onChange={handleChange}
               name="profilePicture"
-              // value={formdata.profilePicture}
+              
               className="w-[328px] md:w-[652px] h-[50px] rounded-md p-2 px-5 outline-0
                placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
                 </div>
@@ -99,7 +110,7 @@ console.log(formdata);
               <textarea type="text" placeholder="I am a phontographer with 5 years experience. I shoot various type of pictures include...." 
               onChange={handleChange}
               name="profileDescription"
-              value={formdata.profileDescription}
+              value={formdata?.profileDescription}
               className="w-[328px] md:w-[652px] min-h-[100px] rounded-md p-2 px-5 outline-0
                placeholder:text-black  bg-[#FFF5F6]" />
                </div>

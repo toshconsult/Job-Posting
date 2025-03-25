@@ -6,17 +6,18 @@ import { UserContext } from "../UserContext";
 import AppliedTask from "../Tasks/AppliedTask";
 
 const Dashboard = () => {
-    const {user, loading, getuser } = useContext(UserContext)
+    const {user, loading,} = useContext(UserContext)
     const userDetail = user?.userDetails?.user
     // console.log(userDetail);
     
-      
-    // useEffect(()=>{
-    //   getuser()
-    // }[userDetail])
+        // useEffect(()=>{
+    //   window.location.reload()
+    // },[userDetail.userType])
+
+
       return (
         <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
-          {loading ? <Loader />: <>
+         
           {/* Sidebar */}
           <Sidebar />
     
@@ -29,7 +30,7 @@ const Dashboard = () => {
                 <Gift className="text-gray-500" />
                 <Bell className="text-gray-500" />
                 <img
-                  src={'userDetail?.profilePicture '}
+                  src={userDetail?.profilePicture}
                   alt="Profile"
                   className="w-8 h-8 rounded-full border-2 border-yellow-400"
                 />
@@ -65,7 +66,7 @@ const Dashboard = () => {
     
             <AppliedTask/>
           </div>
-          </>}
+         
         </div>
       );
   

@@ -23,21 +23,24 @@ const EditTask = () => {
       const [field, setField] = useState('')
       const [selectedSkills, setSelectedSkills] = useState([])
       const {id} = useParams()
-     
+         console.log();
+         
+  const [task, setTask] = useState({});
+  const sTask = task?.task
+// console.log(title);
+
+      
      
      const navigate = useNavigate()
-      const [formdata, setFormdata] = useState({
-        title: '',
-        description: '',
-        duration: '',
-        projectType: '',
-        location: '',
-        price: '',
-        skills: selectedSkills,
-        taskImage: null
-       
-      })
-    console.log(formdata);
+     const [title, setTitle] = useState('')
+     const [description, setDescription] = useState('')
+     const [price, setPrice] = useState('')
+     const [duration, setDuration] = useState('')
+     const [projectType, sertProjectType] = useState('')
+     const [location, setLocation] = useState('')
+     const [skillss, setSkills] = useState([])
+     const [taskImage, setTaskImage] = useState(null)
+    // console.log(title);
     
       const handleSelect = (skill) => {
         setSelectedSkills((prev) => {
@@ -50,68 +53,111 @@ const EditTask = () => {
 
       useEffect(() => {
         // console.log(selectedSkills);
-        formdata.skills = selectedSkills
+        // sTask.skills = selectedSkills
+        setSkills(selectedSkills)
       }, [selectedSkills]);
       
-      // const handleFileChange = (e) => {
-      //   const file = e.target.files[0]
-      //   if (file) {
-      //     setFormdata((prev) => ({ ...prev, taskImage: file }));
-      //   }
-      // };
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormdata(prevData => ({
-        ...prevData,
-        [name]: value,  
-       
-        }));
-      }
-     
+    
       
     // !!!!!!!!!!-------------------------------------- FUCTION TO HANDLE SUBMIT --------------------------------------!!!!!!!!!!
       const handleSubmit = async (e) => {
         e.preventDefault()
         // console.log("Submitting data:", formdata); 
+
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("price", price);
+        formData.append("duration", duration);
+        formData.append("projectType", projectType);
+        formData.append("location", location);
+        formData.append("skills", skillss);
+        if (taskImage) formData.append("taskImage", taskImage);
+        
         
         try {
           setLoading(true)
-          // if (!userToken) {
-          //   console.error("userToken is missing!");
-          //  navigate('/login')
-
-          // }
-
+          
             
           const response = await fetch(`${url}client/edit-tasks/${id}`, {
             method: 'PATCH',
             headers: {
-              'Content-Type': 'application/json',
+              // 'Content-Type': 'application/json',
               'Authorization': `Bearer ${userToken}`
             },
-            body: JSON.stringify(formdata)
+            body: formData
           }) 
     
           if(response.ok){
             const data = await response.json();
             setLoading(false)
+            console.log(data);
+            
             toast.success(data.message)
-            navigate('/dashboard')
+            navigate('/client-dashboard')
           } 
           else {
             const data = await response.json();
-          //  console.log(data.error);
+           console.log(data.error);
             setLoading(false)
             toast.error(data.error)
           }
     
         } catch (error) {
-          loading(false)
+          setLoading(false)
           console.log(error);
           
           
         }
       }
+
+ //////---------------------------------- Get Single Task --------------------------------/////
+      const getTasks = async () => {
+          try {
+            setLoading(true);
+            
+            const response = await fetch(`${url}user/task/${id}`, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+                "Content-Type": "application/json",
+              },
+            });
+      
+            if (response.ok) {
+              const data = await response.json();
+              console.log(data);
+              
+              setTask(data);
+              setLoading(false);
+            } else {
+              const data = await response.json();
+              console.log(data.error);
+              // navigate("/login");
+              setLoading(false);
+            }
+          } catch (error) {
+            setLoading(false);
+            console.log(error);
+          }
+        };
+      
+        useEffect(() => {
+          getTasks();
+        }, [userToken, user]);
+
+        useEffect(() => {
+          if (sTask) {
+            setTitle(()=>sTask?.title)
+            setDescription(()=> sTask?.description)
+            setDuration(()=>sTask?.duration)
+            setPrice(()=>sTask?.price)
+            sertProjectType(()=>sTask?.projectType)
+            setLocation(()=>sTask?.location)
+            setTaskImage(()=>sTask?.taskImage)
+          }
+        }, [task]);
 
   return (
     <div className="flex flex-col items-center md:items-start px-4 md:px-20">
@@ -133,8 +179,9 @@ const EditTask = () => {
                   type="text"
                   id="title"
                   name="title"
+                  value={title}
                   placeholder="Enter title"
-                  onChange={handleChange}
+                  onChange={(e)=>setTitle(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -146,8 +193,9 @@ const EditTask = () => {
                 <textarea
                   id="description"
                   name="description"
+                  value={description}
                   placeholder="Enter the task description"
-                  onChange={handleChange}
+                  onChange={(e)=>setDescription(e.target.value)}
                   className="w-full h-[114px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -159,8 +207,9 @@ const EditTask = () => {
                 <input
                   type="text"
                   name="location"
+                  value={location}
                   placeholder="Enter location"
-                  onChange={handleChange}
+                  onChange={(e)=>setLocation(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -170,10 +219,11 @@ const EditTask = () => {
                   Price
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
+                  value={price}
                   placeholder="Enter price"
-                  onChange={handleChange}
+                  onChange={(e)=>setPrice(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -184,7 +234,8 @@ const EditTask = () => {
                 </label>
                 <select
                   name="duration"
-                  onChange={handleChange}
+                  value={duration}
+                  onChange={(e)=>setDuration(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >
                   <option value="">Select project type</option>
@@ -203,10 +254,11 @@ const EditTask = () => {
                 </label>
                 <select
                   name="projectType"
-                  onChange={handleChange}
+                  value={projectType}
+                  onChange={(e)=>sertProjectType(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >
-                  <option value="">Select project type</option>
+                  {/* <option value="">Select project type</option> */}
                   <option value="Onsite">Onsite</option>
                   <option value="Remote">Remote</option>
                   <option value="Hybrid">Hybrid</option>
@@ -220,7 +272,8 @@ const EditTask = () => {
                 <input
                   type="file"
                   name="taskImage"
-                  onChange={handleChange}
+                  // value={taskImage}
+                  onChange={(e)=>setTaskImage(e.target.files[0])}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 />
               </div>
@@ -231,6 +284,7 @@ const EditTask = () => {
                 </label>
                 <select
                   name="field"
+                  
                   onChange={(e)=>setField(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >

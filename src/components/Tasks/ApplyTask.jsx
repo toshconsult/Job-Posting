@@ -3,43 +3,55 @@ import { UserContext } from "../UserContext";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FaCircleXmark } from "react-icons/fa6";
 import Loader from "../Loader";
+import { useParams } from "react-router-dom";
 
 const ApplyTask = () => {
+  
+  const {id} = useParams()
+  // console.log(id);
   
   const [loading, setLoading] = useState(false);
   const { url, userToken, user } = useContext(UserContext);
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
+  const [date, setDate] = useState('')
+console.log(proposal);
 
   const userDetail = user?.userDetails?.user
-  console.log(userDetail._id);
+  // console.log(userDetail._id);
 
   const apply = async (e) => {
 
     e.preventDefault()
 
-    const formData = new FormData()
-    formData.append('price', price)
-    formData.append('description', proposal)
-
+    const requestBody = {
+      price: price,
+      description: proposal,
+      date: date
+  };
     setLoading(true);
+// console.log(formData);
 
-    const response = await fetch(`${url}user/apply//${userDetail._id}`, {
+    const response = await fetch(`${url}user/apply/${id}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${userToken}`,
-        // "Content-Type": "application/json",
+        'Authorization': `Bearer ${userToken}`,
+        "Content-Type": "application/json"
       },
-      body: formData
+      body: JSON.stringify(requestBody)
     });
 
     if (response.ok) {
       const data = await response.json();
-      setMessage(data);
+      // setMessage(data);
+      console.log(data);
+      
       setLoading(false);
     } else {
-      const data = await response.json();
-      setMessage(data);
+      const err = await response.json();
+      // setMessage(data);
+      console.log(err);
+      
       setLoading(false);
     }
   };
@@ -58,12 +70,12 @@ const ApplyTask = () => {
                 {/* <ToastContainer /> */}
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="title" className="text-[#333] font-semibold">
+                    <label htmlFor="price" className="text-[#333] font-semibold">
                       Your price
                     </label>
                     <input
                       type="number"
-                      id="title"
+                      id="price"
                       value={price}
                       placeholder="Enter price"
                       onChange={(e)=>setPrice(e.target.value)}
@@ -72,15 +84,29 @@ const ApplyTask = () => {
                   </div>
     
                   <div>
-                    <label htmlFor="description" className="text-[#333] font-semibold">
-                      Description
+                    <label htmlFor="proposal" className="text-[#333] font-semibold">
+                      Proposal
                     </label>
                     <textarea
-                      id="description"
+                      id="proposal"
                      value={proposal}
                       placeholder="Enter the task description"
                       onChange={(e)=>setProposal(e.target.value)}
                       className="w-full h-[114px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="date" className="text-[#333] font-semibold">
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      id="date"
+                      value={date}
+                      placeholder="Enter price"
+                      onChange={(e)=>setDate(e.target.value)}
+                      className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                     />
                   </div>
                   </div>

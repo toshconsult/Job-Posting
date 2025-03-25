@@ -1,6 +1,7 @@
 import  { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../UserContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const ClientTasks = () => {
@@ -9,7 +10,8 @@ const ClientTasks = () => {
       const [loading, setLoading] = useState(false);
       const [tasks, setTasks] = useState([]);
       const navigate = useNavigate();
-    //   const task = tasks?.tasks
+      const task = tasks?.tasks
+    const maxContent = 150
     
       // !!!!!!!!!!-------------------------------------- FUCTION TO GET ALL TASKS --------------------------------------!!!!!!!!!!
       const getTasks = async () => {
@@ -50,25 +52,29 @@ const ClientTasks = () => {
         getTasks();
       }, []);
     
-    
-    const [requests, setRequests] = useState([
-        { title: "Looking For An Experience Designer", price: "Undefined" },
-        { title: "Well-Organized Designer", price: "10k+ Per Hours" },
-        { title: "Web Designer", price: "Undefined" },
-        { title: "Professional Banner Designer", price: "Undefined" },
-      ]);
+// !!!!!!!!!!-------------------------------------- FUCTION TO GET ALL TASKS --------------------------------------!!!!!!!!!!
+  
+
+   
   return (
     <div>
          <div className="mt-4 space-y-4 md:px-10">
-        {tasks.length === 0 ? <h2 className='text-2xl font-semibold'>No tasks created yet</h2>: <>
-              {requests.map((req, index) => (
+        {task?.length === 0 ? <h2 className='text-2xl font-semibold'>No tasks created yet</h2>: <>
+              {task?.map((task, index) => (
+               
                 <div key={index} className="bg-white p-4 rounded-xl border-1 border-[#F3F5FF]">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold">{req.title}</p>
-                    <p className="text-gray-500">Edit</p>
+                    <p className="font-bold">{task.title}</p>
+                    
+                    <p className="text-gray-500"> <Link to={`/edit-task/${task._id}`}> Edit </Link></p>
+                   
                   </div>
-                  <p className="text-gray-500 text-sm">Hello Everyone! I&apos;m Looking For An Experience Graphics...</p>
-                  <button className="text-[#2F3C7E] mt-2">Show Details</button>
+                  <p className="text-gray-500 text-sm pr-8">{task.description.length > maxContent ? task.description.slice(0, maxContent) + '......' : task.description}</p>
+                  <div className='flex justify-between w-full'>
+                 <Link to={`/single-task/${task._id}`} > <button className="text-[#2F3C7E] mt-2 cursor-pointer">Show Details</button></Link>
+                 <p className="text-red-600"> <Link to={`/delete-task/${task._id}`}> Delete </Link></p>
+               
+                </div>
                 </div>
               ))}
             </> }

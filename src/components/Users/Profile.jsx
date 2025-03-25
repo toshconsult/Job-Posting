@@ -4,21 +4,37 @@ import {  useContext, useEffect, useState } from "react"
 // import Loader from "../Loader";
 // import {  Link, useNavigate } from "react-router-dom";
 // import image from '/src/assets/react.svg' 
-import profile from '/src/assets/images/profiless.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 import Loader from '../Loader'
 import ProductClick from '../Clients/ProductClick'
 const Profile = () => {
 
   
- const {user, loading, getuser} = useContext(UserContext)
-console.log(user);
+ const {user, loading, getuser, url, userToken} = useContext(UserContext)
+// console.log(user);
 
-
+const {id} = useParams()
  const details = user?.userDetails.user;
 //  console.log(balance);
- 
+ const getProfile = async ()=>{
+  const response = await fetch(`${url}user/profile/${id}`,{
+  method: "GET",
+  headers:{
+    'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userToken}`
+  }
+  })
+  if(response.ok){
+    const data = await response.json()
+    console.log(data);
+    
+  } else {
+    const err = await response.json()
+    console.log(err);
+    
+  }
+ }
  
 
  
@@ -26,6 +42,7 @@ console.log(user);
 
  useEffect(()=>{
   getuser()
+  getProfile()
  }, [])
 
  
@@ -43,7 +60,7 @@ console.log(user);
       </div>
 
         <div className=' flex gap-6 items-center '>
-        <img src={profile} className='rounded-full w-[67px] h-[67px]'/>
+        <img src={details?.profilePicture} className='rounded-full w-[67px] h-[67px]'/>
          <div>
           <p className='md:text-4xl'>{details?.username}</p>
           <div>

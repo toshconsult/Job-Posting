@@ -39,8 +39,10 @@ import EditTask from './components/Clients/EditTask.jsx';
 import ApplyTask from './components/Tasks/ApplyTask.jsx';
 import SwitchRole from './components/Accoount/SwitchRole.jsx';
 import AppliedTask from './components/Tasks/AppliedTask.jsx';
+import DeleteTask from './components/Clients/DeleteTask.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import GetTasks from './components/Tasks/GetTasks.jsx';
-// import ApplyTask from './components/Tasks/ApplyTask.jsx';
+// import ApplyTask from './components/Tasks/ApplyTask.js
 
 
 const router = createBrowserRouter([
@@ -82,10 +84,11 @@ const router = createBrowserRouter([
 
         //////// ----------------------------- CLIENT ROUTES ---------------------------------//////
 
-        {path: '/client-dashboard', element: <ClientDashboard />},
+        {path: '/client-dashboard', element: <ProtectedRoute allowedRoles={["client"]}><ClientDashboard /></ProtectedRoute>},
         {path: '/client-wallet', element: <ClientWallet />},
         {path: '/client-tasks', element: <ClientTasks />},
-        {path: '/edit-task', element: <EditTask />},
+        {path: '/edit-task/:id', element: <EditTask />},
+        {path: '/delete-task/:id', element: <DeleteTask />},
         
 
 
@@ -95,12 +98,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <UserContextProvider >
-  
     <RoleContextProvider>
-
+   
     <RouterProvider router={router} />
-
+   
     </RoleContextProvider>
+    
   </UserContextProvider>
 )
 

@@ -39,6 +39,7 @@ import EditTask from './components/Clients/EditTask.jsx';
 import ApplyTask from './components/Tasks/ApplyTask.jsx';
 import SwitchRole from './components/Accoount/SwitchRole.jsx';
 import AppliedTask from './components/Tasks/AppliedTask.jsx';
+import GetTasks from './components/Tasks/GetTasks.jsx';
 // import ApplyTask from './components/Tasks/ApplyTask.jsx';
 
 
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
         {path: '/support', element: <StartSupport />},
         {path: '/dashboard', element: <Dashboard />},
         {path: '/apply', element: <AppliedTask/>},
+        {path: '/get-tasks', element: <GetTasks />},
         
 
         //////// ----------------------------- CLIENT ROUTES ---------------------------------//////

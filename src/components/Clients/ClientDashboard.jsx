@@ -7,14 +7,14 @@ import ClientTasks from "./ClientTasks";
 import { Link } from "react-router-dom";
 
 const ClientDashboard = () => {
-    const {user, } = useContext(UserContext)
-    const userDetail = user?.userDetails?.user
-    console.log(userDetail);
+    const {user, getuser } = useContext(UserContext)
+    
+    // console.log(user);
     
 
       //  useEffect(()=>{
-      //       window.location.reload()
-      //     },[userDetail.userType])
+      //      getuser()
+      //     },[])
     
       return (
         <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
@@ -30,7 +30,7 @@ const ClientDashboard = () => {
                 <Gift className="text-gray-500" />
                 <Bell className="text-gray-500" />
                 <img
-                  src={userDetail?.profilePicture }
+                  src={user?.profilePicture }
                   alt="Profile"
                   className="w-8 h-8 rounded-full border-2 border-yellow-400"
                 />
@@ -40,13 +40,17 @@ const ClientDashboard = () => {
             {/* KYC Alert */}
             <div className="bg-[#2F3C7E] text-white p-4 rounded-xl mt-6 flex justify-between items-center">
               <div>
-                <p className="font-bold">Welcome {userDetail?.username}!!!</p>
-                <p className="text-sm">You&apos;re One Way In. Complete Your KYC Verification</p>
+                <p className="font-bold">Welcome {user?.username}!!!</p>
+                {
+                  !user?.isVerified ? <p className="text-sm">You&apos;re One Way In. Complete Your KYC Verification</p>: null
+                }
               </div>
-              <button className="bg-white text-[#2F3C7E] px-4 py-2 rounded-full">Get Started</button>
+             {
+              !user?.isVerified ?  <button className="bg-white text-[#2F3C7E] px-4 py-2 rounded-full">Get Started</button> : null
+             }
             </div>
     
-            {/* Latest Update */}
+          
             <h2 className="mt-8 text-lg font-semibold">Latest <span className="text-[#2F3C7E]">Update</span></h2>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="bg-gray-300 h-24 rounded-xl"></div>
@@ -54,13 +58,13 @@ const ClientDashboard = () => {
               <div className="bg-gray-300 h-24 rounded-xl"></div>
             </div>
     
-            {/* Client Requests */}
+           
             <div className="flex justify-between items-center mt-8">
               <h2 className="text-lg font-semibold">Task <span className="text-[#2F3C7E]">History</span></h2>
               <div className="flex gap-3 items-center">
                
                <Link to='/create-task'> <FaPlusCircle className="text-blue-950 cursor-pointer" size={30}/></Link>
-                {/* <Settings className="text-gray-500 cursor-pointer" /> */}
+                
               </div>
             </div>
             <p className="text-sm text-gray-500">All posted tasks</p>

@@ -1,7 +1,6 @@
 import { useContext, useState } from "react"
 import { UserContext } from "../UserContext"
 import Loader from "../Loader"
-import Sidebar from "../SideBar"
 import { toast, ToastContainer } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
@@ -10,15 +9,15 @@ const UpdateProfile = () => {
     const navigate = useNavigate()
     const {url, user, userToken} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
-    const details = user?.userDetails?.user;
+console.log(user);
     
     const [formdata, setFormdata] = useState({
-        profilePicture: details?.profilePicture,
-        jobTitle: details?.jobTitle,
-        profileDescription: details?.profileDescription,
-        location: details?.location
+        profilePicture: user?.profilePicture,
+        jobTitle: user?.jobTitle,
+        profileDescription: user?.profileDescription,
+        location: user?.location
         })
-        const [profilePic, setProfilePicture] = useState(null)
+     
 console.log(formdata);
 
 const handleChange = (e) => {
@@ -30,14 +29,6 @@ const handleChange = (e) => {
   }));
 };
         
-    // const handleFile = (e)=>{
-    //   const file = e.target.files[0];
-    // if (file) {
-    //     setProfilePicture(file);
-    // }
-    // }
-    
-
     const handleSubmit = async (e)=>{
         e.preventDefault()
         
@@ -59,8 +50,8 @@ const handleChange = (e) => {
        if (response.ok){
         const data = await response.json()
         setLoading(false)
-        console.log(data);
-        toast.success('Profile Updated Successfully')
+        // console.log(data);
+        toast.success(data.message)
         navigate('/dashboard')
         
        } else {
@@ -72,11 +63,8 @@ const handleChange = (e) => {
      }
   return (
     <div className="flex min-h-screen md:gap-10">
-    {loading ? <Loader /> :
+    {loading || !user  ? <Loader /> :
           <>
-          {/* <Sidebar /> */}
-          {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
-           
           <div className="w-full gap-y-2 flex flex-col">
           <h1 className="text-[25px] text-center font-semibold pb-6 mt-10">Update 
           <span className="text-[#EA1588] "> Profile</span></h1>
@@ -92,7 +80,7 @@ const handleChange = (e) => {
               name="profilePicture"
               
               className="w-[328px] md:w-[652px] h-[50px] rounded-md p-2 px-5 outline-0
-               placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
+                 bg-[#FFF5F6]" />
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -102,7 +90,7 @@ const handleChange = (e) => {
               name="jobTitle"
               value={formdata.jobTitle}
               className="w-[328px] md:w-[652px] rounded-md p-2 px-5 outline-0
-               placeholder:text-black bg-[#FFF5F6]" />
+                bg-[#FFF5F6]" />
             </div>
 
                 <div className="flex flex-col gap-2">
@@ -112,7 +100,7 @@ const handleChange = (e) => {
               name="profileDescription"
               value={formdata?.profileDescription}
               className="w-[328px] md:w-[652px] min-h-[100px] rounded-md p-2 px-5 outline-0
-               placeholder:text-black  bg-[#FFF5F6]" />
+                 bg-[#FFF5F6]" />
                </div>
 
                
@@ -123,7 +111,7 @@ const handleChange = (e) => {
               name="location"
               value={formdata.location}
               className="w-[328px] md:w-[652px] h-[50px] rounded-md p-2 px-5 outline-0
-               placeholder:text-black  bg-[#FFF5F6]" />
+                 bg-[#FFF5F6]" />
                </div>
              {/* <ToastContainer /> */}
             <button type="submit" className="w-[328px] md:w-[652px] py-[20px] 

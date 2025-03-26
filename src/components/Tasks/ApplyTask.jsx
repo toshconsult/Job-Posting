@@ -11,15 +11,13 @@ const ApplyTask = () => {
   // console.log(id);
   
   const [loading, setLoading] = useState(false);
-  const { url, userToken, user } = useContext(UserContext);
+  const { url, userToken,  } = useContext(UserContext);
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
   const [date, setDate] = useState('')
 console.log(proposal);
 
-  const userDetail = user?.userDetails?.user
-  // console.log(userDetail._id);
-
+ 
   const apply = async (e) => {
 
     e.preventDefault()
@@ -56,9 +54,9 @@ console.log(proposal);
     }
   };
 
-  useEffect(() => {
-    // apply();
-  }, []);
+  // useEffect(() => {
+  //   // apply();
+  // }, []);
 
   return (
     <div className="flex flex-col items-center md:items-start px-4 md:px-20">

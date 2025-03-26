@@ -3,7 +3,7 @@ import { UserContext } from "../UserContext"
 
 
 const SwitchRole = () => {
-    const {user, url, userToken} = useContext(UserContext)
+    const { url, userToken} = useContext(UserContext)
 
 
     const switchRole = async ()=>{
@@ -31,7 +31,7 @@ const SwitchRole = () => {
   return (
     <div>SwitchRole
 
-        <button onClick={switchRole}>click ,me</button>
+        <button onClick={switchRole}>click me</button>
     </div>
   )
 }

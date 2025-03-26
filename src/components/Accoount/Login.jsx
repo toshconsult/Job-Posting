@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext,  useState } from "react"
 import Loader from "../Loader"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
@@ -7,14 +7,14 @@ import { UserContext } from "../UserContext"
 
 
 const Login = () => {
-    const {url, user} = useContext(UserContext)
+    const {url} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [formdata, setFormdata] = useState({
         email: '',
         password: ''
     })
-    const details = user?.userDetails?.user;
+    
 
     const navigate = useNavigate()
     const togglePassword = () => {
@@ -46,16 +46,19 @@ const Login = () => {
                 console.log(data);
                 const token = data.token
                 localStorage.setItem('token', token)
-                toast.success('Login Successful')
+                toast.success(data.message)
                 setLoading(false)
-                if(details?.userType === "client"){
+                if(data.user.userType === "client"){
                     navigate('/client-dashboard')
-                } else if(details?.userType === "tasker"){
-                    navigate('/dashboard')
-                } else {
-                    setLoading(true)
-                }
-console.log(details?.userType);
+                } else if(data.user.userType === "tasker"){
+                    if(data.user.skillsets.length === 0){
+                        navigate('/interest')
+                    }else if(data.user.profileDescription === ""){
+                        navigate('/update-profile')
+                    } else {
+                        navigate('/dashboard')
+                    }
+ }
 
             } else {
                 const data = await response.json()

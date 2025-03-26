@@ -1,20 +1,25 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { user } = useContext(UserContext);
+const ProtectedRoute = ({ children }) => {
+  const { user, userToken } = useContext(UserContext);
   const userRole = user?.userDetails?.user?.userType; // Adjust based on your user structure
+  const navigate = useNavigate()
 console.log(userRole);
-if (!userRole) {
-    return <Navigate to="/login" replace />; // Redirect to login if not authenticated
-  }
+// if (!userToken) {
+//     return <Navigate to="/login"  />; 
+// }
+
+if(userRole === 'client'){
+  navigate('/client-dashboard')
+} else if (userRole === 'tasker'){
+  navigate('/dashboard')
+} else {
+  navigate('/dashboard')
+}
   
-  if (!userRole || !allowedRoles.includes(userRole)) {
-    
-    return <Navigate to="/login" replace />; // Redirect if not allowed
-  }
 
   return children;
 };

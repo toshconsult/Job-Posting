@@ -31,11 +31,11 @@ export const UserContextProvider = ({children}) =>{
         if(response.ok){
             setLoading(false)
             const data = await response.json()
-            setUser(data)
+            setUser(data.userDetails.user)
         } else{
             // const error = await response.json()
             console.log(response);
-            // setUser(null)
+        //    localStorage.removeItem('token')
             setLoading(false)
             
         }

@@ -6,11 +6,13 @@ import { Link, useParams } from 'react-router-dom';
 const AppliedTask = () => {
     
 
-    const {url, userToken} = useContext(UserContext);
+    const {url} = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [task, setTask] = useState([]);
+    const userToken = localStorage.getItem('token')
     console.log(task)
    
+    useEffect(() => {
         const applyTask = async () => {
             try{
                 setLoading(true);
@@ -36,9 +38,9 @@ const AppliedTask = () => {
             }
         };
         
-        useEffect(() => {
+       
         applyTask();
-    }, []);
+    }, [url, userToken]);
     
   return (
     <div>

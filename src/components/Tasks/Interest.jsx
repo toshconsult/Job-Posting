@@ -15,10 +15,12 @@ const Interest = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   console.log(selectedSkills);
+  console.log(userToken);
   
 
 
   const addSkills = async ()=>{
+    setLoading(true)
   const response = await fetch(`${url}user/update-profile`, {
           method: 'PATCH',
           headers: {

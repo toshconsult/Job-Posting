@@ -1,25 +1,19 @@
-import { useContext, useEffect, useState, Fragment } from "react";
-// import { Dialog, Transition } from "@headlessui/react";
-// import Loader from "../Loader";
+import { useContext, useEffect, useState, } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
-// import ApplyTask from "./ApplyTask"; // Import the ApplyTask component
-// import image from '/src/assets/react.svg' 
-
- 
-
-import { ArrowLeft } from "lucide-react"
-
+import Loader from "../Loader";
 
 const SingleTask = () => {
-  const { url, user, userToken } = useContext(UserContext);
+  const { url, user, userToken,  } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
-  const [isOpen, setIsOpen] = useState(false); // Modal state
   const sTask = task?.task
-console.log(sTask);
+  // console.log(sTask?.client);
+  
+const [userP, setUserP] = useState({})
+console.log(userP);
 
   const getTasks = async () => {
     try {
@@ -35,7 +29,7 @@ console.log(sTask);
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         
         setTask(data);
         setLoading(false);
@@ -51,24 +45,54 @@ console.log(sTask);
     }
   };
 
+  //////--------------------------------- GET USER PROFILE ---------------------------------------------/////////
+
+  
+  const getProfile = async () => {
+    const response = await fetch(`${url}user/profile/${sTask?.client}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUserP(data.user);
+      console.log(data);
+     
+      
+    } else {
+      const err = await response.json();
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (sTask?.client) {
+      getProfile(sTask.client);
+    }
+  }, [sTask.client]);
+
   useEffect(() => {
     getTasks();
-  }, [userToken, user]);
+    // getProfile();
+  }, [userToken, user, ]);
 
   return (
   
     <div className="max-w-5xl mx-auto bg-white my-10 rounded-2xl  p-6">
-    
+    {loading ? <Loader /> : <>
     <div className="flex  md:items-center justify-between">
      
       <div className="flex items-center space-x-4">
         <img
-          src="https://spaces-wp.imgix.net/2016/06/coding-in-the-classroom.png?auto=compress,format&q=50"
+          src={userP?.profilePicture ? userP?.profilePicture : 'https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg'}
           alt="Johnson Daniel"
           className="w-14 h-14 rounded-full object-cover"
         />
         <div>
-          <h3 className="text-xl font-semibold">Johnson Daniel</h3>
+          <h3 className="text-xl font-semibold">{userP?.username}</h3>
           <p className="text-gray-500 text-sm">Certified Client</p>
         </div>
       </div>
@@ -121,8 +145,8 @@ console.log(sTask);
         
         {/* Pricing & Duration */}
         <div className="mt-6 flex justify-between text-lg font-semibold">
-          <p>💰 Price: <span className="text-green-600">₦{sTask?.price}</span></p>
-          <p>🕒 Duration: {sTask?.duration} Months</p>
+          <p> Price: <span className="text-green-600">₦{sTask?.price}</span></p>
+          <p> Duration: {sTask?.duration} Months</p>
         </div>
   
         {/* Send Proposal Button */}
@@ -135,6 +159,7 @@ console.log(sTask);
         </div>
       </div>
     </div>
+    </>}
   </div>
 
   );

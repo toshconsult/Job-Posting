@@ -41,6 +41,8 @@ import SwitchRole from './components/Accoount/SwitchRole.jsx';
 import AppliedTask from './components/Tasks/AppliedTask.jsx';
 import DeleteTask from './components/Clients/DeleteTask.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Proposals from './components/Clients/Proposals.jsx';
+import SingleProposal from './components/Clients/SingleProposal.jsx';
 // import ApplyTask from './components/Tasks/ApplyTask.js
 
 
@@ -52,7 +54,7 @@ const router = createBrowserRouter([
         {index: true, element: <Home /> },
         {path: '/account-type', element: <AccountType />},
         {path: '/register', element: <SignUp />},
-        {path: '/login', element: <Login />},
+        {path: '/login', element: <Login /> },
         {path: '/forgot-password', element: <ForgotPassword />},
         {path: '/verify-otp', element: <VerifyOTP />},
         {path: '/reset-password', element: <ResetPassword />},
@@ -67,7 +69,7 @@ const router = createBrowserRouter([
         {path: '/messages', element: <GetMessages />},
         {path: '/chat', element: <StartChat />},
         {path: '/review', element: <Review />},
-        {path: '/profile', element:<Profile />},
+        {path: '/profile/:id', element:<Profile />},
         {path: '/settings', element:<Settingpage />},
         {path: '/wallet', element: <WalletPage />},
 
@@ -82,11 +84,13 @@ const router = createBrowserRouter([
 
         //////// ----------------------------- CLIENT ROUTES ---------------------------------//////
 
-        {path: '/client-dashboard', element: <ProtectedRoute allowedRoles={["client"]}><ClientDashboard /></ProtectedRoute>},
+        {path: '/client-dashboard', element: <ClientDashboard />},
         {path: '/client-wallet', element: <ClientWallet />},
         {path: '/client-tasks', element: <ClientTasks />},
         {path: '/edit-task/:id', element: <EditTask />},
         {path: '/delete-task/:id', element: <DeleteTask />},
+        {path: '/proposals/:id', element: <Proposals />},
+        {path: '/single-proposal', element: <SingleProposal />}
         
 
 

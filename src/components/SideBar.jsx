@@ -21,18 +21,19 @@ const settingsOptions = [
 ];
 
 const Sidebar = () => {
+  const userToken = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
-  const [role, setRole] = useState(null);
-  const { user, logout, url, userToken, getuser } = useContext(UserContext);
+  const [role, setRole] = useState('');
+  const { user, logout, url,  getuser } = useContext(UserContext);
   const [loading, setLoading] = useState(false)
   // const {switchRole} = useContext(RoleContext)
-  // console.log(role);
+  console.log(user);
+  
   
   const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  const userDetail = user?.userDetails?.user
 
   const switchRole = async ()=>{
     setLoading(true)
@@ -56,14 +57,16 @@ const Sidebar = () => {
     }
 }
 
-// useEffect(()=>{
-//   window.location.reload()
-
-//   // setRole(userDetail?.userType)
-//   // console.log(role);
+useEffect(()=>{
+if(!user) getuser()
   
-// },[userDetail?.userType])
+},[])
 
+useEffect(()=>{
+if(user && user.userType != "tasker"){
+  navigate('/client-dashboard')
+}
+},[navigate, user])
 
   return (
     <div className="flex ">
@@ -96,19 +99,19 @@ const Sidebar = () => {
             <span className="text-gray-800 font-medium">Account Type</span>
             <div className="flex justify-between items-center mt-2">
               <span className="text-sm text-gray-500">{`As A ${
-                role ? role : userDetail?.userType
+                role ? role : user?.userType
               }`}</span>
               <Switch
                 checked={role}
                 onChange={switchRole}
                 onClick={getuser}
                 className={`${
-                  role || userDetail?.userType == "tasker" ? "bg-pink-500" : "bg-gray-300"
+                  role || user?.userType == "tasker" ? "bg-pink-500" : "bg-gray-300"
                 } relative inline-flex h-6 w-11 items-center rounded-full transition`}
               >
                 <span
                   className={`${
-                    role || userDetail?.userType  == "tasker" ? "translate-x-6" : "translate-x-1"
+                    role || user?.userType  == "tasker" ? "translate-x-6" : "translate-x-1"
                   } inline-block h-4 w-4 transform bg-white rounded-full transition`}
                 />
               </Switch>

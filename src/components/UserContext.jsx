@@ -6,6 +6,7 @@ export const UserContext = createContext({});
 export const UserContextProvider = ({children}) =>{
 
     const [user, setUser] = useState();
+    const [balance, setBalance] = useState()
     const [loading, setLoading] = useState(false);
     // const [initChat, setInit] = useState(null)
     
@@ -32,6 +33,7 @@ export const UserContextProvider = ({children}) =>{
             setLoading(false)
             const data = await response.json()
             setUser(data)
+            setBalance(data.userDetails.balance)
         } else{
             // const error = await response.json()
             console.log(response);
@@ -93,7 +95,7 @@ export const UserContextProvider = ({children}) =>{
         }
     }, [userToken])
 
-    const contextvalue = {url, user, userToken, loading,  logout, getuser}
+    const contextvalue = {url, user, userToken, loading, balance,  logout, getuser}
     
     return(
     <UserContext.Provider value={contextvalue}>

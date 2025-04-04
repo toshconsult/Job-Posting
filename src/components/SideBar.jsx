@@ -9,16 +9,7 @@ import { UserContext } from "./UserContext";
 import Loader from "./Loader";
 
 
-const settingsOptions = [
-  { text: "Dashboard", link: "/dashboard" },
-  { text: "Profile", link: "/profile" },
-  { text: "Wallet", link: "/wallet" },
-  { text: "Tasks", link: "/all-task" },
-  { text: "Messages", link: "/messages" },
-  { text: "Referrals", link: "/referrals" },
-  { text: "Community", link: "/community" },
-  { text: "Availability", link: "/availaibility" },
-];
+
 
 const Sidebar = () => {
   const userToken = localStorage.getItem('token')
@@ -26,10 +17,18 @@ const Sidebar = () => {
   const [role, setRole] = useState('');
   const { user, logout, url,  getuser } = useContext(UserContext);
   const [loading, setLoading] = useState(false)
-  // const {switchRole} = useContext(RoleContext)
-  console.log(user);
   
   
+  const settingsOptions = [
+    { text: "Dashboard", link: "/dashboard" },
+    { text: "Profile", link: `/profile/${user?._id}` },
+    { text: "Wallet", link: "/wallet" },
+    { text: "Tasks", link: "/all-task" },
+    { text: "Referrals", link: "/referrals" },
+    { text: "Community", link: "/community" },
+    { text: "Availability", link: "/availaibility" },
+  ];
+
   const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -37,10 +36,11 @@ const Sidebar = () => {
 
   const switchRole = async ()=>{
     setLoading(true)
+   
     const response = await fetch(`${url}user/update-user-type`, {
         method: 'PUT',
         headers: {
-            // 'Content-Type': 'application/json',
+           
             'Authorization': `Bearer ${userToken}`
         }
     })
@@ -49,7 +49,7 @@ const Sidebar = () => {
         const data = await response.json()
         setRole(data.user.userType)
       setLoading(false)
-        // console.log(data.user.userType)
+      localStorage.removeItem('token')
     } else {
         const error = await response.json()
         console.log(error)
@@ -60,13 +60,9 @@ const Sidebar = () => {
 useEffect(()=>{
 if(!user) getuser()
   
-},[])
+},[getuser, user])
 
-useEffect(()=>{
-if(user && user.userType != "tasker"){
-  navigate('/client-dashboard')
-}
-},[navigate, user])
+
 
   return (
     <div className="flex ">

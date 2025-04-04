@@ -26,8 +26,7 @@ const ClientSideBar = () => {
   const [role, setRole] = useState(null);
   const { user, logout, url, getuser } = useContext(UserContext);
   const [loading, setLoading] = useState(false)
-  // const {switchRole} = useContext(RoleContext)
-  // console.log(role);
+  
   
   const navigate = useNavigate();
   const toggleSidebar = () => {
@@ -48,7 +47,7 @@ const ClientSideBar = () => {
         const data = await response.json()
         setRole(data.user.userType)
       setLoading(false)
-        // console.log(data.user.userType)
+       localStorage.removeItem('token')
     } else {
         const error = await response.json()
         console.log(error)
@@ -62,11 +61,7 @@ if(!user) getuser()
   
 },[user, getuser])
 
-useEffect(()=>{
-if(user && user.userType != "client"){
-  navigate('/dashboard')
-}
-},[navigate, user])
+
 
   return (
   
@@ -75,7 +70,7 @@ if(user && user.userType != "client"){
   
     <div className="flex ">
           <div
-            className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
+            className={`fixed overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
         border-[#F3F5FF] transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 transition-transform duration-300 ease-in-out`}
@@ -143,7 +138,8 @@ if(user && user.userType != "client"){
     
               {/* Log Out Button */}
               <button
-                className="cursor-pointer w-full flex items-center justify-center gap-2 mt-10 bg-pink-500 text-white py-3 rounded-lg text-lg font-semibold transition hover:bg-pink-600"
+                className="cursor-pointer w-full flex items-center justify-center gap-2 mt-10 bg-blue-900 text-white py-3 rounded-lg text-lg font-semibold transition
+                 hover:bg-white hover:text-black hover:border-1 hover:border-gray-100"
                 onClick={logout}
               >
                 <LogOut size={20} />

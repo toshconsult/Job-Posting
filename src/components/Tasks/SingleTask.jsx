@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import Loader from "../Loader";
 
@@ -7,22 +7,24 @@ const SingleTask = () => {
   const { url, user, userToken,  } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({});
-  const navigate = useNavigate();
   const { id } = useParams();
   const sTask = task?.task
-  // console.log(sTask?.client);
+  console.log(sTask?.client);
+  console.log(id);
+  
   
 const [userP, setUserP] = useState({})
 console.log(userP);
 
+useEffect(() => {
+  setLoading(true);
   const getTasks = async () => {
     try {
-      setLoading(true);
       
       const response = await fetch(`${url}user/task/${id}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          'Authorization': `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
       });
@@ -45,10 +47,17 @@ console.log(userP);
     }
   };
 
+  
+    getTasks();
+    
+  }, [userToken, user, id, url]);
+
   //////--------------------------------- GET USER PROFILE ---------------------------------------------/////////
 
   
+  useEffect(() => {
   const getProfile = async () => {
+    setLoading(true)
     const response = await fetch(`${url}user/profile/${sTask?.client}`, {
       method: "GET",
       headers: {
@@ -59,25 +68,23 @@ console.log(userP);
     if (response.ok) {
       const data = await response.json();
       setUserP(data.user);
-      console.log(data);
+      // console.log(data);
+      setLoading(false)
      
       
     } else {
       const err = await response.json();
       console.log(err);
+      setLoading(false)
     }
   };
 
-  useEffect(() => {
     if (sTask?.client) {
-      getProfile(sTask.client);
+      getProfile(sTask?.client);
     }
-  }, [sTask.client]);
+  }, [sTask?.client, url, userToken]);
 
-  useEffect(() => {
-    getTasks();
-    // getProfile();
-  }, [userToken, user, ]);
+  
 
   return (
   

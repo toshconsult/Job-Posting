@@ -1,41 +1,61 @@
-import { useContext, useEffect, useState } from "react";
-import { Bell, Gift, RefreshCcw, Settings } from "lucide-react";
-import Sidebar from '../SideBar'
+import { useContext, useEffect } from "react";
+import { Bell, RefreshCcw, Settings } from "lucide-react";
+import Sidebar from "../SideBar";
 import { UserContext } from "../UserContext";
 import AppliedTask from "../Tasks/AppliedTask";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
+import { MdOutlineMessage } from "react-icons/md";
 
 const Dashboard = () => {
-    const {user, loading,} = useContext(UserContext)
-    const navigate  = useNavigate()
-    // const user = user?.users?.user
-    console.log(user);
-    
+  const { user, loading } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  console.log(user);
   
+  const token = localStorage.getItem('token')
 
-        useEffect(()=>{
-        if(user?.skillsets?.length === 0){
-      navigate('/interest')
-  }else if(user && !('profileDescription' in user)){
+  useEffect(()=>{
+    if(!token){
+      window.location.href = '/login'
+    }
+  },[token])
+  
+  useEffect(() => {
+    if (user?.skillsets?.length === 0) {
+      navigate("/interest");
+    } else if (user && !("profileDescription" in user )) {
+      navigate("/update-profile");
+    } else if (user?.profileDescription === "undefined"){
       navigate('/update-profile')
-  } 
-    },[user, navigate ])
+    }
+  }, [user, navigate]);
 
+  useEffect(() => {
+    if (user && user.userType != "tasker") {
+      navigate("/client-dashboard");
+    }
+  }, [user, navigate]);
 
-      return (
-        <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
-         {loading ? <Loader /> : <>
+  return (
+    <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
           {/* Sidebar */}
           <Sidebar />
-    
+
           {/* Main Content */}
           <div className="flex-1 p-6 pt-6">
-            
             <div className="flex justify-between items-center">
-              <h1 className="text-xl font-bold text-[#1E1E1E]">Thebest<span className="text-pink-500">Price</span></h1>
+            <Link to='/'>
+          <h1 className="text-xl font-bold text-[#1E1E1E] pl-10 md:pl-0">
+            Thebest<span className="text-[#2F3C7E]">Price</span>
+          </h1>
+          </Link>
               <div className="flex items-center gap-4">
-                <Gift className="text-gray-500" />
+                <MdOutlineMessage className="text-gray-500" size={20} />
                 <Bell className="text-gray-500" />
                 <img
                   src={user?.profilePicture}
@@ -44,44 +64,51 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-    
-           
+
             <div className="bg-pink-500 text-white p-4 rounded-xl mt-6 flex justify-between items-center">
               <div>
                 <p className="font-bold">Welcome {user?.username}!!!</p>
-                {
-                  !user?.isVerified ? <p className="text-sm">You're One Way In. Complete Your KYC Verification</p> : null
-                }
+                {!user?.isVerified ? (
+                  <p className="text-sm">
+                    You&apos;re One Way In. Complete Your KYC Verification
+                  </p>
+                ) : null}
               </div>
-              {
-                !user?.isVerified ? <button className="bg-white text-pink-500 px-4 py-2 rounded-full">Get Started</button>: null
-              }
+              {!user?.isVerified ? (
+                <button className="bg-white text-pink-500 px-4 py-2 rounded-full">
+                  Get Started
+                </button>
+              ) : null}
             </div>
-    
-          
-            <h2 className="mt-8 text-lg font-semibold">Latest <span className="text-pink-500">Update</span></h2>
+
+            <h2 className="mt-8 text-lg font-semibold">
+              Latest <span className="text-pink-500">Update</span>
+            </h2>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="bg-gray-300 h-24 rounded-xl"></div>
               <div className="bg-gray-300 h-24 rounded-xl"></div>
               <div className="bg-gray-300 h-24 rounded-xl"></div>
             </div>
-    
-           
+
             <div className="flex justify-between items-center mt-8">
-              <h2 className="text-lg font-semibold">Clients <span className="text-pink-500">Request</span></h2>
+              <h2 className="text-lg font-semibold">
+                Applied <span className="text-pink-500">Tasks</span>
+              </h2>
               <div className="flex gap-3">
                 <RefreshCcw className="text-gray-500 cursor-pointer" />
                 <Settings className="text-gray-500 cursor-pointer" />
               </div>
             </div>
-            <p className="text-sm text-gray-500">Send Your Offer To Your Clients</p>
-    
-            <AppliedTask/>
-          </div>
-          </>}
-        </div>
-      );
-  
-}
+            <p className="text-sm text-gray-500">
+              List of tasks you have applied for
+            </p>
 
-export default Dashboard
+            <AppliedTask />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;

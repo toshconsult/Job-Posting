@@ -42,7 +42,7 @@ const NavBar = () => {
           <Link to='/' className="btn"><input className="input" type="search" name="" id="" placeholder="Search" /><i class="fa fa-search"></i></Link>
           {
             user? (
-            <Link to='/profile' className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+              <Link to={user?.userType === "client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
 
             ):
             (
@@ -78,7 +78,7 @@ const NavBar = () => {
             <button className="btn"><i class="fa fa-search"></i></button>
             {
             user? (
-            <Link to='/profile' className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+            <Link to={user?.userType === "Client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
 
             ):
             (

@@ -34,21 +34,9 @@ const CreateTask = () => {
      const [location, setLocation] = useState('')
      const [skillss, setSkills] = useState([])
      const [taskImage, setTaskImage] = useState(null)
-console.log(taskImage);
+// console.log(taskImage);
 
-     
-      // const [formdata, setFormdata] = useState({
-      //   title: '',
-      //   description: '',
-      //   duration: '',
-      //   projectType: '',
-      //   location: '',
-      //   price: '',
-      //   skills: selectedSkills,
-      //   taskImage: null
-       
-      // })
-    // console.log(formData);
+  
     
       const handleSelect = (skill) => {
         setSelectedSkills((prev) => {
@@ -60,25 +48,11 @@ console.log(taskImage);
       };
 
       useEffect(() => {
-        // console.log(selectedSkills);
         setSkills(selectedSkills)
-        // formData.skills = selectedSkills
+        
       }, [selectedSkills]);
       
-      // const handleFileChange = (e) => {
-      //   const file = e.target.files[0]
-      //   if (file) {
-      //     setFormdata((prev) => ({ ...prev, taskImage: file }));
-      //   }
-      // };
-      // const handleChange = (e) => {
-      //   const { name, value } = e.target;
-      //   setFormdata(prevData => ({
-      //   ...prevData,
-      //   [name]: value,  
-       
-      //   }));
-      // }
+      
      
       
     // !!!!!!!!!!-------------------------------------- FUCTION TO HANDLE SUBMIT --------------------------------------!!!!!!!!!!
@@ -100,12 +74,7 @@ console.log(taskImage);
         
         try {
           setLoading(true)
-          // if (!userToken) {
-          //   console.error("userToken is missing!");
-          //  navigate('/login')
-
-          // }
-
+         
             
           const response = await fetch(`${url}client/create-task`, {
             method: 'POST',

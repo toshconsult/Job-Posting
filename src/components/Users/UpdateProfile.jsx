@@ -7,18 +7,19 @@ import { useNavigate } from "react-router-dom"
 
 const UpdateProfile = () => {
     const navigate = useNavigate()
-    const {url, user, userToken} = useContext(UserContext)
+    const {url, user} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
+    const userToken = localStorage.getItem('token')
 console.log(user);
     
     const [formdata, setFormdata] = useState({
         profilePicture: user?.profilePicture,
-        jobTitle: user?.jobTitle,
+        jobTitle: user.jobTitle,
         profileDescription: user?.profileDescription,
         location: user?.location
         })
      
-console.log(formdata);
+// console.log(formdata);
 
 const handleChange = (e) => {
   const { name, value, type, files } = e.target;
@@ -50,9 +51,10 @@ const handleChange = (e) => {
        if (response.ok){
         const data = await response.json()
         setLoading(false)
-        // console.log(data);
+        console.log(data);
         toast.success(data.message)
-        navigate('/dashboard')
+        window.location.href = '/dashboard'
+        // navigate('/dashboard')
         
        } else {
         const error = await response.json()

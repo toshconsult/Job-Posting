@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import { UserContext } from "../UserContext";
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FaCircleXmark } from "react-icons/fa6";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
-import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const ApplyTask = () => {
   
@@ -15,13 +14,16 @@ const ApplyTask = () => {
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
   const [date, setDate] = useState('')
-console.log(proposal);
+  const navigate = useNavigate()
 
  
   const apply = async (e) => {
 
     e.preventDefault()
-
+if(price === '' || proposal === '' || date === ''){
+  toast.error('All field require')
+  return
+}
     const requestBody = {
       price: price,
       description: proposal,
@@ -41,17 +43,22 @@ console.log(proposal);
 
     if (response.ok) {
       const data = await response.json();
-      // setMessage(data);
+      // setMessage(data.message);
       console.log(data);
-      
+      toast.success(data.message)
+      navigate('/dashboard')
       setLoading(false);
     } else {
       const err = await response.json();
-      // setMessage(data);
+      toast.error(err.error)
       console.log(err);
       
       setLoading(false);
     }
+
+    setProposal('')
+    setPrice('')
+    setDate('')
   };
 
   // useEffect(() => {
@@ -60,12 +67,12 @@ console.log(proposal);
 
   return (
     <div className="flex flex-col items-center md:items-start px-4 md:px-20">
-        
+        {loading ? <Loader /> : <>
               <h1 className="text-[25px] pb-6 mt-14 md:text-center">
                 Send Your <span className="text-[#EA1588]">Proposal</span>
               </h1>
               <form onSubmit={apply} className="w-full max-w-2xl">
-                {/* <ToastContainer /> */}
+                <ToastContainer />
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="price" className="text-[#333] font-semibold">
@@ -111,12 +118,15 @@ console.log(proposal);
                   <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all"
+                className="w-full py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white
+                 hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all"
+        
               >
-                Post
+               Submit
               </button>
             </div>
                   </form>
+                  </>}
                   </div>
   );
 };

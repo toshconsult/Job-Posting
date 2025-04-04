@@ -1,14 +1,18 @@
-import Sidebar from "../SideBar";
+
 import { useContext, useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import Loader from "../Loader";
+import { MdVerified } from "react-icons/md";
+
 const Profile = () => {
   const { loading, url, userToken } = useContext(UserContext);
   const [user, setUser] = useState({});
   console.log(user?.username);
   const { id } = useParams();
   const navigate = useNavigate();
+  useEffect(() => {
+
   const getProfile = async () => {
     const response = await fetch(`${url}user/profile/${id}`, {
       method: "GET",
@@ -39,9 +43,8 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
     getProfile();
-  }, []);
+  }, [id, userToken, url, navigate]);
 
   return (
     <div className="flex justify-center px-4 md:px-20 md:justify-normal min-h-screen md:gap-72">
@@ -49,8 +52,6 @@ const Profile = () => {
         <Loader />
       ) : (
         <>
-          {/* <Sidebar /> */}
-
          
               <div className="">
                 <div className="w-[328px] md:w-[100%] h-[137px] px-6 border-1 border-[#F3F5FF]  rounded-2xl mt-20 md:mt-10 my-6">
@@ -62,7 +63,8 @@ const Profile = () => {
                       />
                     </div>
                     <div>
-                      <p className="md:text-4xl mt-6 md:mt-0">{user?.username}</p>
+                      <p className="md:text-4xl mb-1 mt-6 md:mt-0 flex items-center">{user?.username}  <MdVerified size={20} 
+                      className="text-blue-700 mt-2 pl-1"/> </p>
                       <div>
                         <p className="text-gray-600">{user?.jobTitle}</p>
                         <p className="">{user?.location}</p>
@@ -82,7 +84,7 @@ const Profile = () => {
                   <div className="pt-3 flex justify-between">
                     <h2 className="font-semibold text-3xl">Skillset</h2>
                   </div>
-                  <p className="pt-3 grid grid-cols-3 md:grid-cols-4 gap-4 mb-4">
+                  <p className="pt-3 grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                     {user?.skillsets?.map((skills, index) => {
                       return (
                         <span

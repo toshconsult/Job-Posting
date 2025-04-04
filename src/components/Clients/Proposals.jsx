@@ -1,14 +1,17 @@
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../UserContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Proposals = () => {
   const { url, userToken } = useContext(UserContext);
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   const maxContent = 200
-//  const id = '67e183403a9bc14667f76a09'
+
   const {id} = useParams()
+  localStorage.setItem('taskId', id)
+  useEffect(()=>{
     const fetchProposals = async () => {
       try {
         setLoading(true);
@@ -33,16 +36,17 @@ const Proposals = () => {
       }
     };
 
-    function showFllContect(){
-        alert("hi clicked")
-        
-    }
-useEffect(()=>{
     fetchProposals();
   }, [id, url, userToken]);
 
+  function showFllContect(){
+    navigate(`/single-proposal/${id}`)
+    
+}
+
   return (
     <div className="max-w-5xl mx-auto bg-white p-6 rounded-xl mt-6">
+
       <h2 className="text-xl font-semibold mb-4">Proposals</h2>
 
       {loading ? (
@@ -66,9 +70,10 @@ useEffect(()=>{
 
               
               <p className="text-gray-600 mt-2">{proposal.description.length > maxContent ? 
-                <>{proposal.description.slice(0, maxContent)} <button onClick={showFllContect}>... Show more</button> </>
+                <>{proposal.description.slice(0, maxContent)} <i
+                >.....</i> </>
               : proposal.description }</p>
-
+        <button onClick={showFllContect} className="text-blue-700">View</button>
              
               <p className="text-gray-500 text-sm mt-1">
                 {new Date(proposal.date).toLocaleDateString()}

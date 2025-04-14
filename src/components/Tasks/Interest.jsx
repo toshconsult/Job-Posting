@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "../UserContext";
-import { useNavigate } from "react-router-dom";
 import Loader from '../Loader'
 import skills from '/src/components/Skills.jsx'
 
@@ -14,7 +13,6 @@ const Interest = () => {
   const [selectedSkills, setSelectedSkills] = useState([])
   const userToken = localStorage.getItem('token')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
   console.log(selectedSkills);
   console.log(userToken);
   
@@ -35,7 +33,7 @@ const Interest = () => {
           setLoading(false)
           console.log(data);
           toast.success('Skills updated Successfully')
-          navigate('/update-profile')
+          window.location.href = '/update-profile'
           
          } else {
           const error = await response.json()

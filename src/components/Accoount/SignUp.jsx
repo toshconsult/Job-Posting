@@ -51,8 +51,8 @@ if(role === ''){
       }));
     }
 
-    if(formdata.username.length > 6){
-      toast.error("Username cannot be longer than 6 characters")
+    if(formdata.username.length > 8){
+      toast.error("Username cannot be longer than 8 characters")
       return
     }
   

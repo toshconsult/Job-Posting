@@ -92,6 +92,7 @@ const Login = () => {
         <input type={showPassword ? "text": "password"} placeholder="Password" required
         onChange={handleChange}
         name="password"
+        autoComplete="current-password"
         className="h-[50px] rounded-md p-2 px-5 outline-0
          placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
          <span onClick={togglePassword} className="text-[#EA1588] cursor-pointer">

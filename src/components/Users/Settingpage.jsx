@@ -1,9 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../SideBar";
 
-const data = [{text:'About us', link:'/about'}, 
-    {text:'Our Team', link:'/team'}, 
+const data = [{text:'Edit Profile', link:'/update-profile'}, 
+    {text:'Update Pin', link:'/update-pin'}, 
     {text:'Our Partner', link:'/partner'}, ]
 
 const Settingpage = () => {
@@ -12,9 +11,9 @@ const Settingpage = () => {
 
     
     <div>
-        <Sidebar/>
+        
         <div className="w-full max-w-lg mx-auto p-6 h-screen">
-          <h2 className="text-xl font-semibold md:text-center mb-6">About</h2>
+          <h2 className="text-xl font-semibold md:text-center mb-6">Settings</h2>
 
           {data.map((option, index) => (
             <button

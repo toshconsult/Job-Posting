@@ -1,8 +1,9 @@
 // import { Sidebar } from "lucide-react";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import Sidebar from "../SideBar";
 import { UserContext } from "../UserContext";
+import { Link } from "react-router-dom";
 
 export default function WalletPage() {
 
@@ -33,9 +34,9 @@ console.log(balance);
           <button className="flex-1 flex items-center justify-center border border-gray-300 rounded-lg py-2 text-gray-800">
             <span className="mr-2">💳</span> Fund Account
           </button>
-          <button className="flex-1 flex items-center justify-center bg-pink-600 text-white rounded-lg py-2">
-            <span className="mr-2">🏦</span> Withdraw
-          </button>
+           <button className="flex-1 flex items-center cursor-pointer justify-center bg-pink-600 text-white rounded-lg py-2">
+           <Link to='/withdraw'>  Withdraw </Link>
+          </button> 
         </div>
         
         {/* Earnings History */}

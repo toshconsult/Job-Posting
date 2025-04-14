@@ -19,21 +19,24 @@ const NavBar = () => {
     <div>
       <div className="containerr">
         {/* {Logo section} */}
-        <div className="text">
+        
+        
+          <Link to='/' className="text">
           <p className="air">THEBEST</p>
           <span className="span">PRICE</span>
-        </div>
+          </Link>
+       
         {/* Menu Section */}
         { user ? (
         <div className="menuList">
           <ul className="ul">
-            <li className="li home-activ">Account Info.</li>
+            {/* <li className="li home-activ">Account Info.</li> */}
+            <li className="li"><Link to='/all-task'>Tasks</Link></li>
             <li className="li">About Us</li>
             <li className="li"><Link to='/settings'>Settings</Link> </li>
-            <li className="li">Support</li>
-            <li className="li">Give Feedback</li>
-            <li className="li">FAQ</li>
-            <li className="li">Check Update</li>
+            {/* <li className="li">Give Feedback</li> */}
+            {/* <li className="li">FAQ</li> */}
+            {/* <li className="li">Check Update</li> */}
           </ul>
         </div>
         ) : ''}
@@ -62,16 +65,15 @@ const NavBar = () => {
     <div className={open ? "bg active" : "bg"}>
      <button className="close" onClick={handleClick}><i class="fa fa-times"></i></button>
       <div className="mobile">
-    { user ?  <Sidebar /> : <>
+    
         <div className="menuList">
             <ul className={open ? "ul active" : "ul"}>
-              <li className="li home-active">Account Info.</li>
-              <li className="li">About Us</li>
-              <li className="li"><Link to='/settings'>Settings</Link> </li>
-              <li className="li">Support</li>
-              <li className="li">Give Feedback</li>
+            <li className="li"><Link to='/all-task'>Tasks</Link></li>
+            <li className="li">About Us</li>
+            <li className="li"><Link to='/settings'>Settings</Link> </li>
+              {/* <li className="li">Give Feedback</li>
               <li className="li">FAQ</li>
-              <li className="li">Check Update</li>
+              <li className="li">Check Update</li> */}
             </ul>
           </div>
           <div className={open ? "button active" : "button"}>
@@ -89,7 +91,6 @@ const NavBar = () => {
             )
           }
           </div>
-    </>}
         </div>
     </div>
     {/* mobile sidebar section */}

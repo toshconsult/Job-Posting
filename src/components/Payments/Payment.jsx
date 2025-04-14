@@ -1,17 +1,44 @@
-import { useContext, useState } from "react"
+import {  useContext, useEffect, useState } from "react"
 import { PaystackButton } from 'react-paystack'
-import { UserContext } from "../UserContext"
 import { toast, ToastContainer } from "react-toastify"
+import { UserContext } from "../UserContext"
 
 const Payment = () => {
-  
+  const {url, userToken} = useContext(UserContext)
   const publicKey = "pk_test_f7fd4dba18436a90b7ebde95b7b7b435e3a539a9"
   const [amount, setAmount] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+
+  const handlePaystackSuccessAction = async(reference, amount) => {
+    console.log(reference);
+    console.log(amount);
+    
+    const sendtobackend = await fetch(`${url}user/fund-wallet`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${userToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: amount / 100,
+        reference
+      })
+    })
+
+    if(sendtobackend.ok) {
+      const data = await sendtobackend.json()
+      console.log(data);
+      toast.success('Your account funded Successfully')
+    }else {
+      const error = await sendtobackend.json()
+      toast.error(error.error)
+    }
+  };
      
   const componentProps = {
+    reference: (new Date()).getTime().toString(),
     email,
     amount: amount * 100,
     metadata: {
@@ -20,8 +47,7 @@ const Payment = () => {
     },
     publicKey,
     text: "Fund",
-    onSuccess: () =>
-      toast.success('Your account funded Successfully') ,
+    onSuccess: async()=> handlePaystackSuccessAction(componentProps.reference, componentProps.amount),
     onClose: () => toast.error('Payment cancelled'),
   }
 

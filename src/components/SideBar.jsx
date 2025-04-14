@@ -21,12 +21,12 @@ const Sidebar = () => {
   
   const settingsOptions = [
     { text: "Dashboard", link: "/dashboard" },
-    { text: "Profile", link: `/profile/${user?._id}` },
+    // { text: "Profile", link: `/profile/${user?._id}` },
     { text: "Wallet", link: "/wallet" },
     { text: "Tasks", link: "/all-task" },
     { text: "Referrals", link: "/referrals" },
     { text: "Community", link: "/community" },
-    { text: "Availability", link: "/availaibility" },
+    { text: "Settings", link: "/settings" },
   ];
 
   const navigate = useNavigate();

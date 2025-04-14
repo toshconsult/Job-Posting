@@ -42,6 +42,9 @@ import SubmitTask from './components/Users/SubmitTask.jsx';
 import ApproveSubmission from './components/Clients/ApproveSubmission.jsx';
 import StartReview from './components/Reviews/StartReview.jsx';
 import Payment from './components/Payments/Payment.jsx';
+import Withdraw from './components/Payments/Withdraw.jsx';
+import CreatePin from './components/Payments/CreatePin.jsx';
+import UpdatePin from './components/Payments/UpdatePin.jsx';
 
 
 const router = createBrowserRouter([
@@ -86,11 +89,14 @@ const router = createBrowserRouter([
       {path: 'submit-task/:id', element: <SubmitTask />},
 
      
-      
+      {path: 'settings', element: <Settingpage />},
       {path: 'update-profile', element: <UpdateProfile />},
       {path: 'dashboard', element:  <Dashboard /> },
       {path: 'apply', element: <AppliedTask/>},
       {path: 'get-tasks', element: <GetTasks />},
+      {path: 'withdraw', element: <Withdraw />},
+      {path: 'create-pin', element: <CreatePin />},
+      {path: 'update-pin', element: <UpdatePin />},
       
 
 

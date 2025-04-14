@@ -6,7 +6,7 @@ import Loader from "../Loader";
 import { MdVerified } from "react-icons/md";
 
 const Profile = () => {
-  const { loading, url, userToken } = useContext(UserContext);
+  const { url, userToken } = useContext(UserContext);
   const [user, setUser] = useState({});
   console.log(user?.username);
   const { id } = useParams();
@@ -48,7 +48,7 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center px-4 md:px-20 md:justify-normal min-h-screen md:gap-72">
-      {loading ? (
+      {!user?.profilePicture ? (
         <Loader />
       ) : (
         <>

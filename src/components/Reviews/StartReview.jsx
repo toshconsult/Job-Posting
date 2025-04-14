@@ -41,7 +41,7 @@ e.preventDefault()
     <div className="flex flex-col items-center md:items-start px-4 md:px-20">
             {loading ? <Loader />: <>
                   <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                    Submit <span className="text-[#EA1588]">Task</span>
+                   Drop a <span className="text-[#EA1588]">Review</span>
                   </h1>
                   <form onSubmit={review} className="w-full max-w-2xl">
                     <ToastContainer />

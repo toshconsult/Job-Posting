@@ -57,11 +57,11 @@ const Dashboard = () => {
               <div className="flex items-center gap-4">
                 <MdOutlineMessage className="text-gray-500" size={20} />
                 <Bell className="text-gray-500" />
-                <img
+               <Link to={`/profile/${user?._id}`} > <img
                   src={user?.profilePicture}
                   alt="Profile"
                   className="w-8 h-8 rounded-full border-2 border-yellow-400"
-                />
+                /></Link>
               </div>
             </div>
 

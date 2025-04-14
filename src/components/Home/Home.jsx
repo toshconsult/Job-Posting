@@ -1,6 +1,6 @@
 
 import "../Home/Home.css"
-import Select from '../Select/Select'
+// import Select from '../Select/Select'
 import GetTasks from "../Tasks/GetTasks"
 
 
@@ -20,7 +20,7 @@ const Home = () => {
                 </div>
             </div>
          </div>
-         <Select />
+         {/* <Select /> */}
          <GetTasks />
     </div>
   )

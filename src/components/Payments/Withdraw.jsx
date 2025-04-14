@@ -11,6 +11,7 @@ const Withdraw = () => {
     const [accountNmber, setAccountNumber] = useState('')
     const [bankCode, setBankCode] = useState('')
     const [amount, setAmount] = useState('')
+    const [pin, setPin] = useState('')
 
     useEffect(()=>{ 
     const getbanks = async ()=>{
@@ -48,7 +49,8 @@ e.preventDefault()
     body: JSON.stringify({
       accountNmber: accountNmber,
       bankCode: bankCode,
-      amount: amount
+      amount: amount,
+      pin: pin
     })
   })
   if(response.ok) {
@@ -121,6 +123,22 @@ e.preventDefault()
                   // value={title}
                   placeholder="Enter Amount"
                   onChange={(e)=>setAmount(e.target.value)}
+                  className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                />
+              </div>
+              </div>
+
+              <div className="space-y-4">
+              <div>
+                <label htmlFor="Pin" className="text-[#333] font-semibold">
+                  Pin
+                </label>
+                <input
+                  type="number"
+                 
+                  // value={title}
+                  placeholder="Enter Pin"
+                  onChange={(e)=>setPin(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>

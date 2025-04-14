@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Loader from "../Loader";
 import { UserContext } from "../UserContext";
 
@@ -23,6 +23,7 @@ const UpdatePin = () => {
 const handleSubmit = async (e)=>{
     e.preventDefault()
 
+    setloading(true)
     const res = await fetch(`${url}user/update-pin`, {
         method: 'POST',
         headers: {
@@ -34,10 +35,13 @@ const handleSubmit = async (e)=>{
 
     if(res.ok){
         const data = await res.json()
-        console.log(data);
+        toast.success(data.message)
+        setloading(false)
         
     } else {
         const err = await res.json()
+        toast.error(err.error)
+        setloading(false)
         console.log(err);
         
     }

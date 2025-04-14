@@ -16,7 +16,7 @@ console.log(balance);
     return (
         <div>
        <Sidebar />
-        <div className="max-w-md md:max-w-lg lg:max-w-xl mx-5 md:mx-auto pt-20 p-4 pl-20 md:pt-10">
+        <div className="max-w-md md:max-w-lg lg:max-w-xl mx-5 md:mx-auto pt-20 p-4 md:pl-20 md:pt-10">
         <h2 className="text-lg font-semibold mb-4">Wallet</h2>
           {/* <Sidebar /> */}
         
@@ -32,7 +32,7 @@ console.log(balance);
         {/* Action Buttons */}
         <div className="flex gap-4 mb-6">
           <button className="flex-1 flex items-center justify-center border border-gray-300 rounded-lg py-2 text-gray-800">
-            <span className="mr-2">💳</span> Fund Account
+           <Link to='/fund-wallet'> <span className="mr-2">💳</span> Fund Account </Link>
           </button>
            <button className="flex-1 flex items-center cursor-pointer justify-center bg-pink-600 text-white rounded-lg py-2">
            <Link to='/withdraw'>  Withdraw </Link>

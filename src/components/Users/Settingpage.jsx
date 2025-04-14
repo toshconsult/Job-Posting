@@ -2,8 +2,9 @@ import { ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const data = [{text:'Edit Profile', link:'/update-profile'}, 
+  {text:'Create Pin', link:'/create-pin'}, 
     {text:'Update Pin', link:'/update-pin'}, 
-    {text:'Our Partner', link:'/partner'}, ]
+  ]
 
 const Settingpage = () => {
     const navigate = useNavigate()

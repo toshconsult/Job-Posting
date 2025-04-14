@@ -41,10 +41,10 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import SubmitTask from './components/Users/SubmitTask.jsx';
 import ApproveSubmission from './components/Clients/ApproveSubmission.jsx';
 import StartReview from './components/Reviews/StartReview.jsx';
-import Payment from './components/Payments/Payment.jsx';
 import Withdraw from './components/Payments/Withdraw.jsx';
 import CreatePin from './components/Payments/CreatePin.jsx';
 import UpdatePin from './components/Payments/UpdatePin.jsx';
+import FundWallet from './components/Payments/FundWallet.jsx';
 
 
 const router = createBrowserRouter([
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
        {path: 'proposals/:id', element: <Proposals />},
        {path: 'single-proposal/:id', element: <SingleProposal /> },
        {path: 'approve-task', element: <ApproveSubmission />},
-       {path: 'payment', element: <Payment />}
+       {path: 'fund-wallet', element: <FundWallet />}
         ]
       }
     ]

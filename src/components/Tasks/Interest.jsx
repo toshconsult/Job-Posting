@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify"
+import { toast} from "react-toastify"
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import Loader from '../Loader'
@@ -8,10 +8,11 @@ import skills from '/src/components/Skills.jsx'
 
 
 const Interest = () => {
-  const {url, userToken} = useContext(UserContext)
+  const {url} = useContext(UserContext)
   const [click, setClick] = useState(null);
   const [clickvalue, setClickValue] = useState(null);
   const [selectedSkills, setSelectedSkills] = useState([])
+  const userToken = localStorage.getItem('token')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   console.log(selectedSkills);

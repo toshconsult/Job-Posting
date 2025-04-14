@@ -53,7 +53,7 @@ const GetTasks = () => {
       <h2 className='lg:text-[30px] text-[20px] font-serif font-bold px-8 pb-5'>Tasks</h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 p-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
         {filtered?.map((task, index) => (
-          <div key={index} className='w-full md:min-h-[300px] min-h-[100px]  cursor-pointer p-6  pb-[0px] lg:pb-[30px] h-[250px] rounded-2xl border-1 border-[#F3F5FF] hover:bg-neutral-100'>
+          <div key={index} className='w-full md:min-h-[300px] min-h-[100px]  cursor-pointer p-6 shadow-sm  pb-[0px] lg:pb-[30px] h-[250px] rounded-2xl border-1 border-[#F3F5FF] hover:bg-neutral-100'>
             <Link to={`/single-task/${task?._id}`}>
               <div className='flex flex-col pb-5 gap-[7px]'>
                 <div className='flex gap-4 items-center'>

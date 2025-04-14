@@ -21,7 +21,8 @@ export const AccountType = () => {
     <div>
         {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
 
-        <div className="w-full gap-y-2 flex flex-col justify-center md:mt-14">
+        <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
+      rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
             <div className="pb-6 mt-12 px-10 md:text-center">
             <h1 className="text-[25px] font-semibold ">Choose  <span className="text-[#EA1588] ">Account Type</span></h1>
             <p>Select your account type for best experience.</p>

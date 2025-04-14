@@ -14,7 +14,7 @@ console.log(user);
     
     const [formdata, setFormdata] = useState({
         profilePicture: user?.profilePicture,
-        jobTitle: user.jobTitle,
+        jobTitle: user?.jobTitle,
         profileDescription: user?.profileDescription,
         location: user?.location
         })

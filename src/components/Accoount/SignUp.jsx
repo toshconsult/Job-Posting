@@ -68,7 +68,7 @@ if(role === ''){
         const data = await response.json();
         setLoading(false)
         toast.success(data.message)
-        navigate('/interest')
+        navigate('/login')
       } 
       else {
         const data = await response.json();
@@ -94,7 +94,8 @@ if(role === ''){
       {loading ? <Loader /> :
       <>
       {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
-      <div className="w-full gap-y-2 flex flex-col justify-center">
+      <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
+      rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
         <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Create <span className="text-[#EA1588] ">Account</span></h1>
        
         <form 

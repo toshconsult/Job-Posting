@@ -59,9 +59,9 @@ console.log(task);
             <Link to={`/review/${req._id}`}>
               <button className="text-blue-900 mt-2">Review</button>
             </Link>
-            {req.taskStatus != 'ppending' ?<Link to={`/submit-task/${req._id}`}> <button className="bg-blue-900 px-3 py-2 rounded-2xl
+            {req.taskStatus != 'ppending' ?<Link to={`/single-task/${req._id}`}> <button className="bg-blue-900 px-3 py-2 rounded-2xl
          text-white cursor-pointer hover:bg-white hover:text-black hover:border
-          hover:border-gray-200">Submit</button></Link> :
+          hover:border-gray-200">View</button></Link> :
               <p className={req.taskStatus === "pending" ? 'text-red-500' : req.taskStatus === 
               'in-progress' ? 'text-blue-500' : 'text-green-500'}>{req.taskStatus}</p> }
             </div>

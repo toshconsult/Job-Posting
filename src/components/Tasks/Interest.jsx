@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
-import { toast} from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import Loader from '../Loader'
@@ -118,6 +118,7 @@ const Interest = () => {
       <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-14">
         Your <span className="text-[#EA1588]">Field</span>
       </h1>
+      <ToastContainer />
       <div className="w-full flex flex-col justify-center items-center px-4">
         <p className="pb-6 text-center">
           You can only select one (1) field from the following

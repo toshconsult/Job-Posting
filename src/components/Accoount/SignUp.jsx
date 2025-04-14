@@ -50,8 +50,13 @@ if(role === ''){
         userType: role 
       }));
     }
+
+    if(formdata.username.length > 6){
+      toast.error("Username cannot be longer than 6 characters")
+      return
+    }
   
-    console.log("Submitting data:", formdata); 
+    console.log("Submitting data:", formdata.username); 
     // console.log(formdata);
 
     try {
@@ -74,6 +79,7 @@ if(role === ''){
         const data = await response.json();
        console.log(data.error);
         setLoading(false)
+       
         toast.error(data.error)
       }
 

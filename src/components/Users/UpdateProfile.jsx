@@ -2,11 +2,9 @@ import { useContext, useState } from "react"
 import { UserContext } from "../UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
-import { useNavigate } from "react-router-dom"
 
 
 const UpdateProfile = () => {
-    const navigate = useNavigate()
     const {url, user} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const userToken = localStorage.getItem('token')

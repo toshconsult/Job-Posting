@@ -1,4 +1,4 @@
-import { useContext,  useState } from "react"
+import { useContext,  useEffect,  useState } from "react"
 import Loader from "../Loader"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
@@ -14,7 +14,11 @@ const Login = () => {
         email: '',
         password: ''
     })
-    
+
+    useEffect(() => {
+        localStorage.removeItem('token')
+    }
+, [])
 
     const navigate = useNavigate()
     const togglePassword = () => {

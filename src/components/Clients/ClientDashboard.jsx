@@ -4,12 +4,11 @@ import { FaPlusCircle } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
 import { UserContext } from "../UserContext";
 import ClientTasks from "./ClientTasks";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import { MdOutlineMessage } from "react-icons/md";
 
 const ClientDashboard = () => {
   const { user } = useContext(UserContext);
-  const navigate = useNavigate();
   
   const token = localStorage.getItem('token')
 
@@ -21,9 +20,9 @@ const ClientDashboard = () => {
 
   useEffect(() => {
     if (user && user.userType != "client") {
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     }
-  }, [navigate, user]);
+  }, [ user]);
 
   return (
     <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">

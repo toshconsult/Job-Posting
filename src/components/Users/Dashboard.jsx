@@ -33,9 +33,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user && user.userType != "tasker") {
-      navigate("/client-dashboard");
+     window.location.href = "/client-dashboard";
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">

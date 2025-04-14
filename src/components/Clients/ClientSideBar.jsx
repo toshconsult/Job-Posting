@@ -47,6 +47,7 @@ const ClientSideBar = () => {
     if(response.ok){
         const data = await response.json()
         setRole(data.user.userType)
+        window.location.reload()
       setLoading(false)
        localStorage.removeItem('token')
     } else {

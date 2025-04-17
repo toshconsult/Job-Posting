@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import skills from '/src/components/Skills.jsx'
 
 const buttons = [

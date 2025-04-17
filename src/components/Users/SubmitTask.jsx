@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 

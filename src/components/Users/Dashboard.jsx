@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Bell, RefreshCcw, Settings } from "lucide-react";
 import Sidebar from "../SideBar";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import AppliedTask from "../Tasks/AppliedTask";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
@@ -55,7 +55,7 @@ const Dashboard = () => {
           </h1>
           </Link>
               <div className="flex items-center gap-4">
-                <MdOutlineMessage className="text-gray-500" size={20} />
+               <Link to='/messages'> <MdOutlineMessage className="text-gray-500" size={20} /></Link>
                 <Bell className="text-gray-500" />
                <Link to={`/profile/${user?._id}`} > <img
                   src={user?.profilePicture}
@@ -65,7 +65,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="bg-pink-500 text-white p-4 rounded-xl mt-6 flex justify-between items-center">
+            <div className="bg-[#333333] text-white p-4 rounded-xl mt-6 flex justify-between items-center">
               <div>
                 <p className="font-bold">Welcome {user?.username}!!!</p>
                 {!user?.isVerified ? (
@@ -75,14 +75,14 @@ const Dashboard = () => {
                 ) : null}
               </div>
               {!user?.isVerified ? (
-                <button className="bg-white text-pink-500 px-4 py-2 rounded-full">
+                <button className="bg-white text-[#F2F2F2] px-4 py-2 rounded-full">
                   Get Started
                 </button>
               ) : null}
             </div>
 
             <h2 className="mt-8 text-lg font-semibold">
-              Latest <span className="text-pink-500">Update</span>
+              Latest <span className="text-[#F2F2F2]">Update</span>
             </h2>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="bg-gray-300 h-24 rounded-xl"></div>
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
             <div className="flex justify-between items-center mt-8">
               <h2 className="text-lg font-semibold">
-                Applied <span className="text-pink-500">Tasks</span>
+                Applied <span className="text-[#F2F2F2]">Tasks</span>
               </h2>
               <div className="flex gap-3">
                 <RefreshCcw className="text-gray-500 cursor-pointer" />

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../context/UserContext';
 import Loader from '../Loader';
 
 const GetTasks = () => {
@@ -35,10 +35,7 @@ const GetTasks = () => {
           const data = await response.json();
           settasks(data.tasks);
          setloading(false)
-        } else {
-          // const error = await response.json()
-        setloading(false)
-        }
+        } 
       } catch (error) {
         console.error('Error fetching data:', error);
       }

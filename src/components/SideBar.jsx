@@ -5,7 +5,7 @@ import { MdCancel } from "react-icons/md";
 import { Switch } from "@headlessui/react";
 import { ChevronRight, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./context/UserContext";
 import Loader from "./Loader";
 
 
@@ -65,10 +65,10 @@ if(!user) getuser()
 
 
   return (
-    <div className="flex ">
+    <div className="flex bg-[#f2f2f2]">
       {loading ? <Loader /> : <>
       <div
-        className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-white shadow-xl md:pl-5 border-1 
+        className={`fixed  overflow-y-auto inset-y-0 left-0 z-50 w-64 bg-[#f2f2f2] shadow-xl md:pl-5 border-1 
     border-[#F3F5FF] transform ${
       isOpen ? "translate-x-0" : "-translate-x-full"
     } md:translate-x-0 transition-transform duration-300 ease-in-out`}
@@ -91,10 +91,10 @@ if(!user) getuser()
 
         <nav className="flex flex-col p-4 space-y-2">
           {/* Account Type Toggle */}
-          <div className="bg-white p-4 rounded-lg">
-            <span className="text-gray-800 font-medium">Account Type</span>
+          <div className="bg-[#f2f2f2] p-4 rounded-lg">
+            <span className="text-[#333333] font-medium">Account Type</span>
             <div className="flex justify-between items-center mt-2">
-              <span className="text-sm text-gray-500">{`As A ${
+              <span className="text-sm text-[#333333]">{`As A ${
                 role ? role : user?.userType
               }`}</span>
               <Switch
@@ -102,41 +102,46 @@ if(!user) getuser()
                 onChange={switchRole}
                 onClick={getuser}
                 className={`${
-                  role || user?.userType == "tasker" ? "bg-pink-500" : "bg-gray-300"
+                  role || user?.userType == "tasker" ? "bg-[#333333]" : "bg-gray-300"
                 } relative inline-flex h-6 w-11 items-center rounded-full transition`}
               >
                 <span
                   className={`${
                     role || user?.userType  == "tasker" ? "translate-x-6" : "translate-x-1"
-                  } inline-block h-4 w-4 transform bg-white rounded-full transition`}
+                  } inline-block h-4 w-4 transform bg-[#f2f2f2] rounded-full transition`}
                 />
               </Switch>
             </div>
           </div>
 
-          {/* General Settings List */}
+         
           <div className="mt-6">
             <h3 className="text-lg font-medium mb-2">General Settings</h3>
-            <div className="bg-white rounded-lg">
+            <div className="bg-[#f2f2f2] rounded-lg hover:text-white">
               {settingsOptions.map((option, index) => (
                 <button
-                  key={index}
-                  onClick={() => navigate(option.link)}
-                  className="w-full flex justify-between items-center p-4  cursor-pointer
-            hover:bg-pink-500 hover:text-white transition"
+                key={index}
+                onClick={() => navigate(option.link)}
+                className="w-full flex justify-between items-center p-4 cursor-pointer
+                hover:bg-[#333333] hover:text-white group"
+              >
+                <Link
+                  to={option.link}
+                  className="text-[#333333] group-hover:text-white w-full flex justify-between items-center"
                 >
-                  <span className="text-gray-700">
-                    <Link to={option.link}> {option.text} </Link>
-                  </span>
-                  <ChevronRight size={18} className="text-gray-500" />
-                </button>
+                  <span>{option.text}</span>
+                  <ChevronRight size={18} />
+                </Link>
+              </button>
+              
               ))}
             </div>
           </div>
 
           {/* Log Out Button */}
           <button
-            className="cursor-pointer w-full flex items-center justify-center gap-2 mt-10 bg-pink-500 text-white py-3 rounded-lg text-lg font-semibold transition hover:bg-pink-600"
+            className="cursor-pointer w-full flex items-center justify-center gap-2 mt-10
+             bg-[#333333] text-white py-3 rounded-lg text-lg font-semibold transition hover:bg-[#666565]"
             onClick={logout}
           >
             <LogOut size={20} />
@@ -148,7 +153,7 @@ if(!user) getuser()
       <div className="md:hidden">
         <button
           onClick={toggleSidebar}
-          className={`fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded focus:outline-none ${
+          className={`fixed top-4 left-4 z-50 p-2 bg-[#333333] text-white rounded focus:outline-none ${
             isOpen ? "hidden" : ""
           } `}
         >

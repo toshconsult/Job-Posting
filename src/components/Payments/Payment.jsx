@@ -1,7 +1,7 @@
 import {  useContext, useState } from "react"
 import { PaystackButton } from 'react-paystack'
 import { toast, ToastContainer } from "react-toastify"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../context/UserContext"
 
 const FundWallet = () => {
   const {url, userToken} = useContext(UserContext)

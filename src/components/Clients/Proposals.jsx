@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Proposals = () => {

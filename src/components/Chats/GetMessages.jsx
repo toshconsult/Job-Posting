@@ -1,95 +1,126 @@
-
-import {  useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader";
-import {  useNavigate } from "react-router-dom";
-import image from '/src/assets/react.svg' 
+import { Link, useNavigate } from "react-router-dom";
+import image from "/src/assets/react.svg";
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
+import { UserContext } from "../context/UserContext";
 import Sidebar from "../SideBar";
-import { UserContext } from "../UserContext";
+import ClientSideBar from "../Clients/ClientSideBar";
+
 const GetMessages = () => {
-    const {url, userToken} = useContext(UserContext)
-    const [loading, setLoading] = useState(false)
-    const [messages, setMessages] = useState([])
-   const navigate = useNavigate()
-      
-const getMessages = async ()=>{
-    
-    if (!userToken){
-        navigate('/login')
-    }
-    setLoading(true)
-    const response = await fetch(`${url}api/v1/chat/67ab605b68eebf099535176f/messages`, {
-        method: 'GET',
-        headers: {
+  const { url, userToken, user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getMessages = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${url}chats/conversations`, {
+          method: "GET",
+          headers: {
             'Authorization': `Bearer ${userToken}`,
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          console.error("Failed to fetch messages");
+          return;
         }
-    })
 
-    if(response.ok){
-        const data = await response.json()
-        setMessages(data)
+        const data = await res.json();
         console.log(data);
-       setLoading(false) 
-    } else {
-        const data = await response.json()
-        console.log(data.error);
-        setLoading(false)
-        
-    }
+        setMessages(data);
+      } catch (error) {
+        console.error("Error fetching messages", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getMessages();
+  }, [url, userToken]);
+
+  const formatTime = (timestamp) => {
+    return new Date(timestamp).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+  const sliceMessage = (message, maxlength = 20) => {
+    return message.length > maxlength ? message.slice(0, maxlength) + "..." : message;
+  };
+
+  const getRecipient = (participants) => {
+    // exclude current user
+    
+    return participants.find((p) => p._id !== user._id);
+  };
+
+
+  useEffect(() => {
+   const getUser = async () => {
+   const response = await fetch(`${url}user/profile/${userId}`)
+   if(response.ok){
+    const data = await response.json()
+    console.log(data);
+   }
 }
-
-useEffect(()=>{
-    getMessages()
-},[])
-
-
-    const formatTime = (timestamp) => {
-      return new Date(timestamp).toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      });
-    }
-
- const sliceMessage = (message, maxlength = 20)=>{
-    return message.length > maxlength ? message.slice(0, maxlength) + "...." : message
- }   
+   getUser()
+},[url, userId])
 
   return (
     <div>
-        <Sidebar />
-        <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Messages</h1>
-        {loading ? <Loader /> : <>
-        <div className="w-full gap-y-2 flex flex-col justify-center items-center">
-
-        {
-            messages.map(msg =>{
-                return(
-                    <div key={msg.sender._id} className="w-[328px] md:w-[642px] h-[67px] border-1 
-                    border-[#F3F5FF] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2">
-                        <div className="flex justify-between px-4 items-center w-full">
-                            <div className="flex items-center gap-3 justify-between">
-                            <img src={image}/>
-                            <div>
-                        <h2 className="font-bold">{msg.sender.username.toUpperCase()}</h2>
-                        <p className="text-[11px]">{sliceMessage(msg.message)}</p>
-                            </div>
-                            </div>
-                            <div>
-                            <small>{formatTime(msg.createdAt)}</small>
-                            <small className={msg.isRead ? 'text-blue-500': ''}>{msg.isRead ? <IoCheckmarkDone /> : <IoIosCheckmark />}</small>
-                            </div>
-                        </div>
+     {user?.userType === "tasker" ? <Sidebar /> : <ClientSideBar />}   
+      <h1 className="text-[25px] font-semibold pb-6 px-20 mt-5  md:mt-14 md:px-10 md:text-center">Messages</h1>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="w-[90%] gap-y-2 flex mx-auto  flex-col justify-center items-center">
+          {messages?.length > 0 ? (
+            messages.map((msg) => {
+              const recipient = getRecipient(msg?.participants || []);
+              const linkId = recipient?._id;
+             
+              
+              return (
+                <Link to={`/chat/${linkId}`} key={msg?._id} className="w-full max-w-md">
+                  <div
+                    className="w-full h-[67px] border border-[#F3F5FF] rounded-2xl flex items-center 
+                    gap-4 p-3 bg-[#f2f2f2]  hover:shadow-sm transition"
+                  >
+                    <img
+                      src={recipient?.image || image}
+                      alt="user"
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="flex-1">
+                      <h2 className="font-bold text-sm">{recipient?.username?.toUpperCase()}</h2>
+                      <p className="text-[11px] text-gray-600">{sliceMessage(msg.lastMessage?.text || "")}</p>
                     </div>
-                )
+                    <div>
+                      {/* <small>{formatTime(msg.lastMessage?.createdAt)}</small> */}
+                      <small className={msg.lastMessage?.seen ? "text-blue-500" : ""}>
+                        {msg.lastMessage?.seen ? <IoCheckmarkDone size={20}/> : <IoIosCheckmark size={30}/>}
+                      </small>
+                    </div>
+                  </div>
+                </Link>
+              );
             })
-        }
-       </div>
-       </>}
+          ) : (
+            <p className="text-gray-500 mt-10">No conversations yet.</p>
+          )}
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default GetMessages
+export default GetMessages;

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 

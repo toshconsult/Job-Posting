@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../context/UserContext"
 import { ToastContainer } from "react-toastify"
 import Loader from "../Loader"
 import { FaStar } from "react-icons/fa"

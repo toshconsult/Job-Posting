@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Loader from "../Loader";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 
 const CreatePin = () => {
     const {url, userToken} = useContext(UserContext)

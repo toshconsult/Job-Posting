@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import Sidebar from "../SideBar";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
 export default function WalletPage() {
@@ -23,7 +23,7 @@ console.log(balance);
         {/* Earnings Section */}
         <div className="mb-6">
           <h3 className="text-lg font-semibold">Earnings</h3>
-          <div className="bg-pink-600 text-white text-center py-6 rounded-lg mt-2">
+          <div className="bg-[#333333] text-white text-center py-6 rounded-lg mt-2">
             <p className="text-sm">Total Balance</p>
             <p className="text-3xl font-bold">₦{balance}.00</p>
           </div>
@@ -34,7 +34,7 @@ console.log(balance);
           <button className="flex-1 flex items-center justify-center border border-gray-300 rounded-lg py-2 text-gray-800">
            <Link to='/fund-wallet'> <span className="mr-2">💳</span> Fund Account </Link>
           </button>
-           <button className="flex-1 flex items-center cursor-pointer justify-center bg-pink-600 text-white rounded-lg py-2">
+           <button className="flex-1 flex items-center cursor-pointer justify-center bg-[#333333] text-white rounded-lg py-2">
            <Link to='/withdraw'>  Withdraw </Link>
           </button> 
         </div>

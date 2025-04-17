@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState, } from "react";
-import { Link, useParams } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 import Loader from "../Loader";
+import { toast, ToastContainer } from "react-toastify";
 
 const SingleTask = () => {
   const { url, user, userToken,  } = useContext(UserContext);
@@ -9,9 +10,8 @@ const SingleTask = () => {
   const [task, setTask] = useState({});
   const { id } = useParams();
   const sTask = task?.task
-  console.log(sTask?.client);
-  console.log(id);
   
+  const navigate = useNavigate()
   
 const [userP, setUserP] = useState({})
 console.log(userP);
@@ -38,19 +38,22 @@ useEffect(() => {
       } else {
         const data = await response.json();
         console.log(data.error);
-        // navigate("/login");
         setLoading(false);
+        // toast.error(data.error);
+        toast.error("Please login to view this page")
+        navigate("/login");
       }
     } catch (error) {
       setLoading(false);
       console.log(error);
+      
     }
   };
 
   
     getTasks();
     
-  }, [userToken, user, id, url]);
+  }, [userToken, user, id, url, navigate]);
 
   //////--------------------------------- GET USER PROFILE ---------------------------------------------/////////
 
@@ -88,35 +91,34 @@ useEffect(() => {
 
   return (
   
-    <div className="max-w-5xl mx-auto bg-white my-10 rounded-2xl  p-6">
+    <div className="max-w-5xl mx-auto bg-[#f2f2f2] my-10 rounded-2xl  p-6">
     {loading ? <Loader /> : <>
     <div className="flex  md:items-center justify-between">
-     
+     <ToastContainer />
       <div className="flex items-center space-x-4">
         <img
           src={userP?.profilePicture ? userP?.profilePicture : 'https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg'}
-          alt="Johnson Daniel"
+          alt={userP?.username}
           className="w-14 h-14 rounded-full object-cover"
         />
         <div>
           <h3 className="text-xl font-semibold">{userP?.username}</h3>
-          <p className="text-gray-500 text-sm">Certified Client</p>
+          <p className="text-gray-500 text-sm">{userP?.isVerified ? 'Verified Client' : 'Not Verified'}</p>
         </div>
       </div>
   
       
       <div className="mt-4 md:mt-0">
-        <button className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-medium">
+        <button className="bg-[#333333] text-white px-5 py-2 rounded-lg text-sm font-medium">
           {sTask?.taskStatus || "Open"}
         </button>
       </div>
     </div>
   
-    {/* Job Content - Responsive 2-Column Layout */}
+    
     <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* Left Section (Image & Basic Details) */}
       <div className="md:col-span-1">
-        <div className="w-full h-60 md:h-72 rounded-lg overflow-hidden">
+        <div className="w-full h-60 md:h-72 rounded-lg shadow-sm border-1 border-blue-100 overflow-hidden">
           <img
             src={sTask?.taskImage}
             alt="Job Image"
@@ -124,22 +126,18 @@ useEffect(() => {
           />
         </div>
         
-        {/* Project Type & Location */}
         <div className="mt-4 text-gray-700">
           <p><span className="font-medium">Project Type:</span> {sTask?.projectType}</p>
           <p><span className="font-medium">Location:</span> {sTask?.location}</p>
         </div>
       </div>
   
-      {/* Right Section (Details & Pricing) */}
       <div className="md:col-span-2">
         <h1 className="text-2xl font-bold">{sTask?.title}</h1>
   
-        {/* Description */}
         <h3 className="font-semibold text-lg mt-4">Job Description</h3>
         <p className="text-gray-600 leading-relaxed">{sTask?.description}</p>
   
-        {/* Skills Required */}
         <h3 className="font-semibold text-lg mt-4">Skills Required</h3>
         <div className="flex flex-wrap gap-2 mt-2">
           {sTask?.skills?.map((skill, i) => (
@@ -150,16 +148,15 @@ useEffect(() => {
         </div>
         
         
-        {/* Pricing & Duration */}
         <div className="mt-6 flex justify-between text-lg font-semibold">
           <p> Price: <span className="text-green-600">₦{sTask?.price}</span></p>
           <p> Duration: {sTask?.duration} Months</p>
         </div>
   
-        {/* Send Proposal Button */}
         <div className="mt-6">
           <Link to={`/apply-task/${sTask?._id}`} >
-          <button className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg text-lg font-semibold">
+          <button className="w-full bg-[#333333] hover:bg-[#727171]
+          cursor-pointer text-white py-3 rounded-lg text-lg font-semibold">
             Send Proposal
           </button>
           </Link>

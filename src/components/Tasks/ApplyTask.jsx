@@ -1,5 +1,5 @@
 import { useContext,  useState } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";

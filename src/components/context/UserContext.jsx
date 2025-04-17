@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useMemo, useState } from "react"
 
 
 export const UserContext = createContext({});
@@ -37,7 +37,7 @@ export const UserContextProvider = ({children}) =>{
         } else{
             // const error = await response.json()
             console.log(response);
-        //    localStorage.removeItem('token')
+           localStorage.removeItem('token')
             setLoading(false)
             
         }
@@ -95,7 +95,9 @@ export const UserContextProvider = ({children}) =>{
         }
     }, [userToken])
 
-    const contextvalue = {url, user, userToken, loading, balance,  logout, getuser}
+    const contextvalue = useMemo(()=>({
+        url, user, userToken, loading, balance,  logout, getuser
+    }), [balance, loading, user, userToken, url])
     
     return(
     <UserContext.Provider value={contextvalue}>

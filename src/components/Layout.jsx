@@ -1,23 +1,25 @@
-import NavBar from './NavBar'
-import Footer from './Footer'
-import { Outlet, useLocation } from 'react-router-dom'
+import NavBar from './NavBar';
+import Footer from './Footer';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const Layout = () => {
-  const location = useLocation()
-  const hideHeadFooter = ['/login', '/register', '/profile', '/reset-password', '/account-type',
-  '/forgot-password', '/reset-password', '/verify-otp', '/change-password', '/interest',
-    '/messages', '/chat', '/wallet', '/client', '/assign', '/update-profile', '/dashboard', '/client-dashboard'
-  
-  ]
+  const location = useLocation();
 
-  const hideAll = hideHeadFooter.includes(location.pathname) 
+  const hideHeadFooter = [
+    '/login', '/register', '/profile', '/reset-password', '/account-type',
+    '/forgot-password', '/verify-otp', '/change-password', '/interest',
+    '/messages', '/wallet', '/client', '/assign', '/update-profile', '/dashboard', '/client-dashboard'
+  ];
+
+  const shouldHide = hideHeadFooter.includes(location.pathname) || location.pathname.startsWith('/chat/');
+
   return (
     <div>
-       {!hideAll && <NavBar />}
-        <Outlet />
-       {!hideAll && <Footer />}
+      {!shouldHide && <NavBar />}
+      <Outlet />
+      {!shouldHide && <Footer />}
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -2,7 +2,7 @@
 
 import { useContext, useState, useEffect } from "react";
 import Sidebar from "../SideBar";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import ClientSideBar from "./ClientSideBar";
 
 export default function ClientWallet() {

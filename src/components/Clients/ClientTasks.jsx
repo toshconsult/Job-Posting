@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 import { MdForwardToInbox } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";

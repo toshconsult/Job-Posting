@@ -2,7 +2,7 @@ import { useContext, useEffect} from "react";
 import { Bell} from "lucide-react";
 import { FaPlusCircle } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import ClientTasks from "./ClientTasks";
 import { Link,} from "react-router-dom";
 import { MdOutlineMessage } from "react-icons/md";
@@ -38,7 +38,7 @@ const ClientDashboard = () => {
           </h1>
           </Link>
           <div className="flex items-center gap-4">
-            <MdOutlineMessage className="text-gray-500" size={20} />
+          <Link to='/messages'> <MdOutlineMessage className="text-gray-500" size={20} /></Link> 
             <Bell className="text-gray-500" />
             <img
               src={user?.profilePicture}
@@ -49,7 +49,7 @@ const ClientDashboard = () => {
         </div>
 
         {/* KYC Alert */}
-        <div className="bg-[#2F3C7E] text-white p-4 rounded-xl mt-6 flex justify-between items-center">
+        <div className="bg-[#333] text-white p-4 rounded-xl mt-6 flex justify-between items-center">
           <div>
             <p className="font-bold">Welcome {user?.username}!!!</p>
             {!user?.isVerified ? (

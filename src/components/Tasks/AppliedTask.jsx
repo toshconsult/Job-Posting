@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
 const AppliedTask = () => {

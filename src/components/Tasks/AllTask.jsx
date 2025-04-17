@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import TaskNav from "./TaskNav";
 
 const AllTask = () => {
@@ -74,8 +74,8 @@ const AllTask = () => {
             return (
               <div
                 key={task._id}
-                className="w-[328px] md:w-[328px] min-h-[200px] md:min-h-[300px] border-2 p-4
-                    border-[#F3F5FF] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
+                className="w-[328px] md:w-[328px] min-h-[200px] md:min-h-[300px] border-1 p-4
+                    border-[#333333] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
               >
                 <h1 className="font-semibold text-[20px]">{task.title}</h1>
                 <p className="text-[#333] font-normal text-[14px]">
@@ -83,8 +83,8 @@ const AllTask = () => {
                 </p>
                 <Link to={`/single-task/${task._id}`}>
                   <button
-                    className="w-[263px] h-[40px] bg-[#EA1588] hover:bg-white
-                         hover:text-black hover:border-2 cursor-pointer hover:border-[#F3F5FF] text-white rounded-md"
+                    className="w-[263px] h-[40px] bg-[#333333] hover:bg-white
+                         hover:text-black hover:border-1 cursor-pointer hover:border-[#333333] text-white rounded-md"
                   >
                     View Details
                   </button>

@@ -19,10 +19,10 @@ import AllTask from './components/Tasks/AllTask.jsx'
 
 import SingleTask from './components/Tasks/SingleTask.jsx'
 import GetMessages from './components/Chats/GetMessages.jsx'
-import StartChat from './components/Chats/StartChat.jsx'
+import StartChat from './components/Chats/SendMsg.jsx'
 import Home from './components/Home/Home.jsx'
 import Profile from './components/Users/Profile.jsx'
-import {  UserContextProvider } from './components/UserContext.jsx';
+import {  UserContextProvider } from './components/context/UserContext.jsx';
 import WalletPage from './components/Users/Wallet.jsx';
 import Settingpage from './components/Users/Settingpage.jsx';
 import UpdateProfile from './components/Users/UpdateProfile.jsx';
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       {path: 'single-task/:id', element: <SingleTask />},
       {path: 'Apply-task/:id', element: <ApplyTask />},
       {path: 'messages', element: <GetMessages />},
-      {path: 'chat', element: <StartChat />},
+      {path: 'chat/:id', element: <StartChat />},
       {path: 'review/:id', element: <StartReview />},
       {path: 'profile/:id', element:<Profile />},
       {path: 'settings', element:<Settingpage />},

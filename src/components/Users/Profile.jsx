@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import Loader from "../Loader";
 import { MdVerified } from "react-icons/md";
 
@@ -89,7 +89,7 @@ const Profile = () => {
                       return (
                         <span
                           key={index}
-                          className="bg-[#F3F5FF] text-[#EA1588] px-2 py-2  rounded-lg"
+                          className="bg-[#333333] text-[#f2f2f2] px-2 py-2  rounded-lg"
                         >
                           {skills}
                         </span>

@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify"
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import Loader from '../Loader'
 import skills from '/src/components/Skills.jsx'
 

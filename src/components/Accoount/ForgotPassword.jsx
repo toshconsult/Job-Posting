@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../context/UserContext"
 
 
 const ForgotPassword = () => {

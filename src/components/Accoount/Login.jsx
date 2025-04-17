@@ -1,9 +1,9 @@
-import { useContext,  useEffect,  useState } from "react"
+import { useContext,  useEffect,  useMemo,  useState } from "react"
 import Loader from "../Loader"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
 import { Link,  useNavigate } from "react-router-dom"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../context/UserContext"
 
 
 const Login = () => {
@@ -14,6 +14,10 @@ const Login = () => {
         email: '',
         password: ''
     })
+
+    const passToggle = useMemo(()=>{
+        return showPassword ? <FaRegEye /> : <FaRegEyeSlash />
+    },[showPassword])
 
     useEffect(() => {
         localStorage.removeItem('token')
@@ -101,7 +105,7 @@ const Login = () => {
         className="h-[50px] rounded-md p-2 px-5 outline-0
          placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
          <span onClick={togglePassword} className="text-[#EA1588] cursor-pointer">
-           {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+           {passToggle}
          </span>
          </div>
        

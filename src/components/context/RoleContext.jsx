@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import { UserContext } from "../UserContext"
+import { UserContext } from "./UserContext"
 
 export const RoleContext = createContext(null)
 const RoleContextProvider = ({children}) => {

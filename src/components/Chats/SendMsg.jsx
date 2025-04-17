@@ -11,12 +11,13 @@ import Sidebar from "../SideBar";
 
 const StartChat = () => {
   const [messages, setMessages] = useState([]);
-
+const [user, setUser] = useState(null);
   const { url, userToken } = useContext(UserContext);
+console.log(user);
 
   const [message, setMessage] = useState("");
   const { id } = useParams();
-  const recipientId = "67df33e8694a98241c745a2e";
+  const recipientId = id;
 
   const messagesEndRef = useRef(null);
 
@@ -36,7 +37,7 @@ const StartChat = () => {
       const res = await fetch(`${url}chats`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          'Authorization': `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -55,13 +56,12 @@ const StartChat = () => {
     }
   };
 
-  // const id = '67d972c93898f569a6b9cbf7'
   useEffect(() => {
     const allMessages = async () => {
       const res = await fetch(`${url}chats/${id}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          "Authorization": `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
       });
@@ -84,6 +84,24 @@ const StartChat = () => {
     // return () => clearInterval(interval); // cleanup
   }, [url, userToken, id]);
 
+  useEffect(() => {
+  const getProfile = async () => {
+    const response = await fetch(`${url}user/profile/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${userToken}`,
+      },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        setUser(data.user);
+        // console.log(data);
+    }
+}
+    getProfile()
+  }, [id, userToken, url]);
+
   const formatTime = (timestamp) => {
     return new Date(timestamp).toLocaleTimeString("en-US", {
       hour: "numeric",
@@ -102,7 +120,7 @@ const StartChat = () => {
       >
         {/* Header */}
         <div className="bg-[#333333] text-white p-4 rounded-t-lg font-semibold px-20 md:px-4 text-lg">
-          Chat with John
+          Chat with {user?.username}
         </div>
 
         {/* Chat Messages */}

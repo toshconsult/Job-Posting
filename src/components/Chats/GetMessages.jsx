@@ -96,7 +96,7 @@ const GetMessages = () => {
                     gap-4 p-3 bg-[#f2f2f2]  hover:shadow-sm transition"
                   >
                     <img
-                      src={recipient?.image || image}
+                      src={recipient?.profilePicture || image}
                       alt="user"
                       className="w-10 h-10 rounded-full object-cover"
                     />

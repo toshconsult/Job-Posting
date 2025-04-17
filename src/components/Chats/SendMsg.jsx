@@ -1,10 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import Loader from "../Loader";
-import { useNavigate, useParams } from "react-router-dom";
-import image from "/src/assets/react.svg";
-import { IoIosCheckmark } from "react-icons/io";
-import { IoCheckmarkDone } from "react-icons/io5";
+import {  useParams } from "react-router-dom";
+
 import { UserContext } from "../context/UserContext";
 import { Send } from "lucide-react";
 import Sidebar from "../SideBar";
@@ -77,11 +73,11 @@ console.log(user);
 
     allMessages(); // Load once initially
 
-    // const interval = setInterval(() => {
-    //   allMessages();
-    // }, 7000);
+    const interval = setInterval(() => {
+      allMessages();
+    }, 7000);
 
-    // return () => clearInterval(interval); // cleanup
+    return () => clearInterval(interval); // cleanup
   }, [url, userToken, id]);
 
   useEffect(() => {

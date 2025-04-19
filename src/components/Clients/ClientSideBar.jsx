@@ -14,6 +14,7 @@ import Loader from "../Loader";
    { text: "Dashboard", link: "/client-dashboard" },
    { text: "Wallet", link: "/client-wallet" },
    { text: "Tasks", link: "/client-tasks" },
+   {text: "Messages", link: "/messages"},
    { text: "Community", link: "/community" },
    { text: "Settings", link: "/settings" },
    

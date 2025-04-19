@@ -24,7 +24,7 @@ const Sidebar = () => {
     // { text: "Profile", link: `/profile/${user?._id}` },
     { text: "Wallet", link: "/wallet" },
     { text: "Tasks", link: "/all-task" },
-    { text: "Referrals", link: "/referrals" },
+    { text: "Messages", link: "/messages" },
     { text: "Community", link: "/community" },
     { text: "Settings", link: "/settings" },
   ];

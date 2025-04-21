@@ -18,7 +18,7 @@ const Proposals = () => {
         const response = await fetch(`${url}client/task/${id}/applicants`, {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            'Authorization': `Bearer ${userToken}`,
             "Content-Type": "application/json",
           },
         });
@@ -45,7 +45,7 @@ const Proposals = () => {
 }
 
   return (
-    <div className="max-w-5xl mx-auto bg-white p-6 rounded-xl mt-6">
+    <div className="max-w-5xl mx-auto bg-[#F2F2F2] p-6 rounded-xl mt-6">
 
       <h2 className="text-xl font-semibold mb-4">Proposals</h2>
 
@@ -73,7 +73,7 @@ const Proposals = () => {
                 <>{proposal.description.slice(0, maxContent)} <i
                 >.....</i> </>
               : proposal.description }</p>
-        <button onClick={showFllContect} className="text-blue-700">View</button>
+        <button onClick={showFllContect} className="text-blue-700 cursor-pointer">View</button>
              
               <p className="text-gray-500 text-sm mt-1">
                 {new Date(proposal.date).toLocaleDateString()}

@@ -4,6 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import Sidebar from "../SideBar";
 import { UserContext } from "../context/UserContext";
 import ClientSideBar from "./ClientSideBar";
+import { Link } from "react-router-dom";
 
 export default function ClientWallet() {
 
@@ -58,7 +59,7 @@ const banks = async ()=>{
             <span className="mr-2">💳</span> Fund Account
           </button>
           <button className="flex-1 flex items-center justify-center bg-[#2F3C7E] text-white rounded-lg py-2">
-            <span className="mr-2">🏦</span> Withdraw
+            <Link to='/withdraw'>  Withdraw</Link>
           </button>
         </div>
         

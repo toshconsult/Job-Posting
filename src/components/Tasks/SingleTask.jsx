@@ -5,11 +5,13 @@ import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 
 const SingleTask = () => {
-  const { url, user, userToken,  } = useContext(UserContext);
+  const { url, user,   } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({});
   const { id } = useParams();
   const sTask = task?.task
+  const userToken  = localStorage.getItem('token')
+  console.log(userToken);
   
   const navigate = useNavigate()
   
@@ -31,9 +33,10 @@ useEffect(() => {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
         
         setTask(data);
+        localStorage.setItem('taskTitle', JSON.stringify(data.task.title))
         setLoading(false);
       } else {
         const data = await response.json();
@@ -65,7 +68,7 @@ useEffect(() => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+        'Authorization': `Bearer ${userToken}`,
       },
     });
     if (response.ok) {
@@ -73,6 +76,7 @@ useEffect(() => {
       setUserP(data.user);
       // console.log(data);
       setLoading(false)
+
      
       
     } else {
@@ -154,12 +158,17 @@ useEffect(() => {
         </div>
   
         <div className="mt-6">
-          <Link to={`/apply-task/${sTask?._id}`} >
+          <a href={
+        sTask?.taskStatus === 'pending' ? `/apply-task/${sTask?._id}` : 
+          sTask?.taskStatus === 'in-progress' ? `/submit-task/${sTask?._id}` :
+           sTask?.taskStatus === 'completed' ? `/review/${sTask?._id}`: ''
+        } >
           <button className="w-full bg-[#333333] hover:bg-[#727171]
           cursor-pointer text-white py-3 rounded-lg text-lg font-semibold">
-            Send Proposal
+          {sTask?.taskStatus === 'pending' ? 'Send Proposal' : 
+          sTask?.taskStatus === 'in-progress' ? 'Submit' : sTask?.taskStatus === 'completed' ? 'Drop a review':  ''}
           </button>
-          </Link>
+          </a> 
         </div>
       </div>
     </div>

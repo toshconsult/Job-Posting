@@ -45,6 +45,11 @@ import Withdraw from './components/Payments/Withdraw.jsx';
 import CreatePin from './components/Payments/CreatePin.jsx';
 import UpdatePin from './components/Payments/UpdatePin.jsx';
 import FundWallet from './components/Payments/Payment.jsx';
+import { AssignedTasks } from './components/Tasks/AssignedTasks.jsx';
+import { SubmittedTasks } from './components/Tasks/SubmitedTasks.jsx';
+import { ClientSubmittedTasks} from './components/Clients/ClientSubmitetedTasks.jsx';
+import { CompletedTasks } from './components/Tasks/CompletedTasks.jsx';
+import ClientReview from './components/Reviews/ClientReview.jsx';
 
 
 const router = createBrowserRouter([
@@ -83,10 +88,14 @@ const router = createBrowserRouter([
       {path: 'messages', element: <GetMessages />},
       {path: 'chat/:id', element: <StartChat />},
       {path: 'review/:id', element: <StartReview />},
+      {path: 'client-review/:id', element: <ClientReview />},
       {path: 'profile/:id', element:<Profile />},
       {path: 'settings', element:<Settingpage />},
       {path: 'wallet', element: <WalletPage />},
       {path: 'submit-task/:id', element: <SubmitTask />},
+      {path: 'assigned-tasks', element:<AssignedTasks />},
+      {path: 'submitted-tasks', element:<SubmittedTasks />},
+      {path: 'completed-tasks', element:<CompletedTasks />},
 
      
       {path: 'settings', element: <Settingpage />},
@@ -105,6 +114,7 @@ const router = createBrowserRouter([
        {path: 'client-dashboard', element: <ClientDashboard />},
        {path: 'client-wallet', element: <ClientWallet />},
        {path: 'client-tasks', element: <ClientTasks />},
+       {path: 'client-submitted-tasks', element: <ClientSubmittedTasks />},
        {path: 'edit-task/:id', element: <EditTask />},
        {path: 'delete-task/:id', element: <DeleteTask />},
        {path: 'proposals/:id', element: <Proposals />},

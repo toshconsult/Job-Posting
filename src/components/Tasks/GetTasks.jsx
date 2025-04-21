@@ -46,7 +46,7 @@ const GetTasks = () => {
 
   return (
     <div>
-      {loading ? <Loader /> : (<>
+     
       <h2 className='lg:text-[30px] text-[20px] font-serif font-bold px-8 pb-5'>Tasks</h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 p-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
         {filtered?.map((task, index) => (
@@ -74,7 +74,7 @@ const GetTasks = () => {
           </div>
         ))}
       </div>
-      </>)}
+      
     </div>
   );
 };

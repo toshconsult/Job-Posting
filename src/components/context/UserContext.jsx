@@ -37,7 +37,7 @@ export const UserContextProvider = ({children}) =>{
         } else{
             // const error = await response.json()
             console.log(response);
-           localStorage.removeItem('token')
+        //    localStorage.removeItem('token')
             setLoading(false)
             
         }
@@ -52,39 +52,7 @@ export const UserContextProvider = ({children}) =>{
     }
 
     
-    ////------------------------------------- Initiate Support -------------------------------------/////////////////////
-// const initiateSupport = async ()=>{
-    
-//     try {
-        
-//         const response = await fetch(`${url}api/v1/support/start`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': `Bearer ${userToken}`
-//             }
-            
-//         })
-
-//         if(response.ok){
-//             const data = await response.json()
-//             // console.log(data);
-//             setInit(data)
-//         } else {
-//             const error = await response.json()
-//             console.log(error);
-//         }
-//     } catch (error) {
-//        console.log(error);
-        
-//     }
-// }
-
-// useEffect(()=>{
-//     if(userToken){
-//         getuser()
-//         // initiateSupport()
-//     }}, [])
+  
     useEffect(()=> {
         if(userToken){
             getuser()
@@ -93,7 +61,7 @@ export const UserContextProvider = ({children}) =>{
             
             localStorage.removeItem('token')
         }
-    }, [userToken])
+    }, [])
 
     const contextvalue = useMemo(()=>({
         url, user, userToken, loading, balance,  logout, getuser

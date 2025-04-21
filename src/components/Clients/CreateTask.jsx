@@ -18,10 +18,12 @@ const buttons = [
 
 const CreateTask = () => {
 
-      const {url, userToken} = useContext(UserContext)
+      const {url} = useContext(UserContext)
       const [loading, setLoading] = useState(false)
       const [field, setField] = useState('')
       const [selectedSkills, setSelectedSkills] = useState([])
+     const userToken = localStorage.getItem('token')
+     console.log(userToken);
      
      
      const navigate = useNavigate()

@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa"
 import { useParams } from "react-router-dom"
 
 
-const StartReview = () => {
+const ClientReview = () => {
   const {url, userToken} = useContext(UserContext)
   const [loading, setloading] = useState(false)
   const totalRating = 5
@@ -23,7 +23,7 @@ e.preventDefault()
                 'Authorization': `Bearer ${userToken}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({taskerRating: rating, taskerComment: comment})
+            body: JSON.stringify({clientRating: rating, clientComment: comment})
     })
 
     if(response.ok){
@@ -94,4 +94,4 @@ e.preventDefault()
   )
 }
 
-export default StartReview
+export default ClientReview

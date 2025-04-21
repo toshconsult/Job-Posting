@@ -13,9 +13,10 @@ const ApplyTask = () => {
   const { url, userToken,  } = useContext(UserContext);
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
+console.log(userToken)
   const [date, setDate] = useState('')
   const navigate = useNavigate()
-
+const taskTitle = JSON.parse(localStorage.getItem('taskTitle'))
  
   const apply = async (e) => {
 
@@ -24,10 +25,18 @@ if(price === '' || proposal === '' || date === ''){
   toast.error('All field require')
   return
 }
+
+if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
+  console.log(taskTitle);
+  
+  toast.error('Please select a task')
+  return
+}
     const requestBody = {
       price: price,
       description: proposal,
-      date: date
+      date: date,
+      title: taskTitle,
   };
     setLoading(true);
 // console.log(formData);

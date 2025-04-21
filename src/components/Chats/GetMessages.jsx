@@ -58,7 +58,6 @@ const GetMessages = () => {
   };
 
   const getRecipient = (participants) => {
-    // exclude current user
     
     return participants.find((p) => p._id !== user._id);
   };
@@ -75,6 +74,14 @@ const GetMessages = () => {
    getUser()
 },[url, userId])
 
+
+const seen = (id) =>{
+  messages?.forEach((msg) => {
+    if (msg._id === id) {
+      msg.lastMessage.seen = true;
+    }
+  })
+}
   return (
     <div>
      {user?.userType === "tasker" ? <Sidebar /> : <ClientSideBar />}   
@@ -92,6 +99,7 @@ const GetMessages = () => {
               return (
                 <Link to={`/chat/${linkId}`} key={msg?._id} className="w-full max-w-md">
                   <div
+                  onClick={seen(msg._id)}
                     className="w-full h-[67px] border border-[#F3F5FF] rounded-2xl flex items-center 
                     gap-4 p-3 bg-[#f2f2f2]  hover:shadow-sm transition"
                   >

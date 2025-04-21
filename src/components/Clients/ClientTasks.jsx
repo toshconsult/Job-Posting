@@ -23,7 +23,7 @@ const ClientTasks = () => {
         const response = await fetch(`${url}client/get-all-posted-tasks`, {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            'Authorization': `Bearer ${userToken}`,
             "Content-Type": "application/json",
           },
         });
@@ -75,12 +75,12 @@ const ClientTasks = () => {
                     : task.description}
                 </p>
                 <div className="flex justify-between w-full pb-2 border-b-1 border-gray-200">
-                  <Link to={`/proposals/${task._id}`}>
+                  <a href={`/proposals/${task._id}`}>
                     {" "}
                     <button className="text-[#2F3C7E] mt-2 cursor-pointer flex items-center gap-2">
                       Proposals <FaArrowRight size={15}/>
                     </button>
-                  </Link>
+                  </a>
                   <p className="text-red-600">
                     {" "}
                     <Link to={`/delete-task/${task._id}`}> Delete </Link>

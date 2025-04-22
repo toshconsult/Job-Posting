@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
-import { MdForwardToInbox } from "react-icons/md";
+import { Link, useLocation } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import ClientSideBar from "./ClientSideBar";
 
 const ClientTasks = () => {
   const { url } = useContext(UserContext);
   const [err, setErr] = useState();
-
   const [tasks, setTasks] = useState([]);
+  const location = useLocation()
 
   const task = tasks?.tasks;
   const maxContent = 150;
@@ -49,8 +49,10 @@ const ClientTasks = () => {
 
 
   return (
-    <div>
+    <div className={`flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen ${location.pathname === '/client-dashboard' ? 'md:gap-0' : 'md:gap-72'}`}>
+      <ClientSideBar />
       <div className="mt-4 space-y-4 md:px-10">
+      <h2 className="pl-24 text-xl font-semibold pb-4">{location.pathname != '/client-dashboard' && 'Tasks'}</h2>
         <p className="text-red-600">{err}</p>
         {sorted?.length === 0 ? (
           <h2 className="text-2xl font-semibold">No tasks created yet</h2>
@@ -86,11 +88,7 @@ const ClientTasks = () => {
                     <Link to={`/delete-task/${task._id}`}> Delete </Link>
                   </p>
                 </div>
-                <div className="pt-2">
-                <Link to='/' >
-                <MdForwardToInbox size={30}/>
-                </Link>
-                </div>
+                
               </div>
             ))}
           </>

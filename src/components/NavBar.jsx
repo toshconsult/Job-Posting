@@ -2,7 +2,6 @@ import { useContext, useState } from "react"
 import "../components/Navbar.css"
 import { Link } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
-import Sidebar from "./SideBar";
 
 const NavBar = () => {
  const {user} = useContext(UserContext);
@@ -31,9 +30,9 @@ const NavBar = () => {
         <div className="menuList">
           <ul className="ul">
             {/* <li className="li home-activ">Account Info.</li> */}
-            <li className="li"><Link to='/all-task'>Tasks</Link></li>
+            {/* <li className="li"><Link to='/all-task'>Tasks</Link></li>
             <li className="li">About Us</li>
-            <li className="li"><Link to='/settings'>Settings</Link> </li>
+            <li className="li"><Link to='/settings'>Settings</Link> </li> */}
             {/* <li className="li">Give Feedback</li> */}
             {/* <li className="li">FAQ</li> */}
             {/* <li className="li">Check Update</li> */}
@@ -42,7 +41,7 @@ const NavBar = () => {
         ) : ''}
         {/* Icons Section */}
         <div className="button">
-          <Link to='/' className="btn"><input className="input" type="search" name="" id="" placeholder="Search" /><i class="fa fa-search"></i></Link>
+         
           {
             user? (
               <Link to={user?.userType === "client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
@@ -62,22 +61,22 @@ const NavBar = () => {
       </div>
     </div>
 
-    <div className={open ? "bg active" : "bg"}>
+    <div className={open ? "bg active relative" : "bg"}>
      <button className="close" onClick={handleClick}><i class="fa fa-times"></i></button>
       <div className="mobile">
     
         <div className="menuList">
-            <ul className={open ? "ul active" : "ul"}>
-            <li className="li"><Link to='/all-task'>Tasks</Link></li>
+            <ul className={open ? "ul active " : "ul"}>
+            {/* <li className="li"><Link to='/all-task'>Tasks</Link></li>
             <li className="li">About Us</li>
-            <li className="li"><Link to='/settings'>Settings</Link> </li>
+            <li className="li"><Link to='/settings'>Settings</Link> </li> */}
               {/* <li className="li">Give Feedback</li>
               <li className="li">FAQ</li>
               <li className="li">Check Update</li> */}
             </ul>
           </div>
-          <div className={open ? "button active" : "button"}>
-            <button className="btn"><i class="fa fa-search"></i></button>
+          <div className={open ? "button active " : "button"}>
+           
             {
             user? (
             <Link to={user?.userType === "Client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>

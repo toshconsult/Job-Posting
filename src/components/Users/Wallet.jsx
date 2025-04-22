@@ -32,7 +32,7 @@ console.log(balance);
         {/* Action Buttons */}
         <div className="flex gap-4 mb-6">
           <button className="flex-1 flex items-center justify-center border border-gray-300 rounded-lg py-2 text-gray-800">
-           <Link to='/fund-wallet'> <span className="mr-2">💳</span> Fund Account </Link>
+           <Link to='/fund-wallet'>  Fund Account </Link>
           </button>
            <button className="flex-1 flex items-center cursor-pointer justify-center bg-[#333333] text-white rounded-lg py-2">
            <Link to='/withdraw'>  Withdraw </Link>

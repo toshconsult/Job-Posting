@@ -69,6 +69,7 @@ const approve = async (id)=>{
 
   return (
     
+    
    <div className='max-w-5xl mx-auto bg-[#F2F2F2] p-6 rounded-xl mt-6 '>
         {filtered?.length === 0 ? 
             <h1>No Tasks</h1>

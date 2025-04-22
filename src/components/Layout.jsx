@@ -8,16 +8,17 @@ const Layout = () => {
   const hideHeadFooter = [
     '/login', '/register', '/profile', '/reset-password', '/account-type',
     '/forgot-password', '/verify-otp', '/change-password', '/interest',
-    '/messages', '/wallet', '/client', '/assign', '/update-profile', '/dashboard', '/client-dashboard'
+    '/messages', '/wallet', '/client', '/assign', '/update-profile', '/dashboard', 
+    '/client-dashboard', '/client-tasks', '/client-wallet'
   ];
 
-  const shouldHide = hideHeadFooter.includes(location.pathname) || location.pathname.startsWith('/chat/');
+  const shouldHide = hideHeadFooter.includes(location.pathname) || location.pathname.startsWith('/chat/', '/single', '/client');
 
   return (
     <div>
-      {!shouldHide && <NavBar />}
-      <Outlet />
-      {!shouldHide && <Footer />}
+     {/* {!shouldHide && <NavBar />}
+      {/* <Outlet />  */}
+      {!shouldHide && <Footer />} */}
     </div>
   );
 };

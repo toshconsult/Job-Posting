@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import skills from '/src/components/Skills.jsx'
+import ClientSideBar from "./ClientSideBar";
 
 const buttons = [
   "Photograph",
@@ -110,13 +111,14 @@ const CreateTask = () => {
       }
 
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+      <ClientSideBar />
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-            Post Your <span className="text-[#EA1588]">Task</span>
+        <div className="mt-4 space-y-4 md:px-10 w-full">
+          <h1 className="text-[25px] pb-6 pl-14 md:pl-0 font-semibold">
+            Post Your Task
           </h1>
           <form onSubmit={handleSubmit} className="w-full max-w-2xl">
             <ToastContainer />
@@ -164,7 +166,7 @@ const CreateTask = () => {
 
               <div>
                 <label htmlFor="price" className="text-[#333] font-semibold">
-                  Price
+                  Price ₦
                 </label>
                 <input
                   type="text"
@@ -247,7 +249,7 @@ const CreateTask = () => {
               {field && (
                 <div className="mt-2">
                   <label className="text-[#333] font-semibold">Skills</label>
-                  <div className="grid grid-cols-2 gap-2 p-2 bg-white border-2 border-[#F3F5FF] rounded-md">
+                  <div className="grid grid-cols-2 gap-2 p-2 bg-[#f2f2f2] border-2 border-[#F3F5FF] rounded-md">
                     { skills[field].map((skill, i) => (
                       <label key={i} className="flex items-center space-x-2">
                         <input
@@ -255,7 +257,7 @@ const CreateTask = () => {
                           value={skill}
                           checked={selectedSkills.includes(skill)}
                           onChange={() => handleSelect(skill)}
-                          className="w-4 h-4 text-[#EA1588] border-gray-300 rounded focus:ring-[#EA1588]"
+                          className="w-4 h-4 text-[#333] border-gray-300 rounded focus:ring-[#EA1588]"
                         />
                         <span className="text-sm text-gray-700"> {skill }</span>
                       </label>
@@ -268,13 +270,14 @@ const CreateTask = () => {
             <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full max-w-xs py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white hover:text-[#EA1588] hover:border-2 hover:border-[#EA1588] transition-all"
+                className="w-full max-w-xs py-4 bg-[#333] text-white rounded-3xl hover:bg-[#f2f2f2]
+                 hover:text-[#333] hover:border-2 hover:border-[#333] transition-all"
               >
                 Post
               </button>
             </div>
           </form>
-        </>
+        </div>
       )}
     </div>
   )

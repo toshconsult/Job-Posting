@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Loader from "../Loader";
 import { UserContext } from "../context/UserContext";
+import ClientSideBar from "../Clients/ClientSideBar";
+import Sidebar from "../SideBar";
 
 const CreatePin = () => {
-    const {url, userToken} = useContext(UserContext)
+    const {url, userToken, user} = useContext(UserContext)
     const [loading, setloading] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -46,13 +48,14 @@ const handleSubmit = async (e)=>{
 }
     
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+      {user?.userType === "client" ? <ClientSideBar /> : <Sidebar />}
           {loading ? (
             <Loader />
           ) : (
-            <>
-              <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                Create <span className="text-[#EA1588]">Pin</span>
+            <div className="mt-4 space-y-4 md:px-10 w-full">
+              <h1 className="text-[25px] pb-6 mt-14 ">
+                Create Pin
               </h1>
               <form onSubmit={handleSubmit} className="w-full max-w-2xl">
                 <ToastContainer />
@@ -91,13 +94,13 @@ const handleSubmit = async (e)=>{
                   <div className="flex justify-center mt-6">
                   <button
                     type="submit"
-                    className="w-full max-w-xs cursor-pointer py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white hover:text-[#EA1588] hover:border-2 hover:border-[#EA1588] transition-all"
+                    className="w-full max-w-xs cursor-pointer py-4 bg-[#333] text-white rounded-3xl hover:bg-white hover:text-[#333] hover:border-2 hover:border-[#333] transition-all"
                   >
                     Create
                   </button>
                 </div>
                   </form>
-                  </>
+                  </div>
           )}
                   </div>
   )

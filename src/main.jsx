@@ -4,7 +4,7 @@ import './index.css'
 
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Layout from './components/Layout.jsx'
+// import Layout from './components/Layout.jsx'
 import SignUp from './components/Accoount/SignUp.jsx'
 import { AccountType } from './components/Accoount/AccountType.jsx'
 import RoleContextProvider from './components/context/RoleContext.jsx'
@@ -39,7 +39,6 @@ import SingleProposal from './components/Clients/SingleProposal.jsx';
 import Proposals from './components/Clients/Proposals.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import SubmitTask from './components/Users/SubmitTask.jsx';
-import ApproveSubmission from './components/Clients/ApproveSubmission.jsx';
 import StartReview from './components/Reviews/StartReview.jsx';
 import Withdraw from './components/Payments/Withdraw.jsx';
 import CreatePin from './components/Payments/CreatePin.jsx';
@@ -55,7 +54,6 @@ import ClientReview from './components/Reviews/ClientReview.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
     children: [
         {index: true, element: <Home /> },
         {path: 'account-type', element: <AccountType />},
@@ -66,17 +64,11 @@ const router = createBrowserRouter([
         {path: 'reset-password', element: <ResetPassword />},
         {path: 'change-password', element: <ChangePassword />},
         {path: 'interest', element: <Interest />},
-       
-
-       
-        
-
-
+ 
     ] 
   },
   {
     path: '/',
-    element: <Layout />,
     children: [ 
       {
         element: <ProtectedRoute />,
@@ -119,7 +111,6 @@ const router = createBrowserRouter([
        {path: 'delete-task/:id', element: <DeleteTask />},
        {path: 'proposals/:id', element: <Proposals />},
        {path: 'single-proposal/:id', element: <SingleProposal /> },
-       {path: 'approve-task', element: <ApproveSubmission />},
        {path: 'fund-wallet', element: <FundWallet />}
         ]
       }

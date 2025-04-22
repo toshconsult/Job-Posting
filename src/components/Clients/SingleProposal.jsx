@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { MdOutlineMessage } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { MdOutlineMessage, MdVerified } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Loader from "../Loader";
+import ClientSideBar from "./ClientSideBar";
 
 const SingleProposal = () => {
   const { url, userToken } = useContext(UserContext);
@@ -11,13 +12,13 @@ const SingleProposal = () => {
   const [profileId, setProifleId] = useState("");
   const [taskId, setTaskid] = useState("");
   const [loading, setloading] = useState(false);
-  const [active, setActive] = useState(false);
+  const [user, setUser] = useState(null)
+  
   // console.log(taskId);
   // console.log(profileId);
 
   const { id } = useParams();
-  // const id = '67e183403a9bc14667f76a09'
-
+  
   useEffect(() => {
     const getProposal = async () => {
       setloading(true);
@@ -35,7 +36,7 @@ const SingleProposal = () => {
         setTaskid(data.proposal.task._id);
         setloading(false);
        
-        // console.log(data);
+        console.log(data);
       } else {
         // const err = await response.json()
         // console.log(err);
@@ -58,6 +59,26 @@ const SingleProposal = () => {
     }
   };
 
+  ////////////------------------------------- Fetch profile ------------------------------/////////
+
+  useEffect(()=>{
+  const fetchProfile = async () => {
+    const response = await fetch(`${url}user/profile/${profileId}`);
+    if (response.ok) {
+      const data = await response.json()
+      setUser(data.user)
+      console.log(data.user);
+     
+    } else {
+      const err = await response.json();
+      console.log(err);
+    }
+  
+  }
+  fetchProfile()
+  
+},[profileId, url])
+
   ///------------------------------------ ASSIGN TASKS -------------- //////
 
   const assign = async () => {
@@ -75,37 +96,46 @@ const SingleProposal = () => {
       const data = await response.json();
       toast.success(data.message);
       console.log(data);
-      setActive(true);
+      
     } else {
       const error = await response.json();
       toast.error(error.error);
       console.log(error);
-      setActive(false);
+      
     }
   };
 
+  
+
   return (
-    <div className="my-10 px-10 md:px-16">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+
+      <ClientSideBar />
       {loading ? (
         <Loader />
       ) : (
-        <>
+        <div className="mt-4 space-y-4 md:px-10 w-full">
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            <div className="flex gap-4 items-center">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShYwM33sSN7MtnLIq0k1qjhpoEtSstLE26gA&s"
-                className="h-20 bg-gray-400"
+                src={user?.profilePicture ? user?.profilePicture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShYwM33sSN7MtnLIq0k1qjhpoEtSstLE26gA&s"}
+                className="h-14 rounded-full"
               />
               <div onClick={getProfile} className="cursor-pointer">
-                <p>{proposal?.tasker?.username}</p>
-                <p>Web Developer</p>
+                <p className="text-xl font-semibold flex gap-3 items-center">{proposal?.tasker?.username} 
+                  {user?.isVerified && ( <MdVerified size={20} className="text-blue-600"/> )} 
+                  </p>
+                <p>{user?.jobTitle}</p>
               </div>
             </div>
             <div>
-              <button>
-                {" "}
-                <MdOutlineMessage size={40} />{" "}
+              
+              <Link to={`/chat/${profileId}`}>
+              <button className="cursor-pointer">
+                
+                <MdOutlineMessage size={40} />
               </button>
+              </Link>
             </div>
           </div>
           <div className="  py-4">
@@ -135,7 +165,7 @@ const SingleProposal = () => {
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

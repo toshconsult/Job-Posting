@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // import img3 from '../../assets/Images/image1.jpeg';
 // import img4 from '../../assets/Images/pic.avif';
 
@@ -43,9 +44,10 @@ const Hero = () => {
             ...Effortlessly
         </h1>
         <div className='flex gap-[20px] lg:gap-[40px] pt-[10px] lg:pt-[20px]'>
-          <button className='bg-black text-white px-[35px] py-[10px] rounded hover:bg-inherit border-orange border-solid border-[3px] hover:text-white' onClick={handleEnrollClick}>
+            
+        <Link to='/account-type'>  <button className='bg-black text-white px-[35px] py-[10px] rounded hover:bg-inherit border-orange border-solid border-[3px] hover:text-white' onClick={handleEnrollClick}>
             Get Started
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

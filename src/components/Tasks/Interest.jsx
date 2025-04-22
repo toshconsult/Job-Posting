@@ -114,7 +114,7 @@ const Interest = () => {
     <div>
       {loading ? <Loader /> : <>
       <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-14">
-        Your <span className="text-[#EA1588]">Field</span>
+        Your <span className="text-[#333]">Field</span>
       </h1>
       <ToastContainer />
       <div className="w-full flex flex-col justify-center items-center px-4">
@@ -128,7 +128,7 @@ const Interest = () => {
               key={index}
               value={item}
               className={`border border-[#F3F5FF] p-3 rounded-2xl text-center 
-            ${click === index ? "bg-[#EA1588] text-white" : ""}`}
+            ${click === index ? "bg-[#333] text-white" : ""}`}
               onClick={(e) => handleClick(index, e.target.value)}
             >
               {item}
@@ -140,7 +140,7 @@ const Interest = () => {
           {clickvalue ? <>
 
             <h1 className="text-[25px] md:text-center font-semibold px-4 pb-2 mt-2">
-        Your <span className="text-[#EA1588]">Skillset</span>
+        Your <span className="text-[#333]">Skillset</span>
       </h1>
       
         <p className="pb-6 text-center">
@@ -167,7 +167,7 @@ const Interest = () => {
         </div >
           
         <div className="mb-5">
-        <button type="submit" className="w-[328px] md:w-[652px] py-[20px] cursor-pointer bg-[#EA1588] text-white
+        <button type="submit" className="w-[328px] md:w-[652px] py-[20px] cursor-pointer bg-[#333] text-white
          hover:bg-white rounded-3xl hover:text-black hover:border-2 hover:border-[#F3F5FF]" onClick={addSkills}>Continue</button>
         </div>
       </div>

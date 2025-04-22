@@ -102,7 +102,7 @@ if(role === ''){
       {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
       <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
       rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
-        <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Create <span className="text-[#EA1588] ">Account</span></h1>
+        <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Create <span className="text-[#333] ">Account</span></h1>
        
         <form 
         onSubmit={handleSubmit}
@@ -111,26 +111,26 @@ if(role === ''){
           onChange={handleChange}
           name="username"
           className="w-[328px] h-[50px] rounded-md p-2 px-5 outline-0
-           placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
+           placeholder:text-black placeholder:font-semibold bg-gray-50" />
           <input type="email" placeholder="Enter Your Email" required
           onChange={handleChange}
           name="email"
           className="w-[328px] h-[50px] rounded-md p-2 px-5 outline-0
-           placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
-         <div className="flex justify-between items-center pr-4 h-[50px] bg-[#FFF5F6] w-[328px] rounded-md">
+           placeholder:text-black placeholder:font-semibold bg-gray-50" />
+         <div className="flex justify-between items-center pr-4 h-[50px] bg-gray-50 w-[328px] rounded-md">
                  <input type={showPassword ? "text": "password"} placeholder="Password" required
                  onChange={handleChange}
                  name="password"
                  className="h-[50px] rounded-md p-2 px-5 outline-0
-                  placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
-                  <span onClick={togglePassword} className="text-[#EA1588] cursor-pointer">
+                  placeholder:text-black placeholder:font-semibold bg-gray-50" />
+                  <span onClick={togglePassword} className="text-[#333] cursor-pointer">
                     {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                   </span>
                   </div>
          <ToastContainer />
-        <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#EA1588] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
+        <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#333] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
         </form>
-          <Link to='/login'> <p className="text-center">Already have an account ? <span className="text-[#EA1588]">Login</span></p></Link>
+          <Link to='/login'> <p className="text-center">Already have an account ? <span className="text-blue-600">Login</span></p></Link>
         
       </div>
       </>

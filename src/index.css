@@ -43,3 +43,7 @@ select{
     border-radius: 10px;
     cursor: pointer;
 }
+
+.victorian {
+    font-family: Swirly;
+  }

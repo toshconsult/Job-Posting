@@ -23,18 +23,17 @@ const  {balance} = useContext(UserContext)
           </div>
         </div>
         
-        {/* Action Buttons */}
+       
         <div className="flex gap-4 mb-6">
           <button className="flex-1 flex items-center justify-center hover:bg-[#333] hover:text-white border cursor-pointer border-gray-300 rounded-lg py-2 text-gray-800">
-          <Link to='/fund-wallet'> Fund Account </Link>
+          <a href='/fund-wallet'> Fund Account </a>
           </button>
           <button className="flex-1 flex items-center justify-center cursor-pointer hover:bg-[#f2f2f2]
            hover:text-[#333] hover:border hover:border-gray-300 bg-[#333] text-white rounded-lg py-2">
-            <Link to='/withdraw'>  Withdraw</Link>
+            <a href='/withdraw'>  Withdraw</a>
           </button>
         </div>
         
-        {/* Earnings History */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Spending History</h3>
           <div className="bg-gray-100 p-3 rounded-lg flex justify-between mb-2">

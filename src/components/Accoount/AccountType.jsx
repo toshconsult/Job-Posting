@@ -5,7 +5,7 @@ import { useContext } from "react"
 
 
 
-export const AccountType = () => {
+export const AccountType = ({modalOpen}) => {
     const {setRole} = useContext(RoleContext)
     const navigate = useNavigate()
 
@@ -18,12 +18,13 @@ export const AccountType = () => {
   return (
     
 
-    <div>
-        {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
-
-        <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
-      rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
-            <div className="pb-6 mt-12 px-10 md:text-center">
+    <div className={modalOpen ? "w-full h-full" : "flex justify-center items-center min-h-screen"}>
+      
+      <div className={modalOpen ? 'border-0' :"flex h-full md:h-[90vh] w-[98%]  md:w-[70%] mx-auto justify-center border-2 border-[#dfe4fc] rounded-2xl shadow-md items-center "}>
+      <img src="https://img.freepik.com/premium-photo/portrait-confident-male-person-as-contractor-outdoors-developing-planning-construction-projects-professional-architect-industry-safety-with-arms-crossed-development_590464-347760.jpg?ga=GA1.1.1994411634.1732195402&semt=ais_hybrid&w=740"
+     className={modalOpen ? 'hidden' :" h-full w-[45%] object-fit rounded-2xl hidden md:flex"}/>
+    <div className={modalOpen ? 'border-0 text-center my-5' : "w-full gap-y-2 flex flex-col justify-center rounded-2xl  p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]"}>
+       
             <h1 className="text-[25px] font-semibold ">Choose  <span className="text-[#333] ">Account Type</span></h1>
             <p>Select your account type for best experience.</p>
             </div>

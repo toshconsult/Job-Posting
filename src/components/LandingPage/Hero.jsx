@@ -40,12 +40,12 @@ const Hero = () => {
       <div className='relative z-10 flex flex-col gap-5 justify-center
        items-center text-center w-full  h-full px-4'>
         <h1 className='text-[25px]  lg:text-[35px] lg:w-[36vw] font-bold text-white drop-shadow-lg'>
-            Find quality service providers and Get Your Work Done
-            ...Effortlessly
+           <span className='victorian text-4xl'>Find Quality Service Providers & Get Your Work Done
+            ...Effortlessly</span>
         </h1>
         <div className='flex gap-[20px] lg:gap-[40px] pt-[10px] lg:pt-[20px]'>
             
-        <Link to='/account-type'>  <button className='bg-black text-white px-[35px] py-[10px] rounded hover:bg-inherit border-orange border-solid border-[3px] hover:text-white' onClick={handleEnrollClick}>
+        <Link to='/account-type'>  <button className='bg-blue-600 cursor-pointer text-white px-[35px] py-[10px] rounded hover:bg-blue-500 hover:text-white' onClick={handleEnrollClick}>
             Get Started
           </button></Link>
         </div>

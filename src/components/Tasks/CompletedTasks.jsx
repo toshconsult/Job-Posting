@@ -3,6 +3,7 @@ import { UserContext } from '../context/UserContext'
 import Loader from '../Loader'
 import TaskNav from './TaskNav'
 import { Link } from 'react-router-dom'
+import Sidebar from '../SideBar'
 
 export const CompletedTasks = () => {
 
@@ -45,11 +46,13 @@ export const CompletedTasks = () => {
 }, [url, userToken])
 
   return (
-    <div className="">
+    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
+      <Sidebar />
          {loading ? (
            <Loader />
          ) : (
-           <>
+           <div className="mt-4 space-y-4 md:px-10 w-full">
+            <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
              <TaskNav />
              <div className="grid place-items-center md:grid-cols-2 lg:grid-cols-3 ">
              {task?.length === 0 && (
@@ -82,7 +85,7 @@ export const CompletedTasks = () => {
                );
              })}
              </div>
-           </>
+           </div>
          )}
          
        </div>

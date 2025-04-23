@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 
 
-const SignUp = () => {
+const SignUp = ({modalOpen }) => {
   const {url} = useContext(UserContext)
   const {role} = useContext(RoleContext)
   const [loading, setLoading] = useState(false)
@@ -96,12 +96,14 @@ if(role === ''){
 
 // !!!!!!!!!!-------------------------------------- CONTENT BODY --------------------------------------!!!!!!!!!!
 
-    <div>
+<div className={modalOpen ? "w-full h-full" : "flex justify-center items-center min-h-screen"}>
       {loading ? <Loader /> :
       <>
       {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
-      <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
-      rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
+      <div className={modalOpen ? 'border-0' :"flex h-full md:h-[90vh] w-[98%]  md:w-[70%] mx-auto justify-center border-2 border-[#dfe4fc] rounded-2xl shadow-md items-center "}>
+      <img src="https://img.freepik.com/premium-photo/portrait-confident-male-person-as-contractor-outdoors-developing-planning-construction-projects-professional-architect-industry-safety-with-arms-crossed-development_590464-347760.jpg?ga=GA1.1.1994411634.1732195402&semt=ais_hybrid&w=740"
+     className={modalOpen ? 'hidden' :" h-full w-[45%] object-fit rounded-2xl hidden md:flex"}/>
+    <div className={modalOpen ? 'border-0' : "w-full gap-y-2 flex flex-col justify-center rounded-2xl  p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]"}>
         <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Create <span className="text-[#333] ">Account</span></h1>
        
         <form 
@@ -133,9 +135,11 @@ if(role === ''){
           <Link to='/login'> <p className="text-center">Already have an account ? <span className="text-blue-600">Login</span></p></Link>
         
       </div>
+      </div>
       </>
       }
     </div>
+    
   )
 }
 

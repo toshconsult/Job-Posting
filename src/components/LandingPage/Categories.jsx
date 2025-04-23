@@ -46,7 +46,7 @@ const Categories = () => {
   ];
 
   return (
-    <div className='bg-gray-400 shadow-lg py-10'>
+    <div className='bg-gray-400 shadow-lg py-10 victorian'>
       {/* Header Section */}
       <div className='flex flex-col gap-5 justify-center items-center text-center px-4 mb-10'>
         <h1 className='text-[35px] font-bold text-black drop-shadow-lg'>

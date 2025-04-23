@@ -3,7 +3,8 @@ import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 import ClientSideBar from "../Clients/ClientSideBar"
-import { Sidebar } from "lucide-react"
+import Sidebar from "../SideBar"
+
 
 
 const UpdateProfile = () => {
@@ -68,13 +69,13 @@ const handleChange = (e) => {
       {user?.userType === 'client' ? <ClientSideBar /> : <Sidebar />} 
     {loading || !user  ? <Loader /> :
           <div className="mt-4 space-y-4 md:px-10 w-full">
-          <div className="w-full gap-y-2 flex flex-col">
-          <h1 className="text-[25px] font-semibold pb-6 ">Update 
+         
+          <h1 className="text-[25px] font-semibold pb-6 pl-14 md:pl-0 ">Update 
            Profile</h1>
           <ToastContainer />
             <form 
             onSubmit={handleSubmit}
-            className="flex flex-col gap-y-4 justify-center items-center">
+            className="flex flex-col gap-y-4 justify-center items-center md:justify-start md:items-start">
               
               <div className="flex flex-col gap-2">
                 <label className="font-semibold">Upload your profile picture:</label>
@@ -121,7 +122,7 @@ const handleChange = (e) => {
             cursor-pointer bg-[#333] hover:bg-white rounded-3xl text-white hover:text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
             </form>
              
-          </div>
+          
           </div>
           }
         </div>

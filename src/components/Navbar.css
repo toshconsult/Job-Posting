@@ -104,13 +104,13 @@
 }
 
 .sign:hover{
-    background-color: #333;
+    background-color: blue;
     color: white;
     transition: 0.5s;
 }
 
 .logo:hover{
-    background-color: #333;
+    background-color: blue;
     color: white;
     transition: 0.5s;
 }

@@ -16,7 +16,7 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div>
+    <div className='victorian'>
       <div className='bg-gray-100 shadow-lg py-10'>
         <div className='lg:flex lg:flex-row gap-5 justify-center items-center text-center lg:w-full h-full px-4'>
           <div className='flex flex-col gap-5 justify-center items-center text-center w-full h-full px-4'>
@@ -36,7 +36,7 @@ const AboutUs = () => {
             <p className='text-[18px] lg:text-[20px] lg:w-[50vw] font-semibold text-gray-700 drop-shadow-lg'>
               Our mission is to provide a seamless experience for both service providers and customers, ensuring that everyone gets the best value for their time and money.
             </p>
-            <button className='bg-black px-[20px] text-white py-[10px] rounded'>Learn more</button>
+            <button className='bg-blue-600 cursor-pointer px-[20px] text-white py-[10px] rounded'>Learn more</button>
           </div>
         </div>
       </div>

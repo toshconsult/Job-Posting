@@ -43,7 +43,7 @@ import StartReview from './components/Reviews/StartReview.jsx';
 import Withdraw from './components/Payments/Withdraw.jsx';
 import CreatePin from './components/Payments/CreatePin.jsx';
 import UpdatePin from './components/Payments/UpdatePin.jsx';
-import FundWallet from './components/Payments/Payment.jsx';
+import FundWallet from './components/Payments/FundWallet.jsx';
 import { AssignedTasks } from './components/Tasks/AssignedTasks.jsx';
 import { SubmittedTasks } from './components/Tasks/SubmitedTasks.jsx';
 import { ClientSubmittedTasks} from './components/Clients/ClientSubmitetedTasks.jsx';

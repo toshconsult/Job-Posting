@@ -108,13 +108,13 @@ const SingleProposal = () => {
   
 
   return (
-    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+    <div className="flex mx-4 md:mx-0 md:justify-around min-h-screen md:gap-72">
 
       <ClientSideBar />
       {loading ? (
         <Loader />
       ) : (
-        <div className="mt-4 space-y-4 md:px-10 w-full">
+        <div className="mt-16 space-y-4 md:px-10 w-full justify-around">
           <div className="flex items-center justify-between">
             <div className="flex gap-4 items-center">
               <img
@@ -125,7 +125,7 @@ const SingleProposal = () => {
                 <p className="text-xl font-semibold flex gap-3 items-center">{proposal?.tasker?.username} 
                   {user?.isVerified && ( <MdVerified size={20} className="text-blue-600"/> )} 
                   </p>
-                <p>{user?.jobTitle}</p>
+                <p>{user?.jobTitle && user?.jobTitle !== 'undefined' ? user?.jobTitle : ''}</p>
               </div>
             </div>
             <div>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
@@ -42,9 +42,9 @@ useEffect(() => {
         const data = await response.json();
         console.log(data.error);
         setLoading(false);
-        // toast.error(data.error);
-        toast.error("Please login to view this page")
-        navigate("/login");
+        toast.error(data.error);
+        // toast.error("Please login to view this page")
+        // navigate("/login");
       }
     } catch (error) {
       setLoading(false);
@@ -94,11 +94,12 @@ useEffect(() => {
   
 
   return (
-  
+  <>
+     <ToastContainer />
+     {sTask && (
     <div className="max-w-5xl mx-auto bg-[#f2f2f2] my-10 rounded-2xl  p-6">
     {loading ? <Loader /> : <>
     <div className="flex  md:items-center justify-between">
-     <ToastContainer />
       <div className="flex items-center space-x-4">
         <img
           src={userP?.profilePicture ? userP?.profilePicture : 'https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg'}
@@ -174,7 +175,8 @@ useEffect(() => {
     </div>
     </>}
   </div>
-
+  )}
+</>
   );
 };
 

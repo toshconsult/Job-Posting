@@ -4,12 +4,15 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
 import { Link,  useNavigate } from "react-router-dom"
 import { UserContext } from "../context/UserContext"
+import Modal from "../Modal"
+import { AccountType } from "./AccountType"
 
 
-const Login = () => {
+const Login = ({modalOpen}) => {
     const {url} = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
     const [formdata, setFormdata] = useState({
         email: '',
         password: ''
@@ -81,13 +84,13 @@ const Login = () => {
 
     
   return (
-    <div>
+    <div className={modalOpen ? "w-full h-full" : "flex justify-center items-center min-h-screen"}>
     {loading ? <Loader /> :
-    <>
-    {/* <h4 className="font-semibold text-right pr-10 mt-4 md:hidden">Back &gt;</h4> */}
-    <div className="w-full gap-y-2 flex flex-col justify-center border-2 border-[#dfe4fc] 
-      rounded-2xl shadow-md p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]">
-      <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 md:text-center">Log <span className="text-[#333] ">in</span></h1>
+    <div className={modalOpen ? 'border-0' :"flex h-full md:h-[90vh] w-[98%]  md:w-[70%] mx-auto justify-center border-2 border-[#dfe4fc] rounded-2xl shadow-md items-center "}>
+    <img src="https://img.freepik.com/premium-photo/portrait-confident-male-person-as-contractor-outdoors-developing-planning-construction-projects-professional-architect-industry-safety-with-arms-crossed-development_590464-347760.jpg?ga=GA1.1.1994411634.1732195402&semt=ais_hybrid&w=740"
+     className={modalOpen ? 'hidden' :" h-full w-[45%] object-fit rounded-2xl hidden md:flex"}/>
+    <div className={modalOpen ? 'border-0' : "w-full gap-y-2 flex flex-col justify-center rounded-2xl  p-6 md:p-10 lg:p-14 mx-auto mt-10 md:w-[400px] lg:w-[500px]"}>
+      <h1 className="text-[25px] font-semibold pb-6 mt-14 px-10 text-left  md:text-center">Log <span className="text-[#333] ">in</span></h1>
      <ToastContainer />
       <form 
       onSubmit={handleSubmit}
@@ -112,11 +115,18 @@ const Login = () => {
       <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#333] hover:bg-white rounded-3xl
        text-white hover:text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
       </form>
+      <div className="flex flex-col gap-y-2 mt-4">
         <Link to='/forgot-password' className="text-center text-blue-600">Forgot Password</Link>
-        <p className="text-center">Don&apos;t have account ? <Link to='/account-type' className="text-blue-500">Sign Up</Link></p>
+        <p className="text-center">Don&apos;t have account ? <button 
+        className="text-blue-500" onClick={modalOpen ? ()=>setOpenModal(true) : '/account-type'}>Sign Up</button></p>
     </div>
-    </>
+    </div>
+    </div>
     }
+
+    <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+    <AccountType modalOpen/>
+    </Modal>
   </div>
 )
   

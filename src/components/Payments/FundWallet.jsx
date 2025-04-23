@@ -2,19 +2,22 @@ import {  useContext, useState } from "react"
 import { PaystackButton } from 'react-paystack'
 import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "../context/UserContext"
+import ClientSideBar from "../Clients/ClientSideBar"
+import Sidebar from "../SideBar"
 
 const FundWallet = () => {
-  const {url, userToken} = useContext(UserContext)
+  const {url, userToken, user} = useContext(UserContext)
   const publicKey = "pk_test_f7fd4dba18436a90b7ebde95b7b7b435e3a539a9"
   const [amount, setAmount] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const handlePaystackSuccessAction = async(reference, amount) => {
-    console.log(reference);
-    console.log(amount);
-    
+    // console.log(reference);
+    // console.log(amount);
+    setLoading(true)
     const sendtobackend = await fetch(`${url}user/fund-wallet`, {
       method: 'POST',
       headers: {
@@ -29,11 +32,13 @@ const FundWallet = () => {
 
     if(sendtobackend.ok) {
       const data = await sendtobackend.json()
+      loading(false)  
       console.log(data);
       toast.success('Your account funded Successfully')
     }else {
       const error = await sendtobackend.json()
       toast.error(error.error)
+      loading(false)
     }
   };
      
@@ -52,9 +57,11 @@ const FundWallet = () => {
   }
 
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20 my-12">
-      
-          <h1>Fund Your <span className="text-[#EA1588]">Wallet</span></h1>
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+{user?.userType === "client" ? <ClientSideBar /> : <Sidebar />}
+   
+    <div className="mt-4 space-y-4 md:px-10 w-full">
+          <h1 className="text-lg font-semibold mb-8 pl-14 md:pl-0">Fund Your <span className="text-[#333]">Wallet</span></h1>
           <form  className="w-full max-w-2xl">
             <ToastContainer />
             <div className="space-y-4">
@@ -68,7 +75,7 @@ const FundWallet = () => {
                   value={name}
                   placeholder="Enter your full name"
                   onChange={(e)=>setName(e.target.value)}
-                  className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
               </div>
@@ -83,7 +90,7 @@ const FundWallet = () => {
                   value={email}
                   placeholder="Enter your email"
                   onChange={(e)=>setEmail(e.target.value)}
-                  className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
               </div>
@@ -98,7 +105,7 @@ const FundWallet = () => {
                   value={amount}
                   placeholder="Enter the funding amount"
                   onChange={(e)=>setAmount(e.target.value)}
-                  className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
               </div>
@@ -113,7 +120,7 @@ const FundWallet = () => {
                   value={phone}
                   placeholder="Enter your phone number"
                   onChange={(e)=>setPhone(e.target.value)}
-                  className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
+                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
               </div>
@@ -123,10 +130,11 @@ const FundWallet = () => {
               <div className="flex justify-center mt-6">
   <PaystackButton 
     {...componentProps} 
-    className="w-[328px] max-w-xs py-2 bg-[#EA1588] text-white rounded-3xl hover:bg-white hover:text-[#EA1588] hover:border-2 hover:border-[#EA1588] transition-all"
+    className="w-[328px] max-w-xs py-2 bg-[#333] text-white rounded-3xl hover:bg-white hover:text-[#333] hover:border-2 hover:border-[#333] transition-all"
   />
 </div>
 
+    </div>
     </div>
   )
 }

@@ -3,6 +3,8 @@ import Loader from "../Loader";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import TaskNav from "./TaskNav";
+import Sidebar from "../SideBar";
+
 
 const AllTask = () => {
   const { url, userToken } = useContext(UserContext);
@@ -11,7 +13,7 @@ const AllTask = () => {
   const max = 200
 
   const task = tasks?.tasks;
-  console.log(task);
+  // console.log(task);
 
   const sortedTasks = task
     ?.slice()
@@ -56,16 +58,18 @@ const AllTask = () => {
 
   return (
     // <></>
-    <div className="">
+    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
+      <Sidebar />
       {loading ? (
-        <Loader />
+       <Loader />
       ) : (
-        <>
+        <div className="mt-4 space-y-4 md:px-10 w-full">
+          <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
           <TaskNav/>
           <div className="grid place-items-center md:grid-cols-2 lg:grid-cols-3 ">
           {task?.length === 0 && (
             <h1 className="text-[25px] pb-6 mt-14 px-6 md:text-center">
-              {" "}
+             
               No Task Available
             </h1>
           )}
@@ -93,7 +97,7 @@ const AllTask = () => {
             );
           })}
           </div>
-        </>
+        </div>
       )}
       
     </div>

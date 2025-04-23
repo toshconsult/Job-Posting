@@ -2,16 +2,26 @@ import { useContext, useState } from "react"
 import "../components/Navbar.css"
 import { Link } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
+import Modal from "./Modal";
+import Login from "./Accoount/Login";
+import SignUp from "./Accoount/SignUp";
+import { AccountType } from "./Accoount/AccountType";
 
 const NavBar = () => {
  const {user} = useContext(UserContext);
 // console.log(user?.username);
+const [modalOpen, setModalOpen] = useState(false);
+const [modalType, setModalType] = useState(null); 
 
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = () => setOpen(!open);
+
+  const openModal = (type) => {
+    setModalType(type);
+    setModalOpen(true);
   }
+  
 
   return (
   <div>
@@ -49,8 +59,8 @@ const NavBar = () => {
             ):
             (
             <>
-            <Link to='/account-type' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
-            <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
+             <button className="sign" onClick={()=> openModal('register')}><i class="fa fa-sign-in"></i>Register</button>
+             <button className="logo" onClick={()=> openModal('login')}><i class="fa fa-user"></i>Log in</button>
             </>
             )
           }
@@ -84,8 +94,8 @@ const NavBar = () => {
             ):
             (
             <>
-            <Link to='/account-type' className="sign"><i class="fa fa-sign-in"></i>Register</Link>
-            <Link to='/login' className="logo"><i class="fa fa-user"></i>Log in</Link>
+            <button className="sign" onClick={()=> openModal('register')}><i class="fa fa-sign-in"></i>Register</button>
+            <button className="logo" onClick={()=> openModal('login')}><i class="fa fa-user"></i>Log in</button>
             </>
             )
           }
@@ -96,6 +106,11 @@ const NavBar = () => {
     <div>
           
     </div>
+    <Modal isOpen={modalOpen} onClose={()=> setModalOpen(false)}>
+      {modalType === "login" && <Login modalOpen/>}
+      {modalType === "register" && <AccountType modalOpen/>}
+
+    </Modal>
   </div>
   )
 }

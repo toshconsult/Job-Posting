@@ -1,14 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import {  useParams } from "react-router-dom";
 
-import { UserContext } from "../context/UserContext";
 import { Send } from "lucide-react";
 import Sidebar from "../SideBar";
+import useUserStore from "../context/Store";
 
 const StartChat = () => {
   const [messages, setMessages] = useState([]);
 const [user, setUser] = useState(null);
-  const { url, userToken } = useContext(UserContext);
+  const { url, userToken } = useUserStore()
 console.log(user);
 
   const [message, setMessage] = useState("");

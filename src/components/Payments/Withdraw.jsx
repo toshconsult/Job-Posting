@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../context/UserContext";
+import {  useEffect, useState } from "react"
+import useUserStore from "../context/Store";
+
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import ClientSideBar from "../Clients/ClientSideBar";
@@ -7,7 +8,7 @@ import Sidebar from "../SideBar";
 
 const Withdraw = () => {
 
-    const {url, userToken, user} = useContext(UserContext)
+    const {url, userToken, user} = useUserStore()
     const [loading, setloading] = useState(false)
     const [banks, setbanks] = useState([])
     const [accountNmber, setAccountNumber] = useState('')
@@ -57,7 +58,8 @@ e.preventDefault()
   })
   if(response.ok) {
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
+    toast.success(data.message)
     setloading(false)
   } else {
     const error = await response.json()

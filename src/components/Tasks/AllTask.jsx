@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import TaskNav from "./TaskNav";
 import Sidebar from "../SideBar";
 
 
 const AllTask = () => {
-  const { url, userToken } = useContext(UserContext);
+  const { url, userToken } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
   const max = 200

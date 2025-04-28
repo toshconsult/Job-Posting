@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import {  useEffect, useState } from "react";
+import useUserStore from "../context/Store";
+
 import { Link, useLocation } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
 
 const ClientTasks = () => {
-  const { url } = useContext(UserContext);
+  const { url } = useUserStore();
   const [err, setErr] = useState();
   const [tasks, setTasks] = useState([]);
   const location = useLocation()

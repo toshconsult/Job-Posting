@@ -20,7 +20,7 @@ export const UserContextProvider = ({children}) =>{
     const url = 'https://airrandserver-nhc3.onrender.com/'
 
     /////////------------------------------------ Fetch User Profile ------------------------------------/////////////////////
-    const getuser = async ()=>{
+    const getUser = async ()=>{
         setLoading(true)
         const response = await fetch(`${url}user/dashboard`, {
             method: 'GET',
@@ -55,7 +55,7 @@ export const UserContextProvider = ({children}) =>{
   
     useEffect(()=> {
         if(userToken){
-            getuser()
+            getUser()
             localStorage.setItem('token', userToken)
         } else {
             
@@ -64,7 +64,7 @@ export const UserContextProvider = ({children}) =>{
     }, [])
 
     const contextvalue = useMemo(()=>({
-        url, user, userToken, loading, balance,  logout, getuser
+        url, user, userToken, loading, balance,  logout, getUser
     }), [balance, loading, user, userToken, url])
     
     return(

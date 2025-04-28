@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import ClientSideBar from "../Clients/ClientSideBar";
 import Sidebar from "../SideBar";
+import axios from "axios";
 
 const UpdatePin = () => {
-    const {url, userToken, user} = useContext(UserContext)
+    const {url, userToken, user} = useUserStore()
     const [loading, setloading] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -25,27 +27,17 @@ const handleSubmit = async (e)=>{
     e.preventDefault()
 
     setloading(true)
-    const res = await fetch(`${url}user/update-pin`, {
-        method: 'POST',
+    const res = await axios({
+        method: "POST",
+        url: `${url}user/update-pin`,
+        data: formData,
         headers: {
-            'Authorization': `Bearer ${userToken}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
+          Authorization: `Bearer ${userToken}`,
+        }
+      })
 
-    if(res.ok){
-        const data = await res.json()
-        toast.success(data.message)
-        setloading(false)
-        
-    } else {
-        const err = await res.json()
-        toast.error(err.error)
-        setloading(false)
-        console.log(err);
-        
-    }
+    toast.success(res.data.message || res.data.error)
+    setloading(false)
 }
     
   return (

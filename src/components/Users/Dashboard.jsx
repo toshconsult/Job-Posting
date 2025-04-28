@@ -1,25 +1,26 @@
-import { useContext, useEffect } from "react";
+import {  useEffect } from "react";
 import { Bell, RefreshCcw, Settings } from "lucide-react";
 import Sidebar from "../SideBar";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import AppliedTask from "../Tasks/AppliedTask";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import { MdOutlineMessage } from "react-icons/md";
 
 const Dashboard = () => {
-  const { user, loading } = useContext(UserContext);
+  const { user, loading, getUser } = useUserStore();
   const navigate = useNavigate();
 
   console.log(user);
   
-  const token = localStorage.getItem('token')
+  // const token = localStorage.getItem('token')
 
-  useEffect(()=>{
-    if(!token){
-      window.location.href = '/login'
-    }
-  },[token])
+  // useEffect(()=>{
+  //   if(!token){
+  //     window.location.href = '/login'
+  //   }
+  // },[token])
   
   useEffect(() => {
     if (user?.skillsets?.length === 0) {
@@ -30,6 +31,12 @@ const Dashboard = () => {
       navigate('/update-profile')
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (!user) {
+    getUser()
+    }
+  }, [user, getUser])
 
   useEffect(() => {
     if (user && user.userType != "tasker") {

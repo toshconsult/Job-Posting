@@ -1,11 +1,12 @@
 // src/components/Sidebar.jsx
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { Switch } from "@headlessui/react";
 import { ChevronRight, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
+import useUserStore from "./context/Store";
+
 import Loader from "./Loader";
 
 
@@ -15,7 +16,7 @@ const Sidebar = () => {
   const userToken = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
   const [role, setRole] = useState('');
-  const { user, logout, url,  getuser } = useContext(UserContext);
+  const { user, logout, url,  getUser } = useUserStore();
   const [loading, setLoading] = useState(false)
   
   
@@ -48,6 +49,7 @@ const Sidebar = () => {
     if(response.ok){
         const data = await response.json()
         setRole(data.user.userType)
+        window.location.href = '/'
       setLoading(false)
       localStorage.removeItem('token')
     } else {
@@ -58,9 +60,9 @@ const Sidebar = () => {
 }
 
 useEffect(()=>{
-if(!user) getuser()
+if(!user) getUser()
   
-},[getuser, user])
+},[getUser, user])
 
 
 
@@ -100,7 +102,7 @@ if(!user) getuser()
               <Switch
                 checked={role}
                 onChange={switchRole}
-                onClick={getuser}
+                onClick={getUser}
                 className={`${
                   role || user?.userType == "tasker" ? "bg-[#333333]" : "bg-gray-300"
                 } relative inline-flex h-6 w-11 items-center rounded-full transition`}

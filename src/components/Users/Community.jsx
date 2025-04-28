@@ -7,12 +7,12 @@ import ClientSideBar from "../Clients/ClientSideBar";
 import Sidebar from "../SideBar";
 
 const data = [
-  { text: "Edit Profile", link: "/update-profile" },
-  { text: "Create Pin", link: "/create-pin" },
-  { text: "Update Pin", link: "/update-pin" },
+  { text: "Facebook", link: "/" },
+  { text: "WhatsApp", link: "/" },
+  { text: "Telegram", link: "/" },
 ];
 
-const Settingpage = () => {
+const OurCommunity = () => {
   const navigate = useNavigate();
   const { user } = useUserStore();
   return (
@@ -20,7 +20,7 @@ const Settingpage = () => {
       {user?.userType === "client" ? <ClientSideBar /> : <Sidebar />}
       <div className="w-full max-w-lg mx-auto p-6 h-screen">
         <h2 className="text-xl font-semibold pl-14 md:pl-0 md:text-center mb-6">
-          Settings
+          Our Communities
         </h2>
 
         {data.map((option, index) => (
@@ -40,4 +40,4 @@ const Settingpage = () => {
   );
 };
 
-export default Settingpage;
+export default OurCommunity;

@@ -1,4 +1,4 @@
-import {  useContext, useState } from "react"
+import {   useState } from "react"
 import { PaystackButton } from 'react-paystack'
 import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "../context/UserContext"
@@ -6,11 +6,11 @@ import ClientSideBar from "../Clients/ClientSideBar"
 import Sidebar from "../SideBar"
 
 const FundWallet = () => {
-  const {url, userToken, user} = useContext(UserContext)
+  const {url, userToken, user} = useUserStore()
   const publicKey = "pk_test_f7fd4dba18436a90b7ebde95b7b7b435e3a539a9"
   const [amount, setAmount] = useState("")
-  const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
+  const email = user?.email
+  const name = user?.username 
   const [phone, setPhone] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -32,13 +32,15 @@ const FundWallet = () => {
 
     if(sendtobackend.ok) {
       const data = await sendtobackend.json()
-      loading(false)  
+      setLoading(false)  
       console.log(data);
-      toast.success('Your account funded Successfully')
+      toast.success(data.message)
+      setAmount("")
+      setPhone("")
     }else {
       const error = await sendtobackend.json()
       toast.error(error.error)
-      loading(false)
+      setLoading(false)
     }
   };
      
@@ -51,7 +53,7 @@ const FundWallet = () => {
       phone,
     },
     publicKey,
-    text: "Fund",
+    text: loading ? "Funding" : "Fund",
     onSuccess: async()=> handlePaystackSuccessAction(componentProps.reference, componentProps.amount),
     onClose: () => toast.error('Payment cancelled'),
   }
@@ -64,36 +66,7 @@ const FundWallet = () => {
           <h1 className="text-lg font-semibold mb-8 pl-14 md:pl-0">Fund Your <span className="text-[#333]">Wallet</span></h1>
           <form  className="w-full max-w-2xl">
             <ToastContainer />
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="name" className="text-[#333] font-semibold">
-                  Your name:                                                                                                                          
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  placeholder="Enter your full name"
-                  onChange={(e)=>setName(e.target.value)}
-                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
-                />
-              </div>
-              </div>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="email" className="text-[#333] font-semibold">
-                  Your Email:                                                                                                                          
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  placeholder="Enter your email"
-                  onChange={(e)=>setEmail(e.target.value)}
-                  className="w-full bg-gray-50 h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
-                />
-              </div>
-              </div>
+           
             <div className="space-y-4">
               <div>
                 <label htmlFor="amountr" className="text-[#333] font-semibold">

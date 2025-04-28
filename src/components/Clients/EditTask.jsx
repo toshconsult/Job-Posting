@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import skills from '/src/components/Skills.jsx'
 
 const buttons = [
@@ -18,7 +19,7 @@ const buttons = [
 
 const EditTask = () => {
 
-      const {url, user, userToken} = useContext(UserContext)
+      const {url, user, userToken} = useUserStore()
       const [loading, setLoading] = useState(false)
       const [field, setField] = useState('')
       const [selectedSkills, setSelectedSkills] = useState([])

@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { UserContext } from "../UserContext";
 
 const StartSupport = () => {
-  const { url, userToken, initChat } = useContext(UserContext);
+  const { url, userToken, initChat } = useUserStore();
   const [messages, setMessages] = useState([]);
   const [usermessage, setUserMessage] = useState("");
 // console.log(messages);

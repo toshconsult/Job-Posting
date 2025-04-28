@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import ClientSideBar from "../Clients/ClientSideBar";
 import Sidebar from "../SideBar";
 
 const CreatePin = () => {
-    const {url, userToken, user} = useContext(UserContext)
+    const {url, userToken, user} = useUserStore()
     const [loading, setloading] = useState(false)
 
     const [formData, setFormData] = useState({

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { useParams } from "react-router-dom"
 import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify"
 
 const SubmitTask = () => {
 const [loading, setloading] = useState(false)
-const {url, userToken} = useContext(UserContext)
+const {url, userToken} = useUserStore()
 const [note, setNote] = useState('')
 const [image, setImage] = useState(null)
 

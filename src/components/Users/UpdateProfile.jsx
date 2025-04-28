@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
@@ -8,7 +8,7 @@ import Sidebar from "../SideBar"
 
 
 const UpdateProfile = () => {
-    const {url, user} = useContext(UserContext)
+    const {url, user} = useUserStore()
     const [loading, setLoading] = useState(false)
     const userToken = localStorage.getItem('token')
 console.log(user);

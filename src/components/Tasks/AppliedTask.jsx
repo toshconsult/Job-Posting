@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import {  useEffect } from "react";
 import { useState } from "react";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import { Link } from "react-router-dom";
 
 const AppliedTask = () => {
-  const { url } = useContext(UserContext);
+  const { url } = useUserStore();
   const [err, setErr] = useState();
   const [task, setTask] = useState([]);
   const userToken = localStorage.getItem("token");

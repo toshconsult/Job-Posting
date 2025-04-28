@@ -1,8 +1,10 @@
-import { useContext,  useState } from "react";
-import { UserContext } from "../context/UserContext";
+import {   useState } from "react";
+import useUserStore from "../context/Store";
+
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
+import Sidebar from "../SideBar";
 
 const ApplyTask = () => {
   
@@ -10,7 +12,7 @@ const ApplyTask = () => {
   // console.log(id);
   
   const [loading, setLoading] = useState(false);
-  const { url, userToken,  } = useContext(UserContext);
+  const { url, userToken,  } = useUserStore();
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
 console.log(userToken)
@@ -75,10 +77,12 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
   // }, []);
 
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
+      <Sidebar />
+      <div className="mt-4 space-y-4 md:px-10 w-full">
         {loading ? <Loader /> : <>
               <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                Send Your <span className="text-[#EA1588]">Proposal</span>
+                Send Your <span className="text-[#333]">Proposal</span>
               </h1>
               <form onSubmit={apply} className="w-full max-w-2xl">
                 <ToastContainer />
@@ -127,7 +131,7 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
                   <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white
+                className="w-full py-4 bg-[#333] text-white rounded-3xl hover:bg-white
                  hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all"
         
               >
@@ -136,6 +140,7 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
             </div>
                   </form>
                   </>}
+                  </div>
                   </div>
   );
 };

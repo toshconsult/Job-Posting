@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Loader from "../Loader";
 import { Link, useNavigate } from "react-router-dom";
 import image from "/src/assets/react.svg";
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
-import { UserContext } from "../context/UserContext";
 import Sidebar from "../SideBar";
 import ClientSideBar from "../Clients/ClientSideBar";
+import useUserStore from "../context/Store";
 
 const GetMessages = () => {
-  const { url, userToken, user } = useContext(UserContext);
+  const { url, userToken, user } = useUserStore()
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState(null);

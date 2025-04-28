@@ -1,15 +1,15 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 // import { Link } from "react-router-dom";
 import { RoleContext } from "../context/RoleContext";
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { UserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import useUserStore from "../context/Store";
 
 
 const SignUp = ({modalOpen }) => {
-  const {url} = useContext(UserContext)
+  const {url} = useUserStore()
   const {role} = useContext(RoleContext)
   const [loading, setLoading] = useState(false)
 const navigate = useNavigate()

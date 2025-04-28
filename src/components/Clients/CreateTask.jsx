@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import skills from '/src/components/Skills.jsx'
 import ClientSideBar from "./ClientSideBar";
 
@@ -19,7 +20,7 @@ const buttons = [
 
 const CreateTask = () => {
 
-      const {url} = useContext(UserContext)
+      const {url} = useUserStore()
       const [loading, setLoading] = useState(false)
       const [field, setField] = useState('')
       const [selectedSkills, setSelectedSkills] = useState([])
@@ -188,7 +189,7 @@ const CreateTask = () => {
                   onChange={(e)=>setDuration(e.target.value)}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF]"
                 >
-                  <option value="">Select project type</option>
+                  <option value="">Select Duration</option>
                   <option value="1">1 Month</option>
                   <option value="2">2 months</option>
                   <option value="3">3 months</option>

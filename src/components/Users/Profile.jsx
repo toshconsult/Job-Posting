@@ -1,13 +1,14 @@
 
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import Loader from "../Loader";
 import { MdVerified } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 
 const Profile = () => {
-  const { url, userToken } = useContext(UserContext);
+  const { url, userToken } = useUserStore();
   const [user, setUser] = useState({});
   const [reviews, setReviews] = useState(null)
   console.log(reviews);

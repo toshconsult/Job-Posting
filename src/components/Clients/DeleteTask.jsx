@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../context/UserContext"
+import {  useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Loader from "../Loader"
+import useUserStore from "../context/Store"
 
 const DeleteTask = () => {
-    const {userToken, url}  = useContext(UserContext)
+    const {userToken, url}  = useUserStore()
     const [msg, setMsg] = useState('')
     const [loading, SetLoading] = useState(false)
     const {id} = useParams()
+    useEffect(()=>{
     const deleteTask = async ()=>{
         SetLoading(true)
         const response = await fetch(`${url}client/delete-tasks/${id}`, {
@@ -31,9 +32,9 @@ const DeleteTask = () => {
         }
       }
 
-useEffect(()=>{
+
     deleteTask()
-},[])
+},[id, url, userToken])
 
   return (
     

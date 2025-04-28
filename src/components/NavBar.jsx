@@ -1,14 +1,14 @@
-import { useContext, useState } from "react"
+import {  useEffect, useState } from "react"
 import "../components/Navbar.css"
 import { Link } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
+import useUserStore from "./context/Store";
+
 import Modal from "./Modal";
 import Login from "./Accoount/Login";
-import SignUp from "./Accoount/SignUp";
 import { AccountType } from "./Accoount/AccountType";
 
 const NavBar = () => {
- const {user} = useContext(UserContext);
+ const {user, getUser} = useUserStore();
 // console.log(user?.username);
 const [modalOpen, setModalOpen] = useState(false);
 const [modalType, setModalType] = useState(null); 
@@ -22,6 +22,9 @@ const [modalType, setModalType] = useState(null);
     setModalOpen(true);
   }
   
+  useEffect(() => {
+    getUser()
+  }, [getUser])
 
   return (
   <div>
@@ -39,13 +42,7 @@ const [modalType, setModalType] = useState(null);
         { user ? (
         <div className="menuList">
           <ul className="ul">
-            {/* <li className="li home-activ">Account Info.</li> */}
-            {/* <li className="li"><Link to='/all-task'>Tasks</Link></li>
-            <li className="li">About Us</li>
-            <li className="li"><Link to='/settings'>Settings</Link> </li> */}
-            {/* <li className="li">Give Feedback</li> */}
-            {/* <li className="li">FAQ</li> */}
-            {/* <li className="li">Check Update</li> */}
+           
           </ul>
         </div>
         ) : ''}
@@ -77,12 +74,7 @@ const [modalType, setModalType] = useState(null);
     
         <div className="menuList">
             <ul className={open ? "ul active " : "ul"}>
-            {/* <li className="li"><Link to='/all-task'>Tasks</Link></li>
-            <li className="li">About Us</li>
-            <li className="li"><Link to='/settings'>Settings</Link> </li> */}
-              {/* <li className="li">Give Feedback</li>
-              <li className="li">FAQ</li>
-              <li className="li">Check Update</li> */}
+            
             </ul>
           </div>
           <div className={open ? "button active " : "button"}>

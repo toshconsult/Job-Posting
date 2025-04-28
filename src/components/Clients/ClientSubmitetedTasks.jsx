@@ -1,13 +1,10 @@
-import  { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../context/UserContext'
-import Loader from '../Loader'
+import  {  useEffect, useState } from 'react'
+import useUserStore from '../context/Store'
 
-import { Link } from 'react-router-dom'
-import TaskNav from '../Tasks/TaskNav'
 
 export const ClientSubmittedTasks = () => {
 
-    const {url, userToken} = useContext(UserContext)
+    const {url, userToken} = useUserStore()
     const [loading, setLoading] = useState(false)
     const [task, setTask] = useState([])
     const max = 200

@@ -6,9 +6,10 @@ const ProtectedRoute = () => {
   const userToken = localStorage.getItem('token')
   
 
-  if(!userToken){
-
-  return  window.location.href = '/login'
+  if(!userToken || userToken === null){
+   
+  return  window.location.href = '/'
+  
   }
  return <Outlet />
 };

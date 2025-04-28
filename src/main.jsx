@@ -22,7 +22,6 @@ import GetMessages from './components/Chats/GetMessages.jsx'
 import StartChat from './components/Chats/SendMsg.jsx'
 import Home from './components/Home/Home.jsx'
 import Profile from './components/Users/Profile.jsx'
-import {  UserContextProvider } from './components/context/UserContext.jsx';
 import WalletPage from './components/Users/Wallet.jsx';
 import Settingpage from './components/Users/Settingpage.jsx';
 import UpdateProfile from './components/Users/UpdateProfile.jsx';
@@ -49,6 +48,7 @@ import { SubmittedTasks } from './components/Tasks/SubmitedTasks.jsx';
 import { ClientSubmittedTasks} from './components/Clients/ClientSubmitetedTasks.jsx';
 import { CompletedTasks } from './components/Tasks/CompletedTasks.jsx';
 import ClientReview from './components/Reviews/ClientReview.jsx';
+import OurCommunity from './components/Users/Community.jsx';
 
 
 const router = createBrowserRouter([
@@ -83,6 +83,7 @@ const router = createBrowserRouter([
       {path: 'client-review/:id', element: <ClientReview />},
       {path: 'profile/:id', element:<Profile />},
       {path: 'settings', element:<Settingpage />},
+      {path: 'community', element:<OurCommunity />},
       {path: 'wallet', element: <WalletPage />},
       {path: 'submit-task/:id', element: <SubmitTask />},
       {path: 'assigned-tasks', element:<AssignedTasks />},
@@ -119,14 +120,14 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-  <UserContextProvider >
+ 
     <RoleContextProvider>
    
     <RouterProvider router={router} />
    
     </RoleContextProvider>
     
-  </UserContextProvider>
+ 
 )
 
 

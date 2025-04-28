@@ -1,10 +1,10 @@
-  import { useContext, useEffect } from "react"
+  import {  useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
 
 const Review = () => {
- const {url, token} = useContext(UserContext)
+ const {url, token} = useUserStore()
  const navigate = useNavigate()
  
 

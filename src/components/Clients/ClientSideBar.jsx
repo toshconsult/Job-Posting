@@ -1,13 +1,13 @@
  // src/components/Sidebar.jsx
 "use strict";
- import { useContext, useEffect, useState } from "react";
+ import {  useEffect, useState } from "react";
  import { FaBars } from "react-icons/fa";
  import { MdCancel } from "react-icons/md";
  import { Switch } from "@headlessui/react";
  import { ChevronRight, LogOut } from "lucide-react";
  import { useNavigate } from "react-router-dom";
- import { UserContext } from "../context/UserContext";
 import Loader from "../Loader";
+import useUserStore from "../context/Store";
 
  
  const settingsOptions = [
@@ -23,10 +23,9 @@ import Loader from "../Loader";
 
 
 const ClientSideBar = () => {
-  const userToken = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
   const [role, setRole] = useState(null);
-  const { user, logout, url, getuser } = useContext(UserContext);
+  const { user, logout, url, getUser, userToken } = useUserStore()
   const [loading, setLoading] = useState(false)
   
   
@@ -48,7 +47,7 @@ const ClientSideBar = () => {
     if(response.ok){
         const data = await response.json()
         setRole(data.user.userType)
-        window.location.reload()
+        window.location.heref = '/'
       setLoading(false)
        localStorage.removeItem('token')
     } else {
@@ -60,9 +59,9 @@ const ClientSideBar = () => {
 
 
 useEffect(()=>{
-if(!user) getuser()
+if(!user) getUser()
   
-},[user, getuser])
+},[user, getUser])
 
 
 
@@ -105,7 +104,7 @@ if(!user) getuser()
                   <Switch
                     checked={role}
                     onChange={switchRole}
-                    onClick={getuser}
+                    onClick={getUser}
                     className={`${
                       role || user?.userType == "tasker" ? "bg-pink-500" : "bg-gray-300"
                     } relative inline-flex h-6 w-11 items-center rounded-full transition`}

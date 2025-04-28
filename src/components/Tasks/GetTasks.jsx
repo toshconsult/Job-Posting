@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import useUserStore from "../context/Store";
+;
 import Loader from '../Loader';
 
 const GetTasks = () => {
 
   const [tasks, settasks] = useState([]);
-  const { userToken, url } = useContext(UserContext);
+  const { userToken, url } = useUserStore();
   const [loading, setloading] = useState(false)
   const contLength = 100
 

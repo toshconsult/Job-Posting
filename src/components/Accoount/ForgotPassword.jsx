@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../context/UserContext"
+import useUserStore from "../context/Store"
 
 
 const ForgotPassword = () => {
-    const {url} = useContext(UserContext)
+    const {url} = useUserStore()
     const [loading, setLoading] = useState(false)
     const [formdata, setFormdata] = useState({
         email: '',
     })
-
-    
 
     const handleChange = (e) => { 
         const {name, value} = e.target

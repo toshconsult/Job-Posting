@@ -1,20 +1,20 @@
-import { useContext, useEffect} from "react";
+import {  useEffect} from "react";
 import { Bell} from "lucide-react";
 import { FaPlusCircle } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
-import { UserContext } from "../context/UserContext";
 import ClientTasks from "./ClientTasks";
 import { Link,} from "react-router-dom";
 import { MdOutlineMessage } from "react-icons/md";
+import useUserStore from "../context/Store";
 
 const ClientDashboard = () => {
-  const { user } = useContext(UserContext);
+  const { user, getUser } = useUserStore()
   
   const token = localStorage.getItem('token')
 
   useEffect(()=>{
     if(!token){
-      window.location.href = '/login'
+      window.location.href = '/'
     }
   },[token])
 
@@ -23,6 +23,10 @@ const ClientDashboard = () => {
       window.location.href = "/dashboard";
     }
   }, [ user]);
+
+  useEffect(() => {
+    getUser()
+  }, [getUser])
 
   return (
     <div className="flex ustify-center md:justify-normal min-h-screen md:gap-72">

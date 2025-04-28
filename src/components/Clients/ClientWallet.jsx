@@ -1,13 +1,14 @@
 
 import { useContext} from "react";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import ClientSideBar from "./ClientSideBar";
-import { Link } from "react-router-dom";
+
 
 export default function ClientWallet() {
 
   
-const  {balance} = useContext(UserContext)
+const  {balance} = useUserStore()
   
 
     return (
@@ -19,7 +20,7 @@ const  {balance} = useContext(UserContext)
         <div className="mb-6">
           <div className="bg-[#333] text-white text-center py-6 rounded-lg mt-2">
             <p className="text-sm">Total Balance</p>
-            <p className="text-3xl font-bold">{`₦${balance?.toLocaleString('en-NG', { minimumFractionDigits: 2 })}`}</p>
+           {balance ?  <p className="text-3xl font-bold">{`₦${balance?.toLocaleString('en-NG', { minimumFractionDigits: 2 })}`}</p> : 'Loading..'}
           </div>
         </div>
         

@@ -1,15 +1,15 @@
-import { useContext,  useEffect,  useMemo,  useState } from "react"
+import {   useEffect,  useMemo,  useState } from "react"
 import Loader from "../Loader"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
 import { toast, ToastContainer } from "react-toastify"
 import { Link,  useNavigate } from "react-router-dom"
-import { UserContext } from "../context/UserContext"
 import Modal from "../Modal"
 import { AccountType } from "./AccountType"
+import useUserStore from "../context/Store"
 
 
 const Login = ({modalOpen}) => {
-    const {url} = useContext(UserContext)
+    const {url} = useUserStore()
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [openModal, setOpenModal] = useState(false)
@@ -54,7 +54,7 @@ const Login = ({modalOpen}) => {
             })
             if(response.ok){
                 const data = await response.json()
-                console.log(data);
+                // console.log(data);
                 const token = data.token
                 localStorage.setItem('token', token)
                 toast.success(data.message)
@@ -81,7 +81,7 @@ const Login = ({modalOpen}) => {
             
         }
     }
-
+const goto = ()=> navigate('/account-type')
     
   return (
     <div className={modalOpen ? "w-full h-full" : "flex justify-center items-center min-h-screen"}>
@@ -118,7 +118,7 @@ const Login = ({modalOpen}) => {
       <div className="flex flex-col gap-y-2 mt-4">
         <Link to='/forgot-password' className="text-center text-blue-600">Forgot Password</Link>
         <p className="text-center">Don&apos;t have account ? <button 
-        className="text-blue-500" onClick={modalOpen ? ()=>setOpenModal(true) : '/account-type'}>Sign Up</button></p>
+        className="text-blue-500 cursor-pointer" onClick={modalOpen ? ()=>setOpenModal(true) : ()=>goto()}>Sign Up</button></p>
     </div>
     </div>
     </div>

@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState, } from "react";
+import {  useEffect, useState, } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import Loader from "../Loader";
 import { toast, ToastContainer } from "react-toastify";
 
 const SingleTask = () => {
-  const { url, user,   } = useContext(UserContext);
+  const { url, user,   } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState({});
   const { id } = useParams();

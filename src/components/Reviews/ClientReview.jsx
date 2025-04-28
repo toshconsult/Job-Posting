@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { UserContext } from "../context/UserContext"
 import { ToastContainer } from "react-toastify"
 import Loader from "../Loader"
@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 
 
 const ClientReview = () => {
-  const {url, userToken} = useContext(UserContext)
+  const {url, userToken} = useUserStore()
   const [loading, setloading] = useState(false)
   const totalRating = 5
   const [rating, setRating] = useState(0)

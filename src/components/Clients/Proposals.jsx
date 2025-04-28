@@ -1,12 +1,15 @@
-import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState,  } from "react";
+import useUserStore from "../context/Store";
+
+import { Link, useParams } from "react-router-dom";
+import ClientSideBar from "./ClientSideBar";
 
 const Proposals = () => {
-  const { url, userToken } = useContext(UserContext);
+  const { url, userToken } = useUserStore();
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  console.log(proposals);
+  
   const maxContent = 200
 
   const {id} = useParams()
@@ -39,14 +42,12 @@ const Proposals = () => {
     fetchProposals();
   }, [id, url, userToken]);
 
-  function showFllContect(){
-    navigate(`/single-proposal/${id}`)
-    
-}
+ 
 
   return (
-    <div className="max-w-5xl mx-auto bg-[#F2F2F2] p-6 rounded-xl mt-6">
-
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+       <ClientSideBar />
+        <div className="mt-4 space-y-4 md:px-10 w-full">
       <h2 className="text-xl font-semibold mb-4">Proposals</h2>
 
       {loading ? (
@@ -73,7 +74,7 @@ const Proposals = () => {
                 <>{proposal.description.slice(0, maxContent)} <i
                 >.....</i> </>
               : proposal.description }</p>
-        <button onClick={showFllContect} className="text-blue-700 cursor-pointer">View</button>
+        <Link to={`/single-proposal/${proposal._id}`} className="text-blue-700 cursor-pointer">View</Link>
              
               <p className="text-gray-500 text-sm mt-1">
                 {new Date(proposal.date).toLocaleDateString()}
@@ -98,6 +99,7 @@ const Proposals = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 import { UserContext } from "../context/UserContext"
 
 
 const ChangePassword = () => {
-    const {url, token} = useContext(UserContext)
+    const {url, token} = useUserStore()
     console.log(token);
     
     const [loading, setLoading] = useState(false)

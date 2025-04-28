@@ -2,7 +2,7 @@
 // import { UserContext } from "./UserContext"
 
 // export const PreventAccess = () => {
-//   const {user} = useContext(UserContext)
+//   const {user} = useUserStore()
 //   if(user && user.userType === 'client'){
 //     return window.location.href = '/client-dashboard'
 //   } else {

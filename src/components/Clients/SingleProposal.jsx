@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import {  useEffect, useState } from "react";
+import useUserStore from "../context/Store";
+
 import { MdOutlineMessage, MdVerified } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,14 +8,14 @@ import Loader from "../Loader";
 import ClientSideBar from "./ClientSideBar";
 
 const SingleProposal = () => {
-  const { url, userToken } = useContext(UserContext);
+  const { url, userToken } = useUserStore();
   const [proposal, setProposals] = useState({});
   const [profileId, setProifleId] = useState("");
   const [taskId, setTaskid] = useState("");
   const [loading, setloading] = useState(false);
   const [user, setUser] = useState(null)
   
-  // console.log(taskId);
+  // console.log(userToken);
   // console.log(profileId);
 
   const { id } = useParams();
@@ -25,7 +26,7 @@ const SingleProposal = () => {
       const response = await fetch(`${url}client/proposal/${id}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          "Authorization": `Bearer ${userToken}`,
           "content-type": "application/json",
         },
       });
@@ -38,8 +39,8 @@ const SingleProposal = () => {
        
         console.log(data);
       } else {
-        // const err = await response.json()
-        // console.log(err);
+        const err = await response.json()
+        console.log(err);
         setloading(false);
       }
     };

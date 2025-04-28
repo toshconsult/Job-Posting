@@ -1,13 +1,14 @@
 
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify"
-import { UserContext } from "../context/UserContext";
+import useUserStore from "../context/Store";
+
 import Loader from '../Loader'
 import skills from '/src/components/Skills.jsx'
 
 
 const Interest = () => {
-  const {url} = useContext(UserContext)
+  const {url} = useUserStore()
   const [click, setClick] = useState(null);
   const [clickvalue, setClickValue] = useState(null);
   const [selectedSkills, setSelectedSkills] = useState([])

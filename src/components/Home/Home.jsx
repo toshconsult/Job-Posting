@@ -1,4 +1,5 @@
 
+
 import "../Home/Home.css"
 import AboutUs from "../LandingPage/About"
 import Categories from "../LandingPage/Categories"
@@ -7,8 +8,9 @@ import Hero from "../LandingPage/Hero"
 import NavBar from "../NavBar"
 // import Select from '../Select/Select'
 
-
 const Home = () => {
+
+
   return (
     <div>
       <NavBar />

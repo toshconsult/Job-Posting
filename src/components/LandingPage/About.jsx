@@ -37,7 +37,7 @@ const AboutUs = () => {
             <p className='text-[18px] lg:text-[20px] lg:w-[40vw] font-normal text-gray-700'>
               Our mission is to provide a seamless experience for both service providers and customers, ensuring that everyone gets the best value for their time and money.
             </p>
-            <button className='bg-[#333] cursor-pointer px-[20px] text-white py-[10px] rounded'>Learn more</button>
+           <a href='/about'> <button className='bg-[#333] cursor-pointer px-[20px] text-white py-[10px] rounded'>Learn more</button></a>
           </div>
         </div>
       </div>

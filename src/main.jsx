@@ -48,6 +48,7 @@ import ClientReview from './components/Reviews/ClientReview.jsx';
 import OurCommunity from './components/Users/Community.jsx';
 import { ClientCompletedTasks } from './components/Clients/ClientCompletedTask.jsx';
 import { ClientOnGoingTasks } from './components/Clients/ClientOnGoingTasks.jsx';
+import AboutPage from './components/LandingPage/AboutPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <RoleContextProvider>
@@ -63,6 +64,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="reset-password" element={<ResetPassword />} />
         <Route path="change-password" element={<ChangePassword />} />
         <Route path="interest" element={<Interest />} />
+        <Route path="about" element={<AboutPage />} />
 
         {/* Protected Routes Layout */}
         <Route element={<ProtectedRoute />}>

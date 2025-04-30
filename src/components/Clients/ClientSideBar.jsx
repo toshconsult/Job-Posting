@@ -96,10 +96,10 @@ if(!user) getUser()
             <nav className="flex flex-col p-4 space-y-2">
               {/* Account Type Toggle */}
               <div className="bg-[#f2f2f2] p-4 rounded-lg">
-                <span className="text-gray-800 font-medium">Account Type</span>
+                <span className="text-gray-800 font-medium">You are a {user?.userType=== "client" ? "Client" : "Tasker"}</span>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-500">{`As A ${
-                    role ? role : user?.userType
+                  <span className="text-sm text-gray-500">{`Switch To ${
+                    user?.userType == "client" ? "Tasker" : "Client"
                   }`}</span>
                   <Switch
                     checked={role}

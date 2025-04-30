@@ -1,6 +1,5 @@
-// import { Sidebar } from "lucide-react";
 
-import { useContext } from "react";
+import {  useEffect, useState } from "react";
 import Sidebar from "../SideBar";
 import useUserStore from "../context/Store";
 
@@ -8,8 +7,30 @@ import { Link } from "react-router-dom";
 
 export default function WalletPage() {
 
-  const  {balance} = useUserStore()
+  const  {balance, url, userToken} = useUserStore()
+  const [transactions, setTransactions] = useState(null)
   
+  useEffect(()=>{
+  const getTransaction = async ()=>{
+    const res =  await fetch(`${url}user/transactions`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userToken}`,
+        
+      }
+    })
+
+    if(res.ok){
+      const data = await res.json()
+      setTransactions(data.trx)
+      console.log(data)
+    } else{
+      const err = await res.json()
+      console.log(err)
+    }
+  }
+  getTransaction()
+  }, [url, userToken])
 
   
 
@@ -37,15 +58,35 @@ export default function WalletPage() {
         
         {/* Earnings History */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Earnings History</h3>
-          <div className="bg-gray-100 p-3 rounded-lg flex justify-between mb-2">
-            <span>Task</span>
-            <span className="font-semibold">#405,300</span>
-          </div>
-          <div className="bg-gray-100 p-3 rounded-lg flex justify-between">
-            <span>Referrals</span>
-            <span className="font-semibold">#94,740</span>
-          </div>
+          <h3 className="text-lg font-semibold mb-2">Transaction History</h3>
+          <table className="w-full text-sm rounded-lg overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
+        <tbody>
+          <th>Status</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Detail</th>
+          <th>Date</th>
+          {/* <th>Reference</th> */}
+          {transactions?.map((trx, i) => (
+            <tr key={i} className="border-b my-2 border-gray-300">
+              <td className={`${trx.TransactionStatus === "completed" ? 'text-green-500' : 'text-red-600'} text-center py-3 px-2 w-5 font-semibold`} >
+               {trx?.TransactionStatus}
+              </td>
+
+             <td className={`${trx.TransactionType === "credit" ? 'text-green-500' : 'text-red-600'} text-center py-3 px-2 w-5 font-semibold`}>
+              {trx?.TransactionType}
+             </td>
+
+             <td className={`${trx.TransactionType === "credit" ? 'text-green-500' : 'text-red-600'} text-center py-3 px-2 w-5 font-semibold`}>
+             {trx.TransactionType === "credit" ? `+${trx?.amount}` :`-${trx?.amount}`}
+             </td>
+             <td className="">{trx.details}</td>
+             <td>{new Date(trx.createdAt).toLocaleDateString()}</td>
+             {/* <td>{trx.reference_number}</td> */}
+            </tr>
+          ))}
+        </tbody>
+      </table>
         </div>
       </div>
       </div>

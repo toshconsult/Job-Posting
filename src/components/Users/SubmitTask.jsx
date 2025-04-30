@@ -1,8 +1,9 @@
 import {  useState } from "react"
 import { useParams } from "react-router-dom"
-import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
+import useUserStore from "../context/Store"
+import Sidebar from "../SideBar"
 
 const SubmitTask = () => {
 const [loading, setloading] = useState(false)
@@ -49,10 +50,12 @@ const [image, setImage] = useState(null)
         setImage(null)
     }
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+      <Sidebar />
         {loading ? <Loader /> : <>
+          <div className="mt-4 space-y-4 md:px-10 w-full">
               <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                Submit <span className="text-[#EA1588]">Task</span>
+                Submit <span className="text-[#333]">Task</span>
               </h1>
               <form onSubmit={submiTask} className="w-full max-w-2xl">
                 <ToastContainer />
@@ -90,7 +93,7 @@ const [image, setImage] = useState(null)
                   <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white
+                className="w-full py-4 bg-[#333] text-white rounded-3xl hover:bg-white
                  hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all cursor-pointer"
         
               >
@@ -98,6 +101,7 @@ const [image, setImage] = useState(null)
               </button>
             </div>
                   </form>
+                  </div>
                   </>}
                   </div>
   )

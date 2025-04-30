@@ -1,3 +1,5 @@
+
+
 import  {  useEffect, useState } from 'react'
 import useUserStore from '../context/Store'
 import ClientSideBar from './ClientSideBar'
@@ -5,7 +7,7 @@ import Loader from '../Loader'
 import ClientTaskNav from './ClientTaskNav'
 
 
-export const ClientSubmittedTasks = () => {
+export const ClientOnGoingTasks = () => {
 
     const {url, userToken} = useUserStore()
     const [loading, setLoading] = useState(false)
@@ -25,7 +27,7 @@ export const ClientSubmittedTasks = () => {
        
     const assigned = async () => {
         setLoading(true)
-        const response = await fetch(`${url}client/all-submitted-tasks`, {
+        const response = await fetch(`${url}client/all-ongoing-tasks`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${userToken}`,
@@ -47,32 +49,12 @@ export const ClientSubmittedTasks = () => {
 
 
 
-const approve = async (id)=>{
-    const res = await fetch(`${url}client/task/${id}/approve`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${userToken}`,
-            "Content-Type": "application/json",
-        }
-    })
-
-    if(res.ok){
-        const data = await res.json()
-        console.log(data);
-        
-    } else {
-        const err = await res.json()
-        console.log(err);
-        
-    }
-}
-
   return (
     <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
     <ClientSideBar />
    <div className='mt-4 space-y-4 md:px-10 w-full'>
     <ClientTaskNav />
-    <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Submitted Tasks</h2>
+    <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">On-Going Tasks</h2>
     {loading ? <Loader />  :<>
         {filtered?.length === 0 ? 
             <h1>No Tasks</h1>
@@ -87,18 +69,15 @@ const approve = async (id)=>{
                             <p className='font-semibold'>{task?.tasker?.username}</p>
                         </div>
                         <div className='py-4'>
-                            <p>{task.submissionNotes}</p>
+                            <p>{task.title}</p>
                         </div>
                         <div className='flex items-center justify-between'>
-                            <button className='border border-blue-100 text-blue-500 px-5 py-2 rounded-lg text-sm font-medium'>
-                                View Image
-                                 </button>
+                            
                             <button className='px-5 py-2 border border-white 
                              rounded-lg text-sm font-medium'
-                             onClick={()=> approve(task._id)}
                              style={{background: '#333333', color: 'white'}}
                              >
-                                Approve
+                                {task?.taskStatus}
                                  </button>
                         </div>
                     </div>

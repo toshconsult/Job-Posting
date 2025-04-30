@@ -9,7 +9,7 @@ const AppliedTask = () => {
   const [err, setErr] = useState();
   const [task, setTask] = useState([]);
   const userToken = localStorage.getItem("token");
-console.log(task);
+// console.log(task);
 
   const sortedTasks = task?.tasks?.sort(
     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
@@ -29,6 +29,8 @@ console.log(task);
 
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
+          
           setTask(data);
         } else {
           const error = await response.json();
@@ -57,7 +59,7 @@ console.log(task);
             </div>
             <p className="text-gray-500 text-sm">{req.description}</p>
             <div className="flex justify-between items-center">
-            <a href={`/single-task/${req._id}`}>
+            <a href={`/single-task/${req.task}`}>
               <button className="text-blue-900 mt-2">View</button>
             </a>
           

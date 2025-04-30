@@ -4,6 +4,7 @@ import useUserStore from "../context/Store";
 import { Link, useLocation } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import ClientSideBar from "./ClientSideBar";
+import ClientTaskNav from "./ClientTaskNav";
 
 const ClientTasks = () => {
   const { url } = useUserStore();
@@ -53,6 +54,8 @@ const ClientTasks = () => {
     <div className={`flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen ${location.pathname === '/client-dashboard' ? 'md:gap-0' : 'md:gap-72'}`}>
       <ClientSideBar />
       <div className="mt-4 space-y-4 md:px-10">
+      {location.pathname != '/client-dashboard' && <ClientTaskNav />}
+        
       <h2 className="pl-24 text-xl font-semibold pb-4">{location.pathname != '/client-dashboard' && 'Tasks'}</h2>
         <p className="text-red-600">{err}</p>
         {sorted?.length === 0 ? (

@@ -6,16 +6,23 @@ import useUserStore from "../context/Store";
 import Loader from "../Loader";
 import { MdVerified } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import NavBar from "../NavBar";
 
 const Profile = () => {
   const { url, userToken } = useUserStore();
   const [user, setUser] = useState({});
-  const [reviews, setReviews] = useState(null)
-  console.log(reviews);
-  
-  const [task, setTask] = useState(null)
-  console.log(reviews?.task);
   const { id } = useParams();
+  console.log(id);
+  
+  
+  const [reviews, setReviews] = useState(null)
+  console.log(reviews?.filter(rv => rv.client == id));
+  
+  const filteredReviews = reviews?.filter(rv => rv.client !== id ||  rv.tasker !== id )
+  console.log(filteredReviews);
+  
+  // const [task, setTask] = useState(null)
+  // console.log(reviews?.task);
   const navigate = useNavigate();
   useEffect(() => {
 
@@ -69,7 +76,7 @@ const Profile = () => {
           if (response.ok) {
             const data = await response.json();
             console.log(data);
-            setTask(data);
+            // setTask(data);
             
           } else {
             const data = await response.json();
@@ -81,6 +88,8 @@ const Profile = () => {
 },[id, url, userToken, reviews?.task])
 
   return (
+    <>
+      <NavBar />
     <div className="flex justify-center px-4 md:px-20 md:justify-normal min-h-screen md:gap-72">
       {!user?.profilePicture ? (
         <Loader />
@@ -138,16 +147,32 @@ const Profile = () => {
                   <div>
                     {reviews.length === 0 && <h1>No review yet</h1>}
                     {reviews?.map((review, i)=>(
-                    <div className="md:pl-4" key={i}>
-                      <div className="flex justify-between items-center my-4">
+                      <div key={i}>
+                    <div className="md:pl-4 border-1 border-[#F3F5FF] rounded-2xl my-2 pb-2" >
+                      <div className="flex gap-5 items-center">
                         <div className="flex gap-4 items-center my-4">
-                        <img src={user?.profilePicture} className="h-14 rounded-full"/>
-                        <p className="">User</p>
+                        
+                        <h2 className="">Title</h2>
                         </div>
                         <p><FaStar className="text-yellow-400"/></p>
                       </div>
                       <p>{review?.taskerComment}</p>
+                     
                     </div>
+
+                <div className="md:pl-4 border-1 border-[#F3F5FF] rounded-2xl my-2 pb-2" key={i}>
+                <div className="flex gap-5 items-center">
+                  <div className="flex gap-4 items-center my-4">
+                  
+                  <h2 className="">Title</h2>
+                  </div>
+                  <p><FaStar className="text-yellow-400"/></p>
+                </div>
+                <p>{review?.clientComment}</p>
+
+                </div>
+                </div>
+
                 ))}
                   </div>
                   </div>
@@ -156,6 +181,7 @@ const Profile = () => {
         </>
       )}
     </div>
+    </>
   );
 };
 

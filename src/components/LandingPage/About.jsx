@@ -1,6 +1,7 @@
 import  { useState, useEffect } from 'react'
-import img4 from '/src/assets/Images/image1.jpeg'
-import img5 from '/src/assets/Images/pic.avif'
+const img4 = 'https://img.freepik.com/free-photo/young-professional-african-american-videographer-holding-professional-camera-with-tripod-pro-equipment-afro-cameraman-wearing-black-duraq-making-videos_627829-4378.jpg?t=st=1745359407~exp=1745363007~hmac=519c6673c2f215285dcb3a61fbda90d75835d16ab373fed4632db0ebd0ad736f&w=996'
+const img5 = 'https://img.freepik.com/free-photo/engineer-cooperation-male-female-technician-maintenance-control-relay-robot-arm-system-welding-with-tablet-laptop-control-quality-operate-process-work-heavy-industry-40-manufacturing-factory_609648-724.jpg?t=st=1745358670~exp=1745362270~hmac=7c0faee18ed69ec6405f023cbfc73b40e2379956faeda94e5b156d8478feaa0a&w=900'
+
 
 const images = [img4, img5];
 

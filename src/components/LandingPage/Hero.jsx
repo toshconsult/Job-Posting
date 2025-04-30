@@ -45,7 +45,7 @@ const Hero = () => {
         </h1>
         <div className='flex gap-[20px] lg:gap-[40px] pt-[10px] lg:pt-[20px]'>
             
-        <Link to='/account-type'>  <button className='bg-blue-600 cursor-pointer text-white px-[35px] py-[10px] rounded hover:bg-blue-500 hover:text-white' onClick={handleEnrollClick}>
+        <Link to='/account-type'>  <button className='bg-[#333] cursor-pointer text-white px-[35px] py-[10px] rounded hover:bg-[#797979] hover:text-white' onClick={handleEnrollClick}>
             Get Started
           </button></Link>
         </div>

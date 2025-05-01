@@ -9,7 +9,8 @@ export default function ClientWallet() {
   
 const  {balance, userToken, url} = useUserStore()
 const [transactions, setTransactions] = useState(null)
-  useEffect(()=>{
+
+  
     const getTransaction = async ()=>{
       const res =  await fetch(`${url}user/transactions`, {
         method: 'GET',
@@ -22,14 +23,15 @@ const [transactions, setTransactions] = useState(null)
       if(res.ok){
         const data = await res.json()
         setTransactions(data.trx)
-        console.log(data)
+        // console.log(data)
       } else{
         const err = await res.json()
         console.log(err)
       }
     }
+    useEffect(()=>{
     getTransaction()
-    }, [url, userToken])
+    }, [])
   
 
     return (

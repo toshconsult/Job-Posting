@@ -20,14 +20,14 @@ const AboutUs = () => {
     <div className='victorian'>
       <div className='bg-gray-100 shadow-lg py-10'>
         <div className='lg:flex lg:flex-row gap-5 justify-center items-center text-center lg:w-full h-full px-4'>
-          <div className='flex flex-col gap-5 justify-center items-center text-center w-[50%] h-full px-4'>
+          <div className='flex flex-col gap-5 justify-center items-center text-center md:w-[50%] h-full px-4'>
             <img 
               src={images[currentImageIndex]} 
               alt="About Us" 
               className='lg:w-[70vw] lg:h-[70vh] object-cover rounded-lg shadow-lg transition-all duration-1000 ease-in-out' 
             />
           </div>
-          <div className='flex flex-col gap-5 justify-center items-center text-center w-[50%] h-full px-20'>
+          <div className='flex flex-col gap-5 justify-center items-center text-center md:w-[50%] h-full md:px-20'>
             <h1 className='text-[35px] lg:text-[35px] lg:w-[35vw] font-bold text-black drop-shadow-lg'>
               About Us
             </h1>

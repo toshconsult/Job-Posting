@@ -10,7 +10,7 @@ export default function WalletPage() {
   const  {balance, url, userToken} = useUserStore()
   const [transactions, setTransactions] = useState(null)
   
-  useEffect(()=>{
+  
   const getTransaction = async ()=>{
     const res =  await fetch(`${url}user/transactions`, {
       method: 'GET',
@@ -29,8 +29,10 @@ export default function WalletPage() {
       console.log(err)
     }
   }
+
+  useEffect(()=>{
   getTransaction()
-  }, [url, userToken])
+  }, [])
 
   
 

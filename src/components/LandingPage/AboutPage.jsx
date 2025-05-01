@@ -124,13 +124,13 @@ const AboutPage = () => {
               backgroundImage: `url(${backgroundImages[currentIndex]})`,
             }}
           />
-  
+   <div className="absolute inset-0 bg-black opacity-50"></div>
           {/* Content */}
-          <div className='relative z-10 flex flex-col gap-5 justify-center items-center text-center w-full h-full px-4'>
-            <h1 className='text-[45px] lg:text-[45px] w-[35vw] font-bold text-white drop-shadow-lg'>
+          <div className='relative z-10 flex flex-col gap-5 justify-center items-center text-center w-full h-full px-2 md:px-4'>
+            <h1 className='text-[45px] lg:text-[45px] md:w-[35vw] font-bold text-white drop-shadow-lg'>
               We are Redefining Service Connections
             </h1>
-            <h1 className='text-[20px] lg:text-[20px] font-bold text-white drop-shadow-lg'>
+            <h1 className='text-[20px] lg:text-[20px] font-bold text-white'>
               ________Experience a new era of service connections
             </h1>
           </div>

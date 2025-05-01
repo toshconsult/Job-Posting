@@ -16,13 +16,19 @@ const AllTask = () => {
   const task = tasks?.tasks;
   // console.log(task);
 
-  const sortedTasks = task
-    ?.slice()
-    .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+const shuffledTask = (task = [])=>{
+const arr = [...task]
+  for (let i = arr?.length -1; i > 0; i-- ){
 
-    const filtered = sortedTasks?.filter(task =>
-      task.status != 'completed'
-    )
+    const t = Math.floor(Math.random() * (i + 1) );
+    [arr[i], arr[t]] = [arr[t], arr[i]]
+
+  }
+  return arr
+}
+
+const shuffled = shuffledTask(task)
+console.log(shuffled);
 
   // !!!!!!!!!!-------------------------------------- FUCTION TO GET ALL TASKS --------------------------------------!!!!!!!!!!
   useEffect(() => {
@@ -59,7 +65,7 @@ const AllTask = () => {
 
   return (
     // <></>
-    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
+    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-60 lg:gap-72">
       <Sidebar />
       {loading ? (
        <Loader />
@@ -67,20 +73,20 @@ const AllTask = () => {
         <div className="mt-4 space-y-4 md:px-10 w-full">
           <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
           <TaskNav/>
-          <div className="grid place-items-center md:grid-cols-2 lg:grid-cols-3 ">
-          {task?.length === 0 && (
+          <div className="grid place-items-center md:grid-cols-2 md:gap-6 lg:grid-cols-3 ">
+          {shuffled?.length === 0 && (
             <h1 className="text-[25px] pb-6 mt-14 px-6 md:text-center">
              
               No Task Available
             </h1>
           )}
-          {filtered?.map((task) => {
+          {shuffled?.map((task) => {
 
             return (
               <div
                 key={task._id}
-                className="w-[328px] md:w-[328px] min-h-[200px] md:min-h-[300px] border-1 p-4
-                    border-[#333333] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
+                className="w-[328px] md:w-[300px] lg:w-[328px] min-h-[200px] md:min-h-[300px]  p-4
+                    shadow-xl rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
               >
                 <h1 className="font-semibold text-[20px]">{task.title}</h1>
                 <p className="text-[#333] font-normal text-[14px]">

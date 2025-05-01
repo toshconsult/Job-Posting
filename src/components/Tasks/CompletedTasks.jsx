@@ -47,7 +47,7 @@ export const CompletedTasks = () => {
 }, [url, userToken])
 
   return (
-    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
+    <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-60 lg:gap-72">
       <Sidebar />
          {loading ? (
            <Loader />
@@ -67,8 +67,8 @@ export const CompletedTasks = () => {
                return (
                  <div
                    key={task._id}
-                   className="w-[328px] md:w-[328px] min-h-[200px] md:min-h-[300px] border-1 p-4
-                       border-[#333333] rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
+                   className="w-[328px] md:w-[300px] lg:w-[328px] min-h-[200px] md:min-h-[300px] p-4
+                    shadow-xl rounded-2xl flex flex-col justify-center items-center gap-y-10 my-2"
                  >
                    <h1 className="font-semibold text-[20px]">{task.title}</h1>
                    <p className="text-[#333] font-normal text-[14px]">

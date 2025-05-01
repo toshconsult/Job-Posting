@@ -11,9 +11,11 @@ const AllTask = () => {
   const { url, userToken } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [newT, setNewT] = useState([])
   const max = 200
 
-  const task = tasks?.tasks;
+
+  // const task = tasks?.tasks;
   // console.log(task);
 
 const shuffledTask = (task = [])=>{
@@ -27,8 +29,8 @@ const arr = [...task]
   return arr
 }
 
-const shuffled = shuffledTask(task)
-console.log(shuffled);
+const shuffled = shuffledTask(tasks)
+// console.log(shuffled);
 
   // !!!!!!!!!!-------------------------------------- FUCTION TO GET ALL TASKS --------------------------------------!!!!!!!!!!
   useEffect(() => {
@@ -47,7 +49,8 @@ console.log(shuffled);
 
         if (response.ok) {
           const data = await response.json();
-          setTasks(data);
+          setTasks(data.tasks);
+          setNewT(data.tasks)
           setLoading(false);
         } else {
           const error = await response.json();
@@ -63,6 +66,22 @@ console.log(shuffled);
     getTasks();
   }, [url, userToken]);
 
+
+  const searchTask = (e)=>{
+    const query = e.toLowerCase().trim();
+    if (!query) {
+      setTasks(newT); 
+      return;
+    }
+    // console.log(query);
+    
+    const searchT = newT?.filter(t => t.title.toLowerCase().includes(query));
+    console.log(searchT);
+    
+    setTasks(searchT);
+    
+  }
+
   return (
     // <></>
     <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-60 lg:gap-72">
@@ -71,7 +90,16 @@ console.log(shuffled);
        <Loader />
       ) : (
         <div className="mt-4 space-y-4 md:px-10 w-full">
+          <div className="flex justify-around items-center">
           <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
+          <div>
+      
+       <input type="text" placeholder="Search for task"
+        onChange={(e)=>searchTask(e.target.value)} 
+       className="bg-white outline-0 w-[10rem] md:w-[20rem] py-1 mb-4 px-4 rounded-xl"/>
+       
+          </div>
+          </div>
           <TaskNav/>
           <div className="grid place-items-center md:grid-cols-2 md:gap-6 lg:grid-cols-3 ">
           {shuffled?.length === 0 && (

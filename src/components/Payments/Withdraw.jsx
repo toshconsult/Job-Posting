@@ -26,12 +26,12 @@ const Withdraw = () => {
           }
         })
 
-        if(!response.ok) {
-            throw new Error('Failed to fetch data')
+        if(response.ok) {
+          const data = await response.json()
+          setbanks(data)
+        
         }
-        const data = await response.json()
-        // console.log(data)
-        setbanks(data)
+        
     }
 
    
@@ -42,6 +42,15 @@ const Withdraw = () => {
 const withdraw = async (e)=>{
 e.preventDefault()
 
+if(amount < 1000){
+  toast.error("Minimum withdraw is 10000")
+  return
+}
+
+if(accountNmber.length < 10){
+  toast.error("Please enter a valid account number")
+  return
+}
   setloading(true)
   const response = await fetch(`${url}user/wallet-withdrawal`, {
     method: 'POST', 
@@ -139,7 +148,7 @@ e.preventDefault()
                   Pin
                 </label>
                 <input
-                  type="number"
+                  type="password"
                  
                   // value={title}
                   placeholder="Enter Pin"

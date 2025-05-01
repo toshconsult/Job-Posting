@@ -49,6 +49,10 @@ import OurCommunity from './components/Users/Community.jsx';
 import { ClientCompletedTasks } from './components/Clients/ClientCompletedTask.jsx';
 import { ClientOnGoingTasks } from './components/Clients/ClientOnGoingTasks.jsx';
 import AboutPage from './components/LandingPage/AboutPage.jsx';
+import AdminDashboard from './Admin/Dashboard.jsx';
+import UsersTable from './Admin/Users.jsx';
+import TasksTable from './Admin/Tasks.jsx';
+import TransactionsTable from './Admin/Transactions.jsx';
 
 createRoot(document.getElementById('root')).render(
   <RoleContextProvider>
@@ -68,6 +72,11 @@ createRoot(document.getElementById('root')).render(
 
         {/* Protected Routes Layout */}
         <Route element={<ProtectedRoute />}>
+        <Route path="admin-dashboard" element={<AdminDashboard />} />
+        <Route path="admin-users" element={<UsersTable />} />
+        <Route path="admin-tasks" element={<TasksTable />} />
+        <Route path="admin-transactions" element={<TransactionsTable />} />
+        
           {/* User Routes */}
           <Route path="create-task" element={<CreateTask />} />
           <Route path="all-task" element={<AllTask />} />

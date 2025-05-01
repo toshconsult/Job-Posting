@@ -63,7 +63,7 @@ const [transactions, setTransactions] = useState(null)
           <div className="max-w-xl mx-auto mt-8">
       <table className="w-full text-sm rounded-lg overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         <tbody>
-          <th>Detail</th>
+          <th className="text-start">Detail</th>
           <th>Amount</th>
           <th>Type</th>
           <th>Date</th>

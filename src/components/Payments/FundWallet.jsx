@@ -1,9 +1,9 @@
 import {   useState } from "react"
 import { PaystackButton } from 'react-paystack'
 import { toast, ToastContainer } from "react-toastify"
-import { UserContext } from "../context/UserContext"
 import ClientSideBar from "../Clients/ClientSideBar"
 import Sidebar from "../SideBar"
+import useUserStore from "../context/Store"
 
 const FundWallet = () => {
   const {url, userToken, user} = useUserStore()

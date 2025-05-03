@@ -72,10 +72,10 @@ const approve = async (id)=>{
     <ClientSideBar />
    <div className='mt-4 space-y-4 md:px-10 w-full'>
     <ClientTaskNav />
-    <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Submitted Tasks</h2>
+    <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Submitted Todo</h2>
     {loading ? <Loader />  :<>
         {filtered?.length === 0 ? 
-            <h1>No Tasks</h1>
+            <h1>No Todo</h1>
         : 
            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
             {filtered?.map((task, i)=>{

@@ -119,14 +119,14 @@ const CreateTask = () => {
       ) : (
         <div className="mt-4 space-y-4 md:px-10 w-full">
           <h1 className="text-[25px] pb-6 pl-14 md:pl-0 font-semibold">
-            Post Your Task
+            Post Your Todo
           </h1>
           <form onSubmit={handleSubmit} className="w-full max-w-2xl">
             <ToastContainer />
             <div className="space-y-4">
               <div>
                 <label htmlFor="title" className="text-[#333] font-semibold">
-                  Task Title
+                  Todo Title
                 </label>
                 <input
                   type="text"
@@ -145,7 +145,7 @@ const CreateTask = () => {
                 <textarea
                   id="description"
                  value={description}
-                  placeholder="Enter the task description"
+                  placeholder="Enter the todo description"
                   onChange={(e)=>setDescription(e.target.value)}
                   className="w-full h-[114px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
@@ -218,7 +218,7 @@ const CreateTask = () => {
 
               <div>
                 <label htmlFor="taskImage" className="text-[#333] font-semibold">
-                  Task Image
+                  Todo Image
                 </label>
                 <input
                   type="file"

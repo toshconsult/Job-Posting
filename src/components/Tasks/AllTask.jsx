@@ -91,10 +91,10 @@ const shuffled = shuffledTask(tasks)
       ) : (
         <div className="mt-4 space-y-4 md:px-10 w-full">
           <div className="flex justify-around items-center">
-          <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
+          <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Todo</h2>
           <div>
       
-       <input type="text" placeholder="Search for task"
+       <input type="text" placeholder="Search for todo"
         onChange={(e)=>searchTask(e.target.value)} 
        className="bg-white outline-0 w-[10rem] md:w-[20rem] py-1 mb-4 px-4 rounded-xl"/>
        
@@ -105,7 +105,7 @@ const shuffled = shuffledTask(tasks)
           {shuffled?.length === 0 && (
             <h1 className="text-[25px] pb-6 mt-14 px-6 md:text-center">
              
-              No Task Available
+              No Todo Available
             </h1>
           )}
           {shuffled?.map((task) => {

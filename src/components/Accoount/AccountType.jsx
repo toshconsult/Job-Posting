@@ -39,8 +39,8 @@ export const AccountType = ({modalOpen}) => {
                 <button type="button" 
                 onClick={() => handleRole('tasker')}
                 className="w-[328px] py-[20px] border-2 hover:bg-[#333] hover:text-white cursor-pointer
-                border-[#F3F5FF] rounded-3xl text-black"><h2 className="font-semibold text-2xl">As a tasker</h2>
-                <p>Sign Up as a tasker</p></button>
+                border-[#F3F5FF] rounded-3xl text-black"><h2 className="font-semibold text-2xl">As a professional</h2>
+                <p>Sign Up as a professional</p></button>
                 
             </div>
         </form>

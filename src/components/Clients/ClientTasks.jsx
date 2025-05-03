@@ -56,10 +56,10 @@ const ClientTasks = () => {
       <div className="mt-4 space-y-4 md:px-10">
       {location.pathname != '/client-dashboard' && <ClientTaskNav />}
         
-      <h2 className="pl-24 text-xl font-semibold pb-4">{location.pathname != '/client-dashboard' && 'Tasks'}</h2>
+      <h2 className="pl-24 text-xl font-semibold pb-4">{location.pathname != '/client-dashboard' && 'Todo'}</h2>
         <p className="text-red-600">{err}</p>
         {sorted?.length === 0 ? (
-          <h2 className="text-2xl font-semibold">No tasks created yet</h2>
+          <h2 className="text-2xl font-semibold">No todo created yet</h2>
         ) : (
           <>
             {sorted?.map((task, index) => (

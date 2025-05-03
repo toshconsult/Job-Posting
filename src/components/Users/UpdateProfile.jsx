@@ -1,9 +1,9 @@
 import {  useState } from "react"
-import { UserContext } from "../context/UserContext"
 import Loader from "../Loader"
 import { toast, ToastContainer } from "react-toastify"
 import ClientSideBar from "../Clients/ClientSideBar"
 import Sidebar from "../SideBar"
+import useUserStore from "../context/Store"
 
 
 

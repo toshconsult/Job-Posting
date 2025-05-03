@@ -99,7 +99,7 @@ const Dashboard = () => {
 
             <div className="flex justify-between items-center mt-8">
               <h2 className="text-lg font-semibold">
-                Applied <span className="text-[#F2F2F2]">Tasks</span>
+                Applied <span className="text-[#F2F2F2]">Todo</span>
               </h2>
               <div className="flex gap-3">
                 <RefreshCcw className="text-gray-500 cursor-pointer" />
@@ -107,7 +107,7 @@ const Dashboard = () => {
               </div>
             </div>
             <p className="text-sm text-gray-500">
-              List of tasks you have applied for
+              List of todo you have applied for
             </p>
 
             <AppliedTask />

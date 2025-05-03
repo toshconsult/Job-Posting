@@ -13,7 +13,7 @@ import useUserStore from "../context/Store";
  const settingsOptions = [
    { text: "Dashboard", link: "/client-dashboard" },
    { text: "Wallet", link: "/client-wallet" },
-   { text: "Tasks", link: "/client-tasks" },
+   { text: "Todo", link: "/client-tasks" },
    {text: "Messages", link: "/messages"},
    { text: "Community", link: "/community" },
    { text: "Settings", link: "/settings" },
@@ -96,10 +96,10 @@ if(!user) getUser()
             <nav className="flex flex-col p-4 space-y-2">
               {/* Account Type Toggle */}
               <div className="bg-[#f2f2f2] p-4 rounded-lg">
-                <span className="text-gray-800 font-medium">You are a {user?.userType=== "client" ? "Client" : "Tasker"}</span>
+                <span className="text-gray-800 font-medium">You are a {user?.userType=== "client" ? "Client" : "Professional"}</span>
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-sm text-gray-500">{`Switch To ${
-                    user?.userType == "client" ? "Tasker" : "Client"
+                    user?.userType == "client" ? "Professional" : "Client"
                   }`}</span>
                   <Switch
                     checked={role}

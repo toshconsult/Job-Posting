@@ -24,7 +24,7 @@ const Sidebar = () => {
     { text: "Dashboard", link: "/dashboard" },
     // { text: "Profile", link: `/profile/${user?._id}` },
     { text: "Wallet", link: "/wallet" },
-    { text: "Tasks", link: "/all-task" },
+    { text: "Todo", link: "/all-task" },
     { text: "Messages", link: "/messages" },
     { text: "Community", link: "/community" },
     { text: "Settings", link: "/settings" },
@@ -94,10 +94,10 @@ if(!user) getUser()
         <nav className="flex flex-col p-4 space-y-2">
           {/* Account Type Toggle */}
           <div className="bg-[#f2f2f2] p-4 rounded-lg">
-            <span className="text-[#333333] font-medium">You are a {user?.userType=== "client" ? "Client" : "Tasker"}</span>
+            <span className="text-[#333333] font-medium">You are a {user?.userType=== "client" ? "Client" : "Professional"}</span>
             <div className="flex justify-between items-center mt-2">
               <span className="text-sm text-[#333333]">{`Switch To ${
-                user?.userType == "client" ? "Tasker" : "Client"
+                user?.userType == "client" ? "Professional" : "Client"
               }`}</span>
               <Switch
                 checked={role}

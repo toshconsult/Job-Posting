@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { useContext } from "react";
 import {  useNavigate } from "react-router-dom";
 import useUserStore from "../context/Store";
 
@@ -15,6 +14,10 @@ const data = [
 const Settingpage = () => {
   const navigate = useNavigate();
   const { user } = useUserStore();
+  const filteredData = user?.userType === "client"
+  ? data.filter((item) => item.text !== "Edit Profile")
+  : data;
+
   return (
     <div>
       {user?.userType === "client" ? <ClientSideBar /> : <Sidebar />}
@@ -23,7 +26,7 @@ const Settingpage = () => {
           Settings
         </h2>
 
-        {data.map((option, index) => (
+        {filteredData.map((option, index) => (
           <button
             key={index}
             onClick={() => navigate(option.link)}

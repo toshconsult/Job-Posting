@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useUserStore from "../context/Store";
 
 import skills from '/src/components/Skills.jsx'
+import ClientSideBar from "./ClientSideBar";
 
 const buttons = [
   "Photograph",
@@ -161,20 +162,22 @@ const EditTask = () => {
         }, [task]);
 
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+      <ClientSideBar />
       {loading ? (
         <Loader />
       ) : (
-        <>
+        <div className='mt-4 space-y-4 md:px-10 w-full'>
+
           <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-            Edit <span className="text-[#2F3C7E]">Task</span>
+            Edit <span className="text-[#2F3C7E]">Todo</span>
           </h1>
           <form onSubmit={handleSubmit} className="w-full max-w-2xl">
             <ToastContainer />
             <div className="space-y-4">
               <div>
                 <label htmlFor="title" className="text-[#333] font-semibold">
-                  Task Title
+                  Todo Title
                 </label>
                 <input
                   type="text"
@@ -195,7 +198,7 @@ const EditTask = () => {
                   id="description"
                   name="description"
                   value={description}
-                  placeholder="Enter the task description"
+                  placeholder="Enter the todo description"
                   onChange={(e)=>setDescription(e.target.value)}
                   className="w-full h-[114px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
@@ -268,7 +271,7 @@ const EditTask = () => {
 
               <div>
                 <label htmlFor="taskImage" className="text-[#333] font-semibold">
-                  Task Image
+                  Todo Image
                 </label>
                 <input
                   type="file"
@@ -309,7 +312,7 @@ const EditTask = () => {
                           value={skill}
                           checked={selectedSkills.includes(skill)}
                           onChange={() => handleSelect(skill)}
-                          className="w-4 h-4 text-[#EA1588] border-gray-300 rounded focus:ring-[#EA1588]"
+                          className="w-4 h-4 text-[#333] border-gray-300 rounded focus:ring-[#333]"
                         />
                         <span className="text-sm text-gray-700">{skill}</span>
                       </label>
@@ -322,13 +325,13 @@ const EditTask = () => {
             <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full max-w-xs py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white hover:text-[#EA1588] hover:border-2 hover:border-[#EA1588] transition-all"
+                className="w-full max-w-xs py-4 bg-[#333] text-white rounded-3xl hover:bg-white hover:text-[#333] hover:border-2 hover:border-[#333] transition-all"
               >
-                Post
+                Update
               </button>
             </div>
           </form>
-        </>
+        </div>
       )}
     </div>
   )

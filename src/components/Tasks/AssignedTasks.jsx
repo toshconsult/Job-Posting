@@ -53,13 +53,13 @@ export const AssignedTasks = () => {
            <Loader />
          ) : (
            <div className="mt-4 space-y-4 md:px-10 w-full">
-            <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Tasks</h2>
+            <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Todo</h2>
              <TaskNav />
              <div className="grid place-items-center md:grid-cols-2 lg:grid-cols-3 ">
              {task?.length === 0 && (
                <h1 className="text-[25px] pb-6 mt-14 px-6 md:text-center">
                 
-                 No Task Available
+                 No Todo Available
                </h1>
              )}
              {filtered?.map((task) => {

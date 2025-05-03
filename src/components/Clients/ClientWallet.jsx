@@ -59,7 +59,7 @@ const [transactions, setTransactions] = useState(null)
         </div>
         
         <div>
-          <h3 className="text-lg font-semibold mb-2">Spending History</h3>
+          <h3 className="text-lg font-semibold mb-2">Transaction History</h3>
           <div className="max-w-xl mx-auto mt-8">
       <table className="w-full text-sm rounded-lg overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         <tbody>

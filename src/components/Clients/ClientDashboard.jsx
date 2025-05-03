@@ -92,7 +92,7 @@ const ClientDashboard = () => {
             </Link>
           </div>
         </div>
-        <p className="text-sm text-gray-500">All posted tasks</p>
+        <p className="text-sm text-gray-500">All posted todo</p>
         <ClientTasks />
       </div>
     </div>

@@ -54,7 +54,7 @@ export const ClientCompletedTasks = () => {
     <ClientSideBar />
    <div className='mt-4 space-y-4 md:px-10 w-full'>
     <ClientTaskNav />
-   <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Completed Tasks</h2>
+   <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Completed Todo</h2>
     {loading ? <Loader /> : <>
         {filtered?.length === 0 ? 
             <h1>No Tasks</h1>

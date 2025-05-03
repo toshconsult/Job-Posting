@@ -55,7 +55,7 @@ const [image, setImage] = useState(null)
         {loading ? <Loader /> : <>
           <div className="mt-4 space-y-4 md:px-10 w-full">
               <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                Submit <span className="text-[#333]">Task</span>
+                Submit <span className="text-[#333]">Todo</span>
               </h1>
               <form onSubmit={submiTask} className="w-full max-w-2xl">
                 <ToastContainer />

@@ -24,7 +24,7 @@ const Sidebar = () => {
     { text: "Dashboard", link: "/dashboard" },
     // { text: "Profile", link: `/profile/${user?._id}` },
     { text: "Wallet", link: "/wallet" },
-    { text: "Todo", link: "/all-task" },
+    { text: "To do list", link: "/all-task" },
     { text: "Messages", link: "/messages" },
     { text: "Community", link: "/community" },
     { text: "Settings", link: "/settings" },

@@ -91,7 +91,7 @@ const shuffled = shuffledTask(tasks)
       ) : (
         <div className="mt-4 space-y-4 md:px-10 w-full">
           <div className="flex justify-around items-center">
-          <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Todo</h2>
+          <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">To do list</h2>
           <div>
       
        <input type="text" placeholder="Search for todo"

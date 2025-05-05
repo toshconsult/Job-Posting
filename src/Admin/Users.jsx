@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import useUserStore from "../components/context/Store";
 import AdminSidebar from "./SideBar";
 
 const UsersTable = () => {
@@ -18,6 +20,34 @@ const UsersTable = () => {
       registrationDate: '2024-02-22',
     },
   ];
+
+
+
+
+const {url, userToken} = useUserStore()
+useEffect(()=>{
+  const getUsers = async ()=>{
+    const res = await fetch(`${url}admin/get-all-users`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userToken}`
+      }
+    })
+
+    if(res.ok){
+      const data = await res.json()
+      console.log(data);
+      
+    } else{
+      const err = await res.json()
+      console.log(err);
+      
+    }
+  }
+
+  getUsers()
+
+}, [url, userToken])
 
   return (
     <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">

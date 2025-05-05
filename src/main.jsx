@@ -8,7 +8,6 @@ import SignUp from './components/Accoount/SignUp.jsx';
 import { AccountType } from './components/Accoount/AccountType.jsx';
 import Login from './components/Accoount/Login.jsx';
 import ForgotPassword from './components/Accoount/ForgotPassword.jsx';
-import VerifyOTP from './components/Accoount/VerifyOTP.jsx';
 import ResetPassword from './components/Accoount/ResetPassword.jsx';
 import ChangePassword from './components/Accoount/ChangePassword.jsx';
 import Interest from './components/Tasks/Interest.jsx';
@@ -64,8 +63,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="register" element={<SignUp />} />
         <Route path="login" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="verify-otp" element={<VerifyOTP />} />
-        <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="user/update-password/" element={<ResetPassword />} />
         <Route path="change-password" element={<ChangePassword />} />
         <Route path="interest" element={<Interest />} />
         <Route path="about" element={<AboutPage />} />

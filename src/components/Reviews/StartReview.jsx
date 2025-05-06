@@ -8,6 +8,7 @@ import ClientSideBar from "../Clients/ClientSideBar"
 import Sidebar from "../SideBar"
 
 
+
 const StartReview = () => {
   const {url, userToken, user} = useUserStore()
   const [loading, setloading] = useState(false)
@@ -21,6 +22,7 @@ const {id} = useParams()
   const review = async (e)=> {
 
 e.preventDefault()
+setloading(true)
     const response = await fetch(`${url}user/task/${id}/review`, {
       method: 'POST',
             headers: {
@@ -33,13 +35,14 @@ e.preventDefault()
     if(response.ok){
       const data = await response.json()
       toast.success(data.message)
-      // console.log(data);
+      console.log(data);
       setloading(false)
       
   } else {
       const err = await response.json()
       toast.error(err.error)
       // console.log(err);
+      setloading(false)
       
   }
   setComment('')
@@ -95,7 +98,7 @@ e.preventDefault()
                      hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all cursor-pointer"
             
                   >
-                  {loading ? "Loading" : " Submit"}
+                  {loading ? "Loading" : "Submit"}
                   </button>
                 </div>
                       </form>

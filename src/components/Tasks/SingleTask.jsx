@@ -12,12 +12,12 @@ const SingleTask = () => {
   const { id } = useParams();
   const sTask = task?.task
   const userToken  = localStorage.getItem('token')
-  console.log(userToken);
+  // console.log(userToken);
   
   const navigate = useNavigate()
   
 const [userP, setUserP] = useState({})
-console.log(userP);
+// console.log(userP);
 
 useEffect(() => {
   setLoading(true);
@@ -156,7 +156,10 @@ useEffect(() => {
         
         
         <div className="mt-6 flex justify-between text-lg font-semibold">
-          <p> Price: <span className="text-green-600">₦{sTask?.price}</span></p>
+          <p> Price: <span className="text-green-600">{sTask?.price?.toLocaleString('en-NG',{
+            style: 'currency',
+            currency: 'NGN',
+          })}</span></p>
           <p> Duration: {sTask?.duration} Months</p>
         </div>
   

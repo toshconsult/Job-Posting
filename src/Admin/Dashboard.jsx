@@ -1,7 +1,16 @@
+import { useEffect } from "react";
+import useAdminStore from "../components/context/AdminStore";
 import AdminSidebar from "./SideBar";
 
 
 const AdminDashboard = () => {
+
+    const {getUsers, users, getTasks, tasks} = useAdminStore();
+
+    useEffect(()=>{
+        if(!users) getUsers()
+        if(!tasks) getTasks()
+    },[])
   return (
     <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
       
@@ -9,13 +18,13 @@ const AdminDashboard = () => {
     <div className="mt-4 space-y-4 md:px-10 w-full">
     <div className="grid grid-cols-3 gap-4">
         <div className="shadow-xl p-10 border-1 border-blue-50 text-center ">
-            <h2 className="text-2xl font-semibold">100</h2>
+            <h2 className="text-2xl font-semibold">{users?.length}</h2>
             <p>Total users</p>
         </div>
 
         <div className="shadow-xl p-10 border-1 border-blue-50 text-center ">
-            <h2 className="text-2xl font-semibold">100</h2>
-            <p>Total users</p>
+            <h2 className="text-2xl font-semibold">{tasks?.length}</h2>
+            <p>Active Tasks</p>
         </div>
 
         <div className="shadow-xl p-10 border-1 border-blue-50 text-center ">

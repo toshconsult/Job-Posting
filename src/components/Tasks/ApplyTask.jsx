@@ -15,7 +15,8 @@ const ApplyTask = () => {
   const { url, userToken,  } = useUserStore();
   const [proposal, setProposal] = useState('')
   const [price, setPrice] = useState('')
-console.log(userToken)
+  const [value, setValue] = useState('')
+// console.log(userToken)
   const [date, setDate] = useState('')
   const navigate = useNavigate()
 const taskTitle = JSON.parse(localStorage.getItem('taskTitle'))
@@ -57,8 +58,10 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
       // setMessage(data.message);
       console.log(data);
       toast.success(data.message)
-      navigate('/dashboard')
       setLoading(false);
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, 2000)
     } else {
       const err = await response.json();
       toast.error(err.error)
@@ -72,9 +75,20 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
     setDate('')
   };
 
-  // useEffect(() => {
-  //   // apply();
-  // }, []);
+  const handlePriceChange = (e) => {
+    const rawValue = e.target.value.replace(/,/g, '');
+    const num = parseFloat(rawValue);
+    
+    if (!isNaN(num)) {
+      const formatted = num.toLocaleString("en-NG");
+      
+      setValue(formatted);
+      setPrice(num)
+
+} else {
+setValue('');
+}
+  }
 
   return (
     <div className="flex mx-4 md:mx-0 md:justify-normal min-h-screen md:gap-72">
@@ -89,14 +103,14 @@ if(taskTitle === null || taskTitle === undefined || taskTitle === ''){
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="price" className="text-[#333] font-semibold">
-                      Your price
+                      Your price ₦:
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       id="price"
-                      value={price}
+                      value={value}
                       placeholder="Enter price"
-                      onChange={(e)=>setPrice(e.target.value)}
+                      onChange={handlePriceChange}
                       className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                     />
                   </div>

@@ -51,7 +51,7 @@ const [modalType, setModalType] = useState(null);
          
           {
             user? (
-              <Link to={user?.userType === "client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+              <Link to={user?.userType === "client"? '/client-dashboard' : user?.userType === "admin" ? '/admin-dashboard'  : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
 
             ):
             (
@@ -81,7 +81,7 @@ const [modalType, setModalType] = useState(null);
            
             {
             user? (
-            <Link to={user?.userType === "Client"? '/client-dashboard' : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
+            <Link to={user?.userType === "client"? '/client-dashboard' : user?.userType === "admin" ? '/admin-dashboard'  : '/dashboard'} className="logo"><i class="fa fa-user"></i>{user?.username}</Link>
 
             ):
             (

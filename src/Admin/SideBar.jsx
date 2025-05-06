@@ -3,12 +3,12 @@ import {  useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { ChevronRight, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 
-import useUserStore from "../components/context/Store";
 import Loader from "../components/Loader";
+import useAdminStore from "../components/context/AdminStore";
 
 
 
@@ -16,7 +16,7 @@ import Loader from "../components/Loader";
 const AdminSidebar = () => {
 //   const userToken = localStorage.getItem('token')
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout,   getUser } = useUserStore();
+  const { users, logout,   getUsers } = useAdminStore();
   const [loading, setLoading] = useState(false)
   
   
@@ -34,9 +34,9 @@ const AdminSidebar = () => {
 
 
 useEffect(()=>{
-if(!user) getUser()
+if(!users) getUsers()
   
-},[getUser, user])
+},[getUsers, users])
 
 
 
@@ -79,13 +79,13 @@ if(!user) getUser()
                 className="w-full flex justify-between items-center p-4 cursor-pointer
                 hover:bg-[#333333] hover:text-white group"
               >
-                <Link
-                  to={option.link}
+                <a
+                  href={option.link}
                   className="text-[#333333] group-hover:text-white w-full flex justify-between items-center"
                 >
                   <span>{option.text}</span>
                   <ChevronRight size={18} />
-                </Link>
+                </a>
               </button>
               
               ))}

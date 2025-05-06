@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../context/Store";
 
+
 import skills from '/src/components/Skills.jsx'
 import ClientSideBar from "./ClientSideBar";
 
@@ -25,7 +26,7 @@ const CreateTask = () => {
       const [field, setField] = useState('')
       const [selectedSkills, setSelectedSkills] = useState([])
      const userToken = localStorage.getItem('token')
-     console.log(userToken);
+    //  console.log(userToken);
      
      
      const navigate = useNavigate()
@@ -33,6 +34,7 @@ const CreateTask = () => {
      const [title, setTitle] = useState()
      const [description, setDescription] = useState('')
      const [price, setPrice] = useState('')
+     const [value, setValue] = useState('')
      const [duration, setDuration] = useState('')
      const [projectType, sertProjectType] = useState('')
      const [location, setLocation] = useState('')
@@ -94,7 +96,10 @@ const CreateTask = () => {
             
             setLoading(false)
             toast.success(data.message)
-            navigate('/dashboard')
+            
+            setTimeout(() => {
+              navigate('/dashboard')
+            }, 2000);
           } 
           else {
             const data = await response.json();
@@ -109,6 +114,21 @@ const CreateTask = () => {
           
           
         }
+      }
+
+      const handlePriceChange = (e) => {
+        const rawValue = e.target.value.replace(/,/g, '');
+        const num = parseFloat(rawValue);
+        
+        if (!isNaN(num)) {
+          const formatted = num.toLocaleString("en-NG");
+          
+          setValue(formatted);
+          setPrice(num)
+    
+  } else {
+    setValue('');
+  }
       }
 
   return (
@@ -171,10 +191,10 @@ const CreateTask = () => {
                 </label>
                 <input
                   type="text"
-                  value={price}
+                  value={value}
                   name="price"
                   placeholder="Enter price"
-                  onChange={(e)=> setPrice(e.target.value)}
+                  onChange={handlePriceChange}
                   className="w-full h-[50px] rounded-md p-2 px-5 outline-0 border-2 border-[#F3F5FF] placeholder:text-gray-500"
                 />
               </div>
@@ -271,7 +291,7 @@ const CreateTask = () => {
             <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="w-full max-w-xs py-4 bg-[#333] text-white rounded-3xl hover:bg-[#f2f2f2]
+                className="w-full cursor-pointer max-w-xs py-4 bg-[#333] text-white rounded-3xl hover:bg-[#f2f2f2]
                  hover:text-[#333] hover:border-2 hover:border-[#333] transition-all"
               >
                 Post

@@ -68,9 +68,16 @@ createRoot(document.getElementById('root')).render(
         <Route path="interest" element={<Interest />} />
         <Route path="about" element={<AboutPage />} />
 
+
+
+        
+
         {/* Protected Routes Layout */}
         <Route element={<ProtectedRoute />}>
+
+        {/* Admin routes */}
         <Route path="admin-dashboard" element={<AdminDashboard />} />
+
         <Route path="admin-users" element={<UsersTable />} />
         <Route path="admin-tasks" element={<TasksTable />} />
         <Route path="admin-transactions" element={<TransactionsTable />} />

@@ -3,6 +3,7 @@ import useUserStore from '../context/Store'
 import ClientSideBar from './ClientSideBar'
 import Loader from '../Loader'
 import ClientTaskNav from './ClientTaskNav'
+import { toast, ToastContainer } from 'react-toastify'
 
 
 export const ClientSubmittedTasks = () => {
@@ -58,11 +59,16 @@ const approve = async (id)=>{
 
     if(res.ok){
         const data = await res.json()
-        console.log(data);
+        toast.success(data.message)
+        setTimeout(() => {
+            window.location.reload()
+        }, 2000);
+        // console.log(data);
         
     } else {
         const err = await res.json()
-        console.log(err);
+        toast.error(err.error)
+        // console.log(err);
         
     }
 }
@@ -73,6 +79,7 @@ const approve = async (id)=>{
    <div className='mt-4 space-y-4 md:px-10 w-full'>
     <ClientTaskNav />
     <h2 className="text-lg font-bold mb-4 pl-14 md:pl-0">Submitted Todo</h2>
+    <ToastContainer />
     {loading ? <Loader />  :<>
         {filtered?.length === 0 ? 
             <h1>No Todo</h1>

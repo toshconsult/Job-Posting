@@ -1,6 +1,6 @@
 import {  useEffect, useState } from "react";
 import Loader from "../Loader";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import image from "/src/assets/react.svg";
 import { IoIosCheckmark } from "react-icons/io";
 import { IoCheckmarkDone } from "react-icons/io5";
@@ -13,7 +13,7 @@ const GetMessages = () => {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState(null);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const getMessages = async () => {
@@ -59,7 +59,7 @@ const GetMessages = () => {
 
   const getRecipient = (participants) => {
     
-    return participants.find((p) => p._id !== user._id);
+    return participants.find((p) => p?._id !== user?._id);
   };
 
 
@@ -77,7 +77,7 @@ const GetMessages = () => {
 
 const seen = (id) =>{
   messages?.forEach((msg) => {
-    if (msg._id === id) {
+    if (msg?._id === id) {
       msg.lastMessage.seen = true;
     }
   })
@@ -99,7 +99,7 @@ const seen = (id) =>{
               return (
                 <Link to={`/chat/${linkId}`} key={msg?._id} className="w-full max-w-md">
                   <div
-                  onClick={seen(msg._id)}
+                  onClick={seen(msg?._id)}
                     className="w-full h-[67px] border border-[#F3F5FF] rounded-2xl flex items-center 
                     gap-4 p-3 bg-[#f2f2f2]  hover:shadow-sm transition"
                   >

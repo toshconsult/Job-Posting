@@ -1,33 +1,19 @@
+import { useEffect } from "react";
+import useAdminStore from "../components/context/AdminStore";
 import AdminSidebar from "./SideBar";
 
 
 const TransactionsTable = () => {
-  const transactions = [
-    {
-      date: '2025-03-25',
-      details: 'Task Payment - Fix Air Conditioner',
-      username: 'johndoe',
-      amount: 30000,
-      type: 'Credit',
-      reference: 'TXN-001',
-    },
-    {
-      date: '2025-03-26',
-      details: 'Withdrawal',
-      username: 'janesmith',
-      amount: 15000,
-      type: 'Debit',
-      reference: 'TXN-002',
-    },
-    {
-      date: '2025-03-27',
-      details: 'Task Payment - Website Redesign',
-      username: 'markdev',
-      amount: 50000,
-      type: 'Credit',
-      reference: 'TXN-003',
-    },
-  ];
+
+  const {trx, getTrx} = useAdminStore()
+
+  useEffect(()=>{
+    if(!trx){
+      getTrx()
+    }
+  }, [])
+  console.log(trx);
+  
 
   return (
      <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
@@ -42,21 +28,21 @@ const TransactionsTable = () => {
             <tr>
               <th className="px-4 py-3">Date</th>
               <th className="px-4 py-3">Details</th>
-              <th className="px-4 py-3">Username</th>
+              <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Amount</th>
               <th className="px-4 py-3">Type</th>
               <th className="px-4 py-3">Reference</th>
             </tr>
           </thead>
           <tbody>
-            {transactions.map((txn, index) => (
+            {trx?.map((txn, index) => (
               <tr key={index} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-3">{txn.date}</td>
+                <td className="px-4 py-3">{new Date(txn.createdAt).toLocaleDateString()}</td>
                 <td className="px-4 py-3">{txn.details}</td>
-                <td className="px-4 py-3">{txn.username}</td>
-                <td className="px-4 py-3">₦{txn.amount.toLocaleString()}</td>
-                <td className={`px-4 py-3 font-medium ${txn.type === 'Credit' ? 'text-green-600' : 'text-red-500'}`}>{txn.type}</td>
-                <td className="px-4 py-3">{txn.reference}</td>
+                <td className="px-4 py-3">{txn.TransactionStatus}</td>
+                <td className="px-4 py-3">₦{txn?.amount?.toLocaleString()}</td>
+                <td className={`px-4 py-3 font-medium ${txn.TransactionType === 'credit' ? 'text-green-600' : 'text-red-500'}`}>{txn.TransactionType}</td>
+                <td className="px-4 py-3">{txn.reference_number}</td>
               </tr>
             ))}
           </tbody>

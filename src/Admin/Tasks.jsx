@@ -63,7 +63,7 @@ const TasksTable = () => {
               <tr key={index} className="border-t hover:bg-gray-50">
                 <td className="px-4 py-3">{task.title}</td>
                 <td className="px-4 py-3">{task.client}</td>
-                <td className="px-4 py-3">₦{task.price.toLocaleString()}</td>
+                <td className="px-4 py-3">₦{task?.price?.toLocaleString()}</td>
                 <td className="px-4 py-3">{new Date(task.createdAt).toLocaleDateString()}</td>
                 <td className="px-4 py-3 text-center">
                   <button 

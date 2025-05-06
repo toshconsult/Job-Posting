@@ -14,6 +14,7 @@ const TasksTable = () => {
   useEffect(()=>{
     if(!tasks) getTasks()
   },[])
+  console.log(tasks);
   
 
   const deleteTask = async (id)=>{
@@ -52,7 +53,7 @@ const TasksTable = () => {
           <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
             <tr>
               <th className="px-4 py-3">Task Title</th>
-              <th className="px-4 py-3">Client</th>
+              <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Amount</th>
               <th className="px-4 py-3">Date</th>
               <th className="px-4 py-3 text-center">Actions</th>
@@ -62,7 +63,7 @@ const TasksTable = () => {
             {tasks?.map((task, index) => (
               <tr key={index} className="border-t hover:bg-gray-50">
                 <td className="px-4 py-3">{task.title}</td>
-                <td className="px-4 py-3">{task.client}</td>
+                <td className="px-4 py-3">{task.taskStatus}</td>
                 <td className="px-4 py-3">₦{task?.price?.toLocaleString()}</td>
                 <td className="px-4 py-3">{new Date(task.createdAt).toLocaleDateString()}</td>
                 <td className="px-4 py-3 text-center">

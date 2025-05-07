@@ -9,16 +9,12 @@ const UsersTable = () => {
   const [loading, setLoading] = useState(false)
 
 const { url, getUsers, users, userss, adminToken, setUsers} = useAdminStore();
-console.log("token", adminToken);
-
 
 useEffect(()=>{
   if(!users)
   getUsers()
 
 }, [])
-console.log(users);
-
 
 /////////////////--------------------- search user -------------------////////////////
 
@@ -31,7 +27,6 @@ console.log(users);
     }
      const getUser = users?.filter(user => user.email.toLowerCase().includes(query))
      setUsers(getUser)
-    //  console.log(getUser);
   }
 
 
@@ -48,7 +43,6 @@ const verifyUsers = async (id)=>{
   if(res.ok){
     const data = await res.json()
     toast.success(data.message)
-    // console.log(data);
     setLoading(false)
   } else{
     const err = await res.json()
@@ -57,9 +51,6 @@ const verifyUsers = async (id)=>{
     
   }
 }
-
-// const fetchUser = 
-
 
   return (
     <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
@@ -96,8 +87,8 @@ const verifyUsers = async (id)=>{
                   <button 
                   disabled = {user.isVerified === true}
                   onClick={()=>verifyUsers(user._id)}
-                  className={`${user.isVerified === false ? "bg-red-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"} text-white px-3 py-1 rounded-md text-xs mr-2 `}>
-                   {user.isVerified === false ? "Verify" : "Verified"}
+                  className={`${user.isVerified === false ? "bg-green-600 text-white cursor-pointer" : "cursor-not-allowed text-[#333]"} text-[0.9rem] font-semibold px-3 py-1 rounded-md text-xs mr-2 `}>
+                   {user.isVerified === false ? "Verify Now" : "Verified"}
                   </button>
                   {/* <button className="bg-red-500 text-white px-3 py-1 rounded-md text-xs hover:bg-red-600">
                     Delete

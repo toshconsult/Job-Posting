@@ -29,7 +29,11 @@ setloading(true)
                 'Authorization': `Bearer ${userToken}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({taskerRating: rating, taskerComment: comment, projectTitle: taskTitle})
+            body: JSON.stringify({
+              taskerRating: rating, 
+              taskerComment: comment, 
+              projectTitle: taskTitle
+            })
     })
 
     if(response.ok){

@@ -33,7 +33,6 @@ const GetMessages = () => {
         }
 
         const data = await res.json();
-        console.log(data);
         setMessages(data);
       } catch (error) {
         console.error("Error fetching messages", error);

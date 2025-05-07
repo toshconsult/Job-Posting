@@ -5,7 +5,6 @@
  import { MdCancel } from "react-icons/md";
  import { Switch } from "@headlessui/react";
  import { ChevronRight, LogOut } from "lucide-react";
- import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import useUserStore from "../context/Store";
 
@@ -29,7 +28,6 @@ const ClientSideBar = () => {
   const [loading, setLoading] = useState(false)
   
   
-  const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -123,9 +121,7 @@ if(!user) getUser()
                 <h3 className="text-lg font-medium mb-2">General Settings</h3>
                 <div className="bg-[#f2f2f2] rounded-lg">
                 {settingsOptions.map((option, index) => (
-  <button
-    key={index}
-    onClick={() => navigate(option.link)}
+  <a href={option.link} key={index}
     className="group w-full flex justify-between items-center p-4 cursor-pointer
       hover:bg-[#333] transition"
   >
@@ -133,7 +129,7 @@ if(!user) getUser()
       {option.text}
     </span>
     <ChevronRight size={18} className="text-gray-500 group-hover:text-white" />
-  </button>
+  </a>
 ))}
 
                 </div>

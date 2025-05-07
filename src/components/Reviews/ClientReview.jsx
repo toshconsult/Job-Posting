@@ -1,47 +1,64 @@
 import {  useState } from "react"
-import { UserContext } from "../context/UserContext"
-import { ToastContainer } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
 import Loader from "../Loader"
 import { FaStar } from "react-icons/fa"
 import { useParams } from "react-router-dom"
+import useUserStore from "../context/Store"
+import ClientSideBar from "../Clients/ClientSideBar"
+import Sidebar from "../SideBar"
+
 
 
 const ClientReview = () => {
-  const {url, userToken} = useUserStore()
+  const {url, userToken, user} = useUserStore()
   const [loading, setloading] = useState(false)
   const totalRating = 5
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
 // console.log(rating);
+const taskTitle = JSON.parse(localStorage.getItem("taskTitle"))
+console.log(taskTitle)
 const {id} = useParams()
   const review = async (e)=> {
 
 e.preventDefault()
+setloading(true)
     const response = await fetch(`${url}user/task/${id}/review`, {
       method: 'POST',
             headers: {
                 'Authorization': `Bearer ${userToken}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({clientRating: rating, clientComment: comment})
+            body: JSON.stringify({
+              clientRating: rating, 
+              clientComment: comment, 
+              projectTitle: taskTitle
+            })
     })
 
     if(response.ok){
       const data = await response.json()
+      toast.success(data.message)
       console.log(data);
       setloading(false)
       
   } else {
       const err = await response.json()
-      console.log(err);
+      toast.error(err.error)
+      // console.log(err);
+      setloading(false)
       
   }
+  setComment('')
+  setRating(0)
   }
   return (
-    <div className="flex flex-col items-center md:items-start px-4 md:px-20">
+    <div className="flex mx-4 md:mx-0 ustify-center md:justify-normal min-h-screen md:gap-72">
+      {user?.userType === "client" ? <ClientSideBar /> : <Sidebar />}
             {loading ? <Loader />: <>
+              <div className="mt-4 space-y-4 md:px-10 w-full">
                   <h1 className="text-[25px] pb-6 mt-14 md:text-center">
-                   Drop a <span className="text-[#EA1588]">Review</span>
+                   Drop a <span className="text-[#333]">Review</span>
                   </h1>
                   <form onSubmit={review} className="w-full max-w-2xl">
                     <ToastContainer />
@@ -54,7 +71,7 @@ e.preventDefault()
                           return (
                             <span  key={starvalue} onClick={()=>setRating(starvalue)}
                             className={`cursor-pointer text-2xl transition duration-300 ${
-                              starvalue <= rating ? "text-[#EA1588]" : "text-gray-300"
+                              starvalue <= rating ? "text-[#333]" : "text-gray-300"
                             }`}
                             ><FaStar /></span>
                           )
@@ -81,14 +98,15 @@ e.preventDefault()
                       <div className="flex justify-center mt-6">
                   <button
                     type="submit"
-                    className="w-full py-4 bg-[#EA1588] text-white rounded-3xl hover:bg-white
+                    className="w-full py-4 bg-[#333] text-white rounded-3xl hover:bg-white
                      hover:text-black hover:border-2 hover:border-[#F3F5FF] transition-all cursor-pointer"
             
                   >
-                   Submit
+                  {loading ? "Loading" : "Submit"}
                   </button>
                 </div>
                       </form>
+                      </div>
                       </>}
                       </div>
   )

@@ -4,7 +4,6 @@ import { FaBars } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { Switch } from "@headlessui/react";
 import { ChevronRight, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "./context/Store";
 
 import Loader from "./Loader";
@@ -30,7 +29,6 @@ const Sidebar = () => {
     { text: "Settings", link: "/settings" },
   ];
 
-  const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -123,17 +121,15 @@ if(!user) getUser()
               {settingsOptions.map((option, index) => (
                 <button
                 key={index}
-                onClick={() => navigate(option.link)}
                 className="w-full flex justify-between items-center p-4 cursor-pointer
                 hover:bg-[#333333] hover:text-white group"
               >
-                <Link
-                  to={option.link}
+                <a href={option.link}
                   className="text-[#333333] group-hover:text-white w-full flex justify-between items-center"
                 >
                   <span>{option.text}</span>
                   <ChevronRight size={18} />
-                </Link>
+                </a>
               </button>
               
               ))}

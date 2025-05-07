@@ -16,13 +16,10 @@ const Profile = () => {
   
   
   const [reviews, setReviews] = useState(null)
-  console.log(reviews?.filter(rv => rv.client == id));
   
-  const filteredReviews = reviews?.filter(rv => rv.client !== id ||  rv.tasker !== id )
-  console.log(filteredReviews);
   
   // const [task, setTask] = useState(null)
-  // console.log(reviews?.task);
+  console.log(reviews);
   const navigate = useNavigate();
   useEffect(() => {
 
@@ -61,31 +58,7 @@ const Profile = () => {
   }, [id, userToken, url, navigate]);
 
 
-  ////---------------------------- get tasks -----------------------------///
-
-  useEffect(()=>{
-  const getTask = async ()=>{
-    const response = await fetch(`${url}user/task/${reviews?.task}`, {
-            method: "GET",
-            headers: {
-              'Authorization': `Bearer ${userToken}`,
-              "Content-Type": "application/json",
-            },
-          });
-    
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            // setTask(data);
-            
-          } else {
-            const data = await response.json();
-            console.log(data.error);
-
-          }
-  }
-  getTask()
-},[id, url, userToken, reviews?.task])
+  
 
   return (
     <>
@@ -97,12 +70,12 @@ const Profile = () => {
         <>
          
               <div className="">
-                <div className="w-[328px] md:w-[100%] h-[137px] px-6 border-1 border-[#F3F5FF]  rounded-2xl mt-20 md:mt-10 my-6">
+                <div className="w-[328px] md:w-[100%] h-[137px] px-6 border-1 border-[#F3F5FF]  rounded-2xl mt-10 my-6">
                   <div className=" flex gap-6 items-center ">
                     <div className="border-2 border-[#F3F5FF] rounded-full">
                       <img
                         src={user?.profilePicture}
-                        className="rounded-full w-[67px] h-[60px] md:h-[67px]"
+                        className="rounded-full w-[70px] h-[60px] md:h-[67px]"
                       />
                     </div>
                     <div>
@@ -142,35 +115,40 @@ const Profile = () => {
                 </div>
 
                 <div className="w-[328px] md:w-[90vw] px-6 border-1 border-[#F3F5FF] rounded-2xl my-6">
-                  <h2 className="text-2xl font-bold">Reviews</h2>
+                  <h2 className="text-2xl font-bold mb-5">Reviews</h2>
 
                   <div>
                     {reviews.length === 0 && <h1>No review yet</h1>}
                     {reviews?.map((review, i)=>(
                       <div key={i}>
                     <div className="md:pl-4 border-1 border-[#F3F5FF] rounded-2xl my-2 pb-2" >
+                    <h2 className="font-bold text-2xl">{review.projectTitle}</h2>
                       <div className="flex gap-5 items-center">
                         <div className="flex gap-4 items-center my-4">
+                        <img src={review?.from?.profilePicture} className="rounded-full w-[40px] 
+                        h-[40px] md:w-[45px] md:h-[40px]"/>
                         
-                        <h2 className="">Title</h2>
+                        <div>
+                          
+                        <h2 className="text-[#333] text-xl font-semibold">{review?.from?.username}</h2>
                         </div>
-                        <p><FaStar className="text-yellow-400"/></p>
+                        </div>
                       </div>
-                      <p>{review?.taskerComment}</p>
+                      <div className="flex text-gray-500">
+                      
+                      <p className=" italic">{`" ${review?.comment} "`}</p>
+
+                      </div>
+                      <p className="flex items-center">
+                      {Array.from({ length: review?.rating || 0 }, (_, index) => (
+                        <FaStar key={index} className="text-amber-300" />
+                      ))}
+                    </p>
+                      
                      
                     </div>
 
-                <div className="md:pl-4 border-1 border-[#F3F5FF] rounded-2xl my-2 pb-2" key={i}>
-                <div className="flex gap-5 items-center">
-                  <div className="flex gap-4 items-center my-4">
-                  
-                  <h2 className="">Title</h2>
-                  </div>
-                  <p><FaStar className="text-yellow-400"/></p>
-                </div>
-                <p>{review?.clientComment}</p>
-
-                </div>
+                
                 </div>
 
                 ))}

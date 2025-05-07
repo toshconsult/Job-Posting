@@ -11,8 +11,8 @@ const TransactionsTable = () => {
     if(!trx){
       getTrx()
     }
+
   }, [])
-  console.log(trx);
   
 
   return (

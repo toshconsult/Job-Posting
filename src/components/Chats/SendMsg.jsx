@@ -9,7 +9,6 @@ const StartChat = () => {
   const [messages, setMessages] = useState([]);
 const [user, setUser] = useState(null);
   const { url, userToken } = useUserStore()
-console.log(user);
 
   const [message, setMessage] = useState("");
   const { id } = useParams();
@@ -43,7 +42,6 @@ console.log(user);
       });
       if (res.ok) {
         const data = await res.json();
-        // console.log(data);
         setMessages((prev) => [...prev, data]);
         setMessage("");
       }
@@ -63,7 +61,6 @@ console.log(user);
       });
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         setMessages(data);
       } else {
         const error = await res.json();

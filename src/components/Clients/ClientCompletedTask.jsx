@@ -75,9 +75,10 @@ export const ClientCompletedTasks = () => {
                             {/* <button className='border border-blue-100 text-blue-500 px-5 py-2 rounded-lg text-sm font-medium'>
                                 View Image
                                  </button> */}
-                           <a href={`review/${task._id}`}> <button className='px-5 py-2 border border-white 
-                             rounded-lg text-sm font-medium'
+                           <a href={`client-review/${task._id}`}> <button className='px-5 py-2 border border-white 
+                             rounded-lg text-sm font-medium cursor-pointer'
                              style={{background: '#333333', color: 'white'}}
+                             onClick={localStorage.setItem('taskTitle', JSON.stringify(task.title))}
                              >
                                 Drop A review
                                  </button></a>

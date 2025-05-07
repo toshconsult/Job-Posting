@@ -27,7 +27,6 @@ setAdminToken: (token) => {
 getUsers : async ()=>{
     try {
 
-        // console.log("from tk admin", localStorage.getItem('adminToken'));
         
         const {url} = get()
     set({ loading: true })
@@ -42,7 +41,6 @@ getUsers : async ()=>{
     if(response){
         set({ loading: false })
         const data = response.data
-        // console.log(data.users);
         
         set({ users: data.users })
         set({userss: data.users})
@@ -66,7 +64,6 @@ getUsers : async ()=>{
 getTasks : async ()=>{
     try {
 
-        // console.log("from tk admin", localStorage.getItem('adminToken'));
         
         const {url} = get()
     set({ loading: true })
@@ -81,7 +78,6 @@ getTasks : async ()=>{
     if(response){
         set({ loading: false })
         const data = response.data
-        // console.log(data.tasks);
         
         set({ tasks: data.tasks })
        
@@ -104,8 +100,6 @@ getTasks : async ()=>{
 getTrx : async ()=>{
     try {
 
-        // console.log("from tk admin", localStorage.getItem('adminToken'));
-        
         const {url} = get()
     set({ loading: true })
 
@@ -119,7 +113,6 @@ getTrx : async ()=>{
     if(response){
         set({ loading: false })
         const data = response.data
-        console.log(data);
         
         set({ trx: data.trx })
        

@@ -52,6 +52,7 @@ import AdminDashboard from './Admin/Dashboard.jsx';
 import UsersTable from './Admin/Users.jsx';
 import TasksTable from './Admin/Tasks.jsx';
 import TransactionsTable from './Admin/Transactions.jsx';
+// import AdminLogin from './Admin/AdminLogin.jsx';
 
 createRoot(document.getElementById('root')).render(
   <RoleContextProvider>
@@ -62,6 +63,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="account-type" element={<AccountType />} />
         <Route path="register" element={<SignUp />} />
         <Route path="login" element={<Login />} />
+        {/* <Route path="admin-login" element={<AdminLogin />} /> */}
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="user/update-password/" element={<ResetPassword />} />
         <Route path="change-password" element={<ChangePassword />} />
@@ -73,10 +75,10 @@ createRoot(document.getElementById('root')).render(
         
 
         {/* Protected Routes Layout */}
+        <Route path="admin-dashboard" element={<AdminDashboard />} />
         <Route element={<ProtectedRoute />}>
 
         {/* Admin routes */}
-        <Route path="admin-dashboard" element={<AdminDashboard />} />
 
         <Route path="admin-users" element={<UsersTable />} />
         <Route path="admin-tasks" element={<TasksTable />} />

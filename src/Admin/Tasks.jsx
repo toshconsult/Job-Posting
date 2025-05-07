@@ -14,7 +14,6 @@ const TasksTable = () => {
   useEffect(()=>{
     if(!tasks) getTasks()
   },[])
-  console.log(tasks);
   
 
   const deleteTask = async (id)=>{
@@ -31,6 +30,7 @@ const TasksTable = () => {
       toast.success(data.message)
       // console.log(data);
       setLoading(false)
+      window.location.reload();
     } else{
       const err = await res.json()
       toast.error(err.error)

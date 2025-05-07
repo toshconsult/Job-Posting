@@ -76,7 +76,7 @@ const ResetPassword = () => {
          placeholder:text-black placeholder:font-semibold bg-[#FFF5F6]" />
          
        
-      <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#333] hover:bg-white rounded-3xl text-black hover:border-2 hover:border-[#F3F5FF]">Continue</button>
+      <button type="submit" className="w-[328px] py-[20px] cursor-pointer bg-[#333] hover:bg-white rounded-3xl text-white hover:border-2 hover:border-[#F3F5FF] hover:text-[#333]">Continue</button>
       </form>
 
     </div>

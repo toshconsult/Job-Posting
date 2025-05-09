@@ -115,7 +115,7 @@ const Profile = () => {
                 </div>
 
                 <div className="w-[328px] md:w-[90vw] px-6 border-1 border-[#F3F5FF] rounded-2xl my-6">
-                  <h2 className="text-2xl font-bold mb-5">Reviews</h2>
+                  <h2 className="text-2xl font-bold mb-5">Reviews from completed job</h2>
 
                   <div>
                     {reviews.length === 0 && <h1>No review yet</h1>}
@@ -144,7 +144,7 @@ const Profile = () => {
                         <FaStar key={index} className="text-amber-300" />
                       ))}
                     </p>
-                      
+                      <p className="italic text-gray-400">{new Date(review?.createdAt).toLocaleDateString()}</p>
                      
                     </div>
 

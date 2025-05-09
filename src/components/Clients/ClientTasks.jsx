@@ -65,7 +65,7 @@ const ClientTasks = () => {
             {sorted?.map((task, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-xl border-1 border-[#F3F5FF]"
+                className="bg-white p-4 rounded-xl border-1 border-[#F3F5FF] w-[328px] md:w-[900px]  shadow-md"
               >
                 <div className="flex justify-between items-center">
                   <p className="font-bold">{task.title}</p>

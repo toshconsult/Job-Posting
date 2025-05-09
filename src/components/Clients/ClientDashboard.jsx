@@ -80,7 +80,7 @@ const ClientDashboard = () => {
 
         <div className="flex justify-between items-center mt-8">
           <h2 className="text-lg font-semibold">
-            Task <span className="text-[#2F3C7E]">History</span>
+            Todo <span className="text-[#2F3C7E]">History</span>
           </h2>
           <div className="flex gap-3 items-center">
             <Link to="/create-task">

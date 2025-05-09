@@ -12,7 +12,7 @@ import useUserStore from "../context/Store";
  const settingsOptions = [
    { text: "Dashboard", link: "/client-dashboard" },
    { text: "Wallet", link: "/client-wallet" },
-   { text: "Todo", link: "/client-tasks" },
+   { text: "My Todo", link: "/client-tasks" },
    {text: "Messages", link: "/messages"},
    { text: "Community", link: "/community" },
    { text: "Settings", link: "/settings" },
